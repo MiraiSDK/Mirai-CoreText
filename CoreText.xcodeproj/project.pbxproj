@@ -7,6 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		439C86F11862E1840089F3DA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 439C86F01862E1840089F3DA /* CoreGraphics.framework */; };
+		439C86F31862E1FC0089F3DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 439C86F21862E1FC0089F3DA /* Foundation.framework */; };
+		43B164401862CF60006B6CE1 /* CTFramesetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111AE185DF1CA00E771B4 /* CTFramesetter.m */; };
+		43B164411862CF64006B6CE1 /* CTFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111A8185DF1CA00E771B4 /* CTFont.m */; };
+		43B164421862CF71006B6CE1 /* CTFontCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111A9185DF1CA00E771B4 /* CTFontCollection.m */; };
+		43B164431862CF71006B6CE1 /* CTFontDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111AA185DF1CA00E771B4 /* CTFontDescriptor.m */; };
+		43B164441862CF71006B6CE1 /* CTFontTraits.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111AB185DF1CA00E771B4 /* CTFontTraits.m */; };
+		43B164451862CF71006B6CE1 /* CTFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111AD185DF1CA00E771B4 /* CTFrame.m */; };
+		43B164461862CF71006B6CE1 /* CTGlyphInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111AF185DF1CA00E771B4 /* CTGlyphInfo.m */; };
+		43B164471862CF71006B6CE1 /* CTLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111B1185DF1CA00E771B4 /* CTLine.m */; };
+		43B164481862CF71006B6CE1 /* CTParagraphStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111B2185DF1CA00E771B4 /* CTParagraphStyle.m */; };
+		43B164491862CF71006B6CE1 /* CTRun.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111B4185DF1CA00E771B4 /* CTRun.m */; };
+		43B1644A1862CF71006B6CE1 /* CTStringAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111B5185DF1CA00E771B4 /* CTStringAttributes.m */; };
+		43B1644B1862CF71006B6CE1 /* CTTextTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111B6185DF1CA00E771B4 /* CTTextTab.m */; };
+		43B1644C1862CF71006B6CE1 /* CTTypesetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111B7185DF1CA00E771B4 /* CTTypesetter.m */; };
+		43B1644D1862CF79006B6CE1 /* OPFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111C4185DF1CA00E771B4 /* OPFont.m */; };
+		43B1644E1862CF79006B6CE1 /* OPFontDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111C6185DF1CA00E771B4 /* OPFontDescriptor.m */; };
+		43B1644F1862CF79006B6CE1 /* OPSimpleLayoutEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111C9185DF1CA00E771B4 /* OPSimpleLayoutEngine.m */; };
 		43BA6CCF185DDED200526D8E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43BA6CCD185DDED200526D8E /* InfoPlist.strings */; };
 		43E111CA185DF1CA00E771B4 /* CTFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111A8185DF1CA00E771B4 /* CTFont.m */; };
 		43E111CB185DF1CA00E771B4 /* CTFontCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111A9185DF1CA00E771B4 /* CTFontCollection.m */; };
@@ -25,7 +43,6 @@
 		43E111D8185DF1CA00E771B4 /* CTTextTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111B6185DF1CA00E771B4 /* CTTextTab.m */; };
 		43E111D9185DF1CA00E771B4 /* CTTypesetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111B7185DF1CA00E771B4 /* CTTypesetter.m */; };
 		43E111DD185DF1CA00E771B4 /* OPFreeTypeFont.h in Headers */ = {isa = PBXBuildFile; fileRef = 43E111BD185DF1CA00E771B4 /* OPFreeTypeFont.h */; };
-		43E111DE185DF1CA00E771B4 /* OPFreeTypeFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111BE185DF1CA00E771B4 /* OPFreeTypeFont.m */; };
 		43E111DF185DF1CA00E771B4 /* OPFreeTypeUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = 43E111BF185DF1CA00E771B4 /* OPFreeTypeUtil.h */; };
 		43E111E2185DF1CA00E771B4 /* OPFont.h in Headers */ = {isa = PBXBuildFile; fileRef = 43E111C3185DF1CA00E771B4 /* OPFont.h */; };
 		43E111E3185DF1CA00E771B4 /* OPFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111C4185DF1CA00E771B4 /* OPFont.m */; };
@@ -55,7 +72,6 @@
 		43E11258185DF23100E771B4 /* CTFontDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111AA185DF1CA00E771B4 /* CTFontDescriptor.m */; };
 		43E11259185DF23100E771B4 /* CTStringAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111B5185DF1CA00E771B4 /* CTStringAttributes.m */; };
 		43E1125C185DF23100E771B4 /* CTLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111B1185DF1CA00E771B4 /* CTLine.m */; };
-		43E1125D185DF23100E771B4 /* OPFreeTypeFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111BE185DF1CA00E771B4 /* OPFreeTypeFont.m */; };
 		43E1125F185DF23100E771B4 /* CTTextTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111B6185DF1CA00E771B4 /* CTTextTab.m */; };
 		43E11260185DF23100E771B4 /* OPFontDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111C6185DF1CA00E771B4 /* OPFontDescriptor.m */; };
 		43E11261185DF23100E771B4 /* CTParagraphStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111B2185DF1CA00E771B4 /* CTParagraphStyle.m */; };
@@ -93,10 +109,26 @@
 		43E11285185DF23100E771B4 /* CTLine-private.h in Headers */ = {isa = PBXBuildFile; fileRef = 43E111B0185DF1CA00E771B4 /* CTLine-private.h */; };
 		43E11286185DF23100E771B4 /* OPFontDescriptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 43E111C5185DF1CA00E771B4 /* OPFontDescriptor.h */; };
 		43E11288185DF23100E771B4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43BA6CCD185DDED200526D8E /* InfoPlist.strings */; };
-		43E1128F185DF34300E771B4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E1128E185DF34300E771B4 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		43B164071862CE38006B6CE1 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		439C86F01862E1840089F3DA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		439C86F21862E1FC0089F3DA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		43B164091862CE38006B6CE1 /* libCoreText-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libCoreText-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		43B164171862CE39006B6CE1 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		43B1641A1862CE39006B6CE1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		43BA6CC1185DDED200526D8E /* CoreText.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreText.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43BA6CCC185DDED200526D8E /* CoreText-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CoreText-Info.plist"; sourceTree = "<group>"; };
 		43BA6CCE185DDED200526D8E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -148,15 +180,22 @@
 		43E1121E185DF1E200E771B4 /* CTTextTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTTextTab.h; sourceTree = "<group>"; };
 		43E1121F185DF1E200E771B4 /* CTTypesetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTTypesetter.h; sourceTree = "<group>"; };
 		43E1128C185DF23100E771B4 /* CoreText.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreText.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		43E1128E185DF34300E771B4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = ../../Products/android/Xcode/Platforms/MacOSX.platform/Developer/SDKs/FakeMacOSX10.9.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = "<group>"; };
 		43E11290185DF55600E771B4 /* Android.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Android.xcconfig; path = CoreText/Android.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		43B164061862CE38006B6CE1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		43BA6CBD185DDED200526D8E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				439C86F11862E1840089F3DA /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,7 +203,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43E1128F185DF34300E771B4 /* Foundation.framework in Frameworks */,
+				439C86F31862E1FC0089F3DA /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,6 +225,7 @@
 			children = (
 				43BA6CC1185DDED200526D8E /* CoreText.framework */,
 				43E1128C185DF23100E771B4 /* CoreText.framework */,
+				43B164091862CE38006B6CE1 /* libCoreText-iOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -193,7 +233,10 @@
 		43BA6CC3185DDED200526D8E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				43E1128E185DF34300E771B4 /* Foundation.framework */,
+				439C86F21862E1FC0089F3DA /* Foundation.framework */,
+				439C86F01862E1840089F3DA /* CoreGraphics.framework */,
+				43B164171862CE39006B6CE1 /* XCTest.framework */,
+				43B1641A1862CE39006B6CE1 /* UIKit.framework */,
 				43BA6CC6185DDED200526D8E /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -390,6 +433,23 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		43B164081862CE38006B6CE1 /* CoreText-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 43B164271862CE39006B6CE1 /* Build configuration list for PBXNativeTarget "CoreText-iOS" */;
+			buildPhases = (
+				43B164051862CE38006B6CE1 /* Sources */,
+				43B164061862CE38006B6CE1 /* Frameworks */,
+				43B164071862CE38006B6CE1 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "CoreText-iOS";
+			productName = "CoreText-iOS";
+			productReference = 43B164091862CE38006B6CE1 /* libCoreText-iOS.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		43BA6CC0185DDED200526D8E /* CoreText */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 43BA6CE9185DDED200526D8E /* Build configuration list for PBXNativeTarget "CoreText" */;
@@ -449,6 +509,7 @@
 			targets = (
 				43BA6CC0185DDED200526D8E /* CoreText */,
 				43E11254185DF23100E771B4 /* CoreText-Android */,
+				43B164081862CE38006B6CE1 /* CoreText-iOS */,
 			);
 		};
 /* End PBXProject section */
@@ -473,6 +534,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		43B164051862CE38006B6CE1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43B164491862CF71006B6CE1 /* CTRun.m in Sources */,
+				43B164401862CF60006B6CE1 /* CTFramesetter.m in Sources */,
+				43B164411862CF64006B6CE1 /* CTFont.m in Sources */,
+				43B1644A1862CF71006B6CE1 /* CTStringAttributes.m in Sources */,
+				43B164471862CF71006B6CE1 /* CTLine.m in Sources */,
+				43B1644D1862CF79006B6CE1 /* OPFont.m in Sources */,
+				43B1644B1862CF71006B6CE1 /* CTTextTab.m in Sources */,
+				43B164481862CF71006B6CE1 /* CTParagraphStyle.m in Sources */,
+				43B164451862CF71006B6CE1 /* CTFrame.m in Sources */,
+				43B1644C1862CF71006B6CE1 /* CTTypesetter.m in Sources */,
+				43B1644E1862CF79006B6CE1 /* OPFontDescriptor.m in Sources */,
+				43B164461862CF71006B6CE1 /* CTGlyphInfo.m in Sources */,
+				43B164441862CF71006B6CE1 /* CTFontTraits.m in Sources */,
+				43B164431862CF71006B6CE1 /* CTFontDescriptor.m in Sources */,
+				43B1644F1862CF79006B6CE1 /* OPSimpleLayoutEngine.m in Sources */,
+				43B164421862CF71006B6CE1 /* CTFontCollection.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		43BA6CBC185DDED200526D8E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -482,7 +566,6 @@
 				43E111CC185DF1CA00E771B4 /* CTFontDescriptor.m in Sources */,
 				43E111D7185DF1CA00E771B4 /* CTStringAttributes.m in Sources */,
 				43E111D3185DF1CA00E771B4 /* CTLine.m in Sources */,
-				43E111DE185DF1CA00E771B4 /* OPFreeTypeFont.m in Sources */,
 				43E111D8185DF1CA00E771B4 /* CTTextTab.m in Sources */,
 				43E111E5185DF1CA00E771B4 /* OPFontDescriptor.m in Sources */,
 				43E111D4185DF1CA00E771B4 /* CTParagraphStyle.m in Sources */,
@@ -506,7 +589,6 @@
 				43E11258185DF23100E771B4 /* CTFontDescriptor.m in Sources */,
 				43E11259185DF23100E771B4 /* CTStringAttributes.m in Sources */,
 				43E1125C185DF23100E771B4 /* CTLine.m in Sources */,
-				43E1125D185DF23100E771B4 /* OPFreeTypeFont.m in Sources */,
 				43E1125F185DF23100E771B4 /* CTTextTab.m in Sources */,
 				43E11260185DF23100E771B4 /* OPFontDescriptor.m in Sources */,
 				43E11261185DF23100E771B4 /* CTParagraphStyle.m in Sources */,
@@ -535,6 +617,53 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		43B164281862CE39006B6CE1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				DSTROOT = /tmp/CoreText_iOS.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/chyhfj/Products/android/Xcode/Platforms/MacOSX.platform/Developer/SDKs/FakeMacOSX10.9.sdk/System/Library/Frameworks,
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CoreText/CoreText-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		43B164291862CE39006B6CE1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				DSTROOT = /tmp/CoreText_iOS.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/chyhfj/Products/android/Xcode/Platforms/MacOSX.platform/Developer/SDKs/FakeMacOSX10.9.sdk/System/Library/Frameworks,
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CoreText/CoreText-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		43BA6CE7185DDED200526D8E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -568,7 +697,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
+				SDKROOT = macosx0.0;
 			};
 			name = Debug;
 		};
@@ -599,7 +728,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				SDKROOT = macosx;
+				SDKROOT = macosx0.0;
 			};
 			name = Release;
 		};
@@ -614,6 +743,7 @@
 				GCC_PREFIX_HEADER = "CoreText/CoreText-Prefix.pch";
 				INFOPLIST_FILE = "CoreText/CoreText-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
@@ -629,6 +759,7 @@
 				GCC_PREFIX_HEADER = "CoreText/CoreText-Prefix.pch";
 				INFOPLIST_FILE = "CoreText/CoreText-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;
@@ -674,6 +805,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		43B164271862CE39006B6CE1 /* Build configuration list for PBXNativeTarget "CoreText-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				43B164281862CE39006B6CE1 /* Debug */,
+				43B164291862CE39006B6CE1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		43BA6CBB185DDED200526D8E /* Build configuration list for PBXProject "CoreText" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
