@@ -1,0 +1,16 @@
+//
+//  Android.xcconfig
+//  UIKit
+//
+//  Created by Chen Yonghui on 12/6/13.
+//  Copyright (c) 2013 Shanghai Tinynetwork Inc. All rights reserved.
+//
+
+DEPLOYMENT_LOCATION = YES
+DSTROOT = /
+INSTALL_PATH = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/FakeMacOSX10.9.sdk/System/Library/Frameworks/
+HEADER_SEARCH_PATHS=$(inherited) /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/FakeMacOSX10.9.sdk/usr/include/freetype2/  $(SOURCE_ROOT)/gnustep-opal/Source/OpalText
+OTHER_LDFLAGS= $(inherited) -shared -lCoreGraphics -lobjc -lgnustl_shared
+
+LD_DEPENDENCY_INFO_FILE= 
+
