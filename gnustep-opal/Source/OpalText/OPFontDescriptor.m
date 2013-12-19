@@ -49,7 +49,7 @@
 
 + (id) fontDescriptorWithFontAttributes: (NSDictionary *)attributes
 {
-  return AUTORELEASE([[[self fontDescriptorClass] alloc] initWithFontAttributes: attributes]);
+  return [[[[self fontDescriptorClass] alloc] initWithFontAttributes: attributes] autorelease];
 }
 
 + (id) fontDescriptorWithName: (NSString *)name
@@ -85,7 +85,7 @@
   [m addEntriesFromDictionary: attributes];
 
   new = [[self class] fontDescriptorWithFontAttributes: m];
-  RELEASE(m);
+    [m release];
 
   return new;
 }
@@ -129,7 +129,7 @@
     }
   else
     {
-      traits = AUTORELEASE([traits mutableCopy]);
+      traits = [[traits mutableCopy] autorelease];
       [(NSMutableDictionary*)traits setObject: 
 			       [NSNumber numberWithUnsignedInt: symbolicTraits]
 			     forKey: OPFontSymbolicTrait];
@@ -168,7 +168,7 @@
 {
   if ([aDecoder allowsKeyedCoding])
   {
-    _attributes = RETAIN([aDecoder decodeObjectForKey: @"NSAttributes"]);
+    _attributes = [[aDecoder decodeObjectForKey: @"NSAttributes"] retain];
   }
   else
   {
@@ -179,7 +179,7 @@
 	
 - (void) dealloc;
 {
-  RELEASE(_attributes);
+  [_attributes release];
   [super dealloc];
 }
 

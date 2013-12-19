@@ -214,7 +214,8 @@ const CGFloat *OPFontIdentityMatrix;
   {
     return nil;
   }
-  ASSIGN(_descriptor, aDescriptor);
+    _descriptor = [aDescriptor retain];
+    
   NSAffineTransform *transform = [_descriptor objectForKey: OPFontMatrixAttribute];
   if (transform == nil)
   {
