@@ -7,7 +7,7 @@
 //
 
 #import "CoreTextView.h"
-
+#import <TNCoreText/CoreText.h>
 @implementation CoreTextView
 {
     NSString *_string;

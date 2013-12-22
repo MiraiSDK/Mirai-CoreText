@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		439C86EE1862D4B10089F3DA /* libCoreText-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 439C86ED1862D4A30089F3DA /* libCoreText-iOS.a */; };
-		439C86FB1862E41B0089F3DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 439C86FA1862E41B0089F3DA /* Cocoa.framework */; };
 		439C87051862E41B0089F3DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 439C87031862E41B0089F3DA /* InfoPlist.strings */; };
 		439C87071862E41B0089F3DA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 439C87061862E41B0089F3DA /* main.m */; };
 		439C870B1862E41B0089F3DA /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 439C87091862E41B0089F3DA /* Credits.rtf */; };
@@ -16,6 +15,7 @@
 		439C87111862E41C0089F3DA /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 439C870F1862E41C0089F3DA /* MainMenu.xib */; };
 		439C87131862E41C0089F3DA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 439C87121862E41C0089F3DA /* Images.xcassets */; };
 		439C87301862E49B0089F3DA /* CoreTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 439C872F1862E49B0089F3DA /* CoreTextView.m */; };
+		439C873918631FCA0089F3DA /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 439C86E91862D4A30089F3DA /* CoreText.framework */; };
 		43B163C71862CD93006B6CE1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43B163C61862CD93006B6CE1 /* Foundation.framework */; };
 		43B163C91862CD93006B6CE1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43B163C81862CD93006B6CE1 /* CoreGraphics.framework */; };
 		43B163CB1862CD93006B6CE1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43B163CA1862CD93006B6CE1 /* UIKit.framework */; };
@@ -95,7 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				439C86FB1862E41B0089F3DA /* Cocoa.framework in Frameworks */,
+				439C873918631FCA0089F3DA /* CoreText.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

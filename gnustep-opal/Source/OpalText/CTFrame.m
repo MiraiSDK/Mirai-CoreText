@@ -142,7 +142,13 @@ void CTFrameGetLineOrigins(
 
 void CTFrameDraw(CTFrameRef frame, CGContextRef ctx)
 {
-  [frame drawOnContext: ctx];
+    CGContextSaveGState(ctx);
+    CGColorRef color = CGColorCreateGenericRGB(1, 0, 0, 1);
+    CGContextSetFillColorWithColor(ctx, color);
+    CGContextSelectFont(ctx, "Arial", 14, kCGEncodingMacRoman);
+    CGContextShowTextAtPoint(ctx, 0, 0, "hello world", 10);
+    CGContextRestoreGState(ctx);
+//  [frame drawOnContext: ctx];
 }
 
 CFTypeID CTFrameGetTypeID()

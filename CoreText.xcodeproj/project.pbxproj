@@ -129,7 +129,7 @@
 		43B164091862CE38006B6CE1 /* libCoreText-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libCoreText-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		43B164171862CE39006B6CE1 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		43B1641A1862CE39006B6CE1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		43BA6CC1185DDED200526D8E /* CoreText.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreText.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		43BA6CC1185DDED200526D8E /* TNCoreText.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TNCoreText.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43BA6CCC185DDED200526D8E /* CoreText-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CoreText-Info.plist"; sourceTree = "<group>"; };
 		43BA6CCE185DDED200526D8E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		43BA6CD0185DDED200526D8E /* CoreText-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoreText-Prefix.pch"; sourceTree = "<group>"; };
@@ -223,7 +223,7 @@
 		43BA6CC2185DDED200526D8E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				43BA6CC1185DDED200526D8E /* CoreText.framework */,
+				43BA6CC1185DDED200526D8E /* TNCoreText.framework */,
 				43E1128C185DF23100E771B4 /* CoreText.framework */,
 				43B164091862CE38006B6CE1 /* libCoreText-iOS.a */,
 			);
@@ -465,7 +465,7 @@
 			);
 			name = CoreText;
 			productName = CoreText;
-			productReference = 43BA6CC1185DDED200526D8E /* CoreText.framework */;
+			productReference = 43BA6CC1185DDED200526D8E /* TNCoreText.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		43E11254185DF23100E771B4 /* CoreText-Android */ = {
@@ -742,7 +742,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoreText/CoreText-Prefix.pch";
 				INFOPLIST_FILE = "CoreText/CoreText-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "TN$(TARGET_NAME)";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = framework;
 			};
@@ -758,7 +758,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoreText/CoreText-Prefix.pch";
 				INFOPLIST_FILE = "CoreText/CoreText-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "TN$(TARGET_NAME)";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = framework;
 			};
