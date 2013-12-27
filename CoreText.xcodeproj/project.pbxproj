@@ -741,7 +741,20 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoreText/CoreText-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/local/include/freetype2,
+					/usr/local/include,
+					"/usr/local/lib/glib-2.0/include",
+					"/usr/local/include/glib-2.0",
+				);
 				INFOPLIST_FILE = "CoreText/CoreText-Info.plist";
+				LIBRARY_SEARCH_PATHS = "/usr/local/lib/**";
+				OTHER_LDFLAGS = (
+					"-lharfbuzz",
+					"-lfreetype",
+				);
 				PRODUCT_NAME = "TN$(TARGET_NAME)";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = framework;
@@ -757,7 +770,20 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoreText/CoreText-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/local/include/freetype2,
+					/usr/local/include,
+					"/usr/local/lib/glib-2.0/include",
+					"/usr/local/include/glib-2.0",
+				);
 				INFOPLIST_FILE = "CoreText/CoreText-Info.plist";
+				LIBRARY_SEARCH_PATHS = "/usr/local/lib/**";
+				OTHER_LDFLAGS = (
+					"-lharfbuzz",
+					"-lfreetype",
+				);
 				PRODUCT_NAME = "TN$(TARGET_NAME)";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = framework;

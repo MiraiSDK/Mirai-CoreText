@@ -25,6 +25,20 @@
 #include <CoreText/CTFrame.h>
 #import "CTFrame-private.h"
 
+#include <ft2build.h>
+#include FT_FREETYPE_H
+//#include <ftadvanc.h>
+//#include <ftsnames.h>
+//#include <tttables.h>
+
+#include <harfbuzz/hb.h>
+#include <harfbuzz/hb-ft.h>
+#if ANDROID
+#include <harfbuzz/hb-icu.h>
+#else
+#include <harfbuzz/hb-glib.h>
+#endif
+
 /* Constants */
 
 const CFStringRef kCTFrameProgressionAttributeName = @"kCTFrameProgressionAttributeName";
@@ -142,12 +156,71 @@ void CTFrameGetLineOrigins(
 
 void CTFrameDraw(CTFrameRef frame, CGContextRef ctx)
 {
-    CGContextSaveGState(ctx);
+//    CGContextSaveGState(ctx);
     CGColorRef color = CGColorCreateGenericRGB(1, 0, 0, 1);
     CGContextSetFillColorWithColor(ctx, color);
     CGContextSelectFont(ctx, "Arial", 14, kCGEncodingMacRoman);
-    CGContextShowTextAtPoint(ctx, 0, 0, "hello world", 10);
-    CGContextRestoreGState(ctx);
+//    CGContextShowTextAtPoint(ctx, 0, 0, "hello world", 10);
+//    CGContextRestoreGState(ctx);
+    
+    FT_Library ft_library;
+    FT_Init_FreeType(&ft_library);
+    
+    FT_Face ft_face;
+    double ptSize = 50.0;
+    int device_hdpi = 100;
+    int device_vdpi = 100;
+    FT_New_Face(ft_library, "/Library/Fonts/Arial.ttf", 0, &ft_face);
+    FT_Set_Char_Size(ft_face, 0, ptSize, device_hdpi, device_vdpi);
+    
+    hb_font_t *hb_ft_font;
+    hb_face_t *hb_ft_face;
+    
+    hb_ft_font = hb_ft_font_create(ft_face, NULL);
+    hb_ft_face = hb_ft_face_create(ft_face, NULL);
+    
+    hb_buffer_t *buf = hb_buffer_create();
+    
+#if ANDROID
+    hb_buffer_set_unicode_funcs(buf, hb_icu_get_unicode_funcs());
+#else
+//    hb_buffer_set_unicode_funcs(buf, hb_glib_get_unicode_funcs());
+#endif
+
+    hb_buffer_set_direction(buf, HB_DIRECTION_LTR);
+    hb_buffer_set_script(buf, HB_SCRIPT_LATIN);
+    hb_buffer_set_language(buf, hb_language_from_string("en", strlen("en")));
+    
+    NSString *str = @"Hello Miku";
+    hb_buffer_add_utf8(buf, str.UTF8String, str.length, 0, str.length);
+    hb_shape(hb_ft_font, buf, NULL, 0);
+    
+    unsigned int glyph_count;
+    hb_glyph_info_t *glyph_info = hb_buffer_get_glyph_infos(buf, &glyph_count);
+    hb_glyph_position_t *glyph_pos = hb_buffer_get_glyph_positions(buf, &glyph_count);
+    CGGlyph *cg_glyphs = malloc(sizeof(CGGlyph) * glyph_count);
+    CGPoint *cg_positions = malloc(sizeof(CGPoint) * glyph_count);
+    
+    CGFloat x = 0;
+    CGFloat y = 0;
+    for (int i = 0; i<glyph_count; ++i) {
+        hb_glyph_info_t info = glyph_info[i];
+        cg_glyphs[i] = info.codepoint;
+        
+        hb_glyph_position_t hb_position = glyph_pos[i];
+        CGPoint p = CGPointMake(x + hb_position.x_offset,
+                                y + hb_position.y_offset);
+        cg_positions[i] = p;
+        
+        x += hb_position.x_advance;
+        y += hb_position.y_advance;
+    }
+    
+    CGContextShowGlyphsAtPositions(ctx, cg_glyphs, cg_positions, glyph_count);
+    
+    free(cg_glyphs);
+    free(cg_positions);
+    
 //  [frame drawOnContext: ctx];
 }
 

@@ -11,6 +11,7 @@ DSTROOT = /
 INSTALL_PATH = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/FakeMacOSX10.9.sdk/System/Library/Frameworks/
 HEADER_SEARCH_PATHS=$(inherited) /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/FakeMacOSX10.9.sdk/usr/include/freetype2/  $(SOURCE_ROOT)/gnustep-opal/Source/OpalText
 OTHER_LDFLAGS= $(inherited) -shared -lCoreGraphics -lobjc -lgnustl_shared
+OTHER_CFLAGS= $(inherited) -DANDROID 1
 
 LD_DEPENDENCY_INFO_FILE= 
 
