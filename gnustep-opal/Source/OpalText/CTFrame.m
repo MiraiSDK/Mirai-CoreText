@@ -39,6 +39,10 @@
 #include <harfbuzz/hb-glib.h>
 #endif
 
+#include <pango/pangocairo.h>
+#include "PangoCoreGraphics-render.h"
+
+
 /* Constants */
 
 const CFStringRef kCTFrameProgressionAttributeName = @"kCTFrameProgressionAttributeName";
@@ -163,6 +167,7 @@ void CTFrameDraw(CTFrameRef frame, CGContextRef ctx)
 //    CGContextShowTextAtPoint(ctx, 0, 0, "hello world", 10);
 //    CGContextRestoreGState(ctx);
     
+    /*
     FT_Library ft_library;
     FT_Init_FreeType(&ft_library);
     
@@ -220,6 +225,20 @@ void CTFrameDraw(CTFrameRef frame, CGContextRef ctx)
     
     free(cg_glyphs);
     free(cg_positions);
+     */
+//    g_type_init();
+    PangoFontMap *fontmap = pango_cairo_font_map_new();
+    PangoContext *pangoctx = pango_font_map_create_context(fontmap);
+    PangoLayout *layout = pango_layout_new(pangoctx);
+     ;
+    pango_layout_set_text(layout,"Hello Miku\nHatsune",-1);
+    PangoFontDescription *desc = pango_font_description_from_string("Sans Bold 27");
+    pango_layout_set_font_description(layout,desc);
+    pango_font_description_free(desc);
+    
+    CGContextSaveGState(ctx);
+    pango_coregraphics_show_layout(ctx, layout);
+    CGContextRestoreGState(ctx);
     
 //  [frame drawOnContext: ctx];
 }

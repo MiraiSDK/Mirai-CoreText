@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		431DCAE318714896000142AF /* PangoCoreGraphics-render.c in Sources */ = {isa = PBXBuildFile; fileRef = 431DCAE218714896000142AF /* PangoCoreGraphics-render.c */; };
 		439C86F11862E1840089F3DA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 439C86F01862E1840089F3DA /* CoreGraphics.framework */; };
 		439C86F31862E1FC0089F3DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 439C86F21862E1FC0089F3DA /* Foundation.framework */; };
 		43B164401862CF60006B6CE1 /* CTFramesetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111AE185DF1CA00E771B4 /* CTFramesetter.m */; };
@@ -124,6 +125,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		431DCAE218714896000142AF /* PangoCoreGraphics-render.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "PangoCoreGraphics-render.c"; sourceTree = "<group>"; };
+		431DCAE4187148B1000142AF /* PangoCoreGraphics-render.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PangoCoreGraphics-render.h"; sourceTree = "<group>"; };
 		439C86F01862E1840089F3DA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		439C86F21862E1FC0089F3DA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		43B164091862CE38006B6CE1 /* libCoreText-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libCoreText-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -288,6 +291,8 @@
 				43E111B5185DF1CA00E771B4 /* CTStringAttributes.m */,
 				43E111B6185DF1CA00E771B4 /* CTTextTab.m */,
 				43E111B7185DF1CA00E771B4 /* CTTypesetter.m */,
+				431DCAE218714896000142AF /* PangoCoreGraphics-render.c */,
+				431DCAE4187148B1000142AF /* PangoCoreGraphics-render.h */,
 				43E111B8185DF1CA00E771B4 /* Fontconfig */,
 				43E111BC185DF1CA00E771B4 /* FreeType */,
 				43E111C0185DF1CA00E771B4 /* GDI */,
@@ -573,6 +578,7 @@
 				43E111CD185DF1CA00E771B4 /* CTFontTraits.m in Sources */,
 				43E111E8185DF1CA00E771B4 /* OPSimpleLayoutEngine.m in Sources */,
 				43E111D9185DF1CA00E771B4 /* CTTypesetter.m in Sources */,
+				431DCAE318714896000142AF /* PangoCoreGraphics-render.c in Sources */,
 				43E111D1185DF1CA00E771B4 /* CTGlyphInfo.m in Sources */,
 				43E111D0185DF1CA00E771B4 /* CTFramesetter.m in Sources */,
 				43E111CF185DF1CA00E771B4 /* CTFrame.m in Sources */,
@@ -697,7 +703,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx0.0;
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -728,7 +734,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				SDKROOT = macosx0.0;
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
@@ -744,16 +750,23 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					/usr/local/include/freetype2,
+					"/usr/local/include/freetype2/**",
 					/usr/local/include,
 					"/usr/local/lib/glib-2.0/include",
 					"/usr/local/include/glib-2.0",
+					"/usr/local/include/pango-1.0/",
+					/usr/local/include/cairo,
 				);
 				INFOPLIST_FILE = "CoreText/CoreText-Info.plist";
 				LIBRARY_SEARCH_PATHS = "/usr/local/lib/**";
 				OTHER_LDFLAGS = (
-					"-lharfbuzz",
+					"-lpangocairo-1.0",
+					"-lpango-1.0",
 					"-lfreetype",
+					"-lgobject-2.0",
+					"-lglib-2.0",
+					"-L/usr/local/opt/gettext/lib",
+					"-lintl",
 				);
 				PRODUCT_NAME = "TN$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -773,16 +786,23 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					/usr/local/include/freetype2,
+					"/usr/local/include/freetype2/**",
 					/usr/local/include,
 					"/usr/local/lib/glib-2.0/include",
 					"/usr/local/include/glib-2.0",
+					"/usr/local/include/pango-1.0/",
+					/usr/local/include/cairo,
 				);
 				INFOPLIST_FILE = "CoreText/CoreText-Info.plist";
 				LIBRARY_SEARCH_PATHS = "/usr/local/lib/**";
 				OTHER_LDFLAGS = (
-					"-lharfbuzz",
+					"-lpangocairo-1.0",
+					"-lpango-1.0",
 					"-lfreetype",
+					"-lgobject-2.0",
+					"-lglib-2.0",
+					"-L/usr/local/opt/gettext/lib",
+					"-lintl",
 				);
 				PRODUCT_NAME = "TN$(TARGET_NAME)";
 				SDKROOT = macosx;
