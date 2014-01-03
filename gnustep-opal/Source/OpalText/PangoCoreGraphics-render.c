@@ -72,6 +72,20 @@ struct _PangoCoreGraphicsRendererClass
 G_DEFINE_TYPE(PangoCoreGraphicsRenderer, pango_coregraphics_renderer, PANGO_TYPE_RENDERER);
 
 static void
+set_color (PangoCoreGraphicsRenderer *crenderer,
+           PangoRenderPart     part)
+{
+    PangoColor *color = pango_renderer_get_color ((PangoRenderer *) (crenderer), part);
+    
+    if (color) {
+        CGColorRef cg_color = CGColorCreateGenericRGB(color->red, color->green, color->blue, 1);
+        CGContextSetFillColorWithColor(crenderer->ctx, cg_color);
+        CGColorRelease(cg_color);
+        
+    }
+}
+
+static void
 pango_coregraphics_renderer_show_text_glyphs (PangoRenderer        *renderer,
                                               const char           *text,
                                               int                   text_len,
@@ -95,14 +109,15 @@ pango_coregraphics_renderer_show_text_glyphs (PangoRenderer        *renderer,
     double base_x = x / PANGO_SCALE;
     double base_y = y / PANGO_SCALE;
     
+    
     gint num_glyphs = glyphs->num_glyphs;
     
     CGGlyph *cg_glyphs = malloc(sizeof(CGGlyph) * glyphs->num_glyphs);
     CGPoint *cg_positions = malloc(sizeof(CGPoint) * glyphs->num_glyphs);
     
+    set_color(crenderer, PANGO_RENDER_PART_FOREGROUND);
     CGContextSaveGState(ctx);
-    CGColorRef color = CGColorCreateGenericRGB(1, 0, 0, 1);
-    CGContextSetFillColorWithColor(ctx, color);
+
     
     for (i = 0; i< glyphs->num_glyphs; i++) {
         PangoGlyphInfo *glyphInfo = &glyphs->glyphs[i];
@@ -116,11 +131,20 @@ pango_coregraphics_renderer_show_text_glyphs (PangoRenderer        *renderer,
         gx += glyphInfo->geometry.width/PANGO_SCALE;
     }
 
-    CGContextSelectFont(ctx, "Arial", 14, kCGEncodingMacRoman);
+    PangoFontDescription *fontDescription = pango_font_describe_with_absolute_size(font);
+    const char * fontFamily = pango_font_description_get_family(fontDescription);
+    CFStringRef familyRef = CFStringCreateWithCString(kCFAllocatorDefault, fontFamily, kCFStringEncodingUTF8);
+    CGFontRef f = CGFontCreateWithFontName(familyRef);
+    CGContextSetFont(ctx, f);
+    CGFontRelease(f);
+    CFRelease(familyRef);
+    
+    gint fontSize = pango_font_description_get_size(fontDescription);
+    CGContextSetFontSize(ctx, fontSize/PANGO_SCALE);
+    
     CGContextShowGlyphsAtPositions(crenderer->ctx, cg_glyphs, cg_positions, glyphs->num_glyphs);
     free(cg_glyphs);
     free(cg_positions);
-    CGColorRelease(color);
     CGContextRestoreGState(crenderer->ctx);
     
 }

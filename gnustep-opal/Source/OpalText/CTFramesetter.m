@@ -99,9 +99,6 @@
   CTFrame *frame = [[CTFrame alloc] initWithPath: path
                                        stringRange: r
                                         attributes: attributes];
-    
-    
-    
 		
     PangoFontMap *fontmap = pango_cairo_font_map_new();
     PangoContext *pangoctx = pango_font_map_create_context(fontmap);
@@ -109,13 +106,23 @@
     NSString *frameString = [[_string string] substringWithRange:r];
     uint16_t length = frameString.length;
     pango_layout_set_text(layout, [frameString UTF8String], length);
+    PangoAttrList *list = pango_attr_list_new();
+    PangoAttribute *attribute = pango_attr_foreground_new(0, 1, 0);
+    attribute->start_index = 0;
+    attribute->end_index = length;
+    pango_attr_list_insert(list, attribute);
+    
+    pango_layout_set_attributes(layout,list);
     pango_layout_set_width(layout, frameRect.size.width);
     pango_layout_set_height(layout, frameRect.size.height);
-    PangoFontDescription *desc = pango_font_description_from_string("Arial 14");
+    PangoFontDescription *desc = pango_font_description_from_string("Helvetica Regular 12");
     pango_layout_set_font_description(layout,desc);
+
     pango_font_description_free(desc);
 
     [frame setPangoLayout:layout];
+    
+    // set visible range
     
     // FIXME: take in to account CTTextTab settings (alignment, justification, etc?)
 
