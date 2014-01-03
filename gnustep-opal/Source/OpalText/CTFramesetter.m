@@ -25,6 +25,9 @@
 #include <CoreText/CTFramesetter.h>
 #import "CTFrame-private.h"
 
+#import "PangoCoreGraphics-render.h"
+#import <pango/pangocairo.h>
+
 /* Classes */
 
 /**
@@ -88,39 +91,61 @@
     return nil;
   }
 
-  CTFrameRef frame = [[CTFrame alloc] initWithPath: path
-                                       stringRange: NSMakeRange(range.location, range.length)
-                                        attributes: attributes];
-		
-  // FIXME: take in to account CTTextTab settings (alignment, justification, etc?)
-
-  switch ([[attributes objectForKey: kCTFrameProgressionAttributeName] intValue])
-  {
-    default:
-    case kCTFrameProgressionTopToBottom:
-    {
-      CFIndex start = 0;
-      while (start < [_string length])
-      {
-        CFIndex lineBreak = CTTypesetterSuggestLineBreak(_ts, start, frameRect.size.width);
-
-        CTLineRef line = CTTypesetterCreateLine(_ts, CFRangeMake(start, lineBreak));
-        [frame addLine: line];
-        [line release];
-        
-        if (start == lineBreak)
-          {
-            NSLog(@"WARNING: Broke possible infinite loop in %s; string %@", __PRETTY_FUNCTION__, _string);
-            break;
-          }
-        start = lineBreak;
-      }
-      break;
+    NSRange r = NSMakeRange(range.location, range.length);
+    if (r.location == 0 && r.length == 0) {
+        r.length = _string.length;
     }
-    case kCTFrameProgressionRightToLeft:
-      // FIXME: as above but for right to left, vertical text layout
-      break;
-  }
+    
+  CTFrame *frame = [[CTFrame alloc] initWithPath: path
+                                       stringRange: r
+                                        attributes: attributes];
+    
+    
+    
+		
+    PangoFontMap *fontmap = pango_cairo_font_map_new();
+    PangoContext *pangoctx = pango_font_map_create_context(fontmap);
+    PangoLayout *layout = pango_layout_new(pangoctx);
+    NSString *frameString = [[_string string] substringWithRange:r];
+    uint16_t length = frameString.length;
+    pango_layout_set_text(layout, [frameString UTF8String], length);
+    pango_layout_set_width(layout, frameRect.size.width);
+    pango_layout_set_height(layout, frameRect.size.height);
+    PangoFontDescription *desc = pango_font_description_from_string("Arial 14");
+    pango_layout_set_font_description(layout,desc);
+    pango_font_description_free(desc);
+
+    [frame setPangoLayout:layout];
+    
+    // FIXME: take in to account CTTextTab settings (alignment, justification, etc?)
+
+//  switch ([[attributes objectForKey: kCTFrameProgressionAttributeName] intValue])
+//  {
+//    default:
+//    case kCTFrameProgressionTopToBottom:
+//    {
+//      CFIndex start = 0;
+//      while (start < [_string length])
+//      {
+//        CFIndex lineBreak = CTTypesetterSuggestLineBreak(_ts, start, frameRect.size.width);
+//
+//        CTLineRef line = CTTypesetterCreateLine(_ts, CFRangeMake(start, lineBreak));
+//        [frame addLine: line];
+//        [line release];
+//        
+//        if (start == lineBreak)
+//          {
+//            NSLog(@"WARNING: Broke possible infinite loop in %s; string %@", __PRETTY_FUNCTION__, _string);
+//            break;
+//          }
+//        start = lineBreak;
+//      }
+//      break;
+//    }
+//    case kCTFrameProgressionRightToLeft:
+//      // FIXME: as above but for right to left, vertical text layout
+//      break;
+//  }
 
   return frame;
 }

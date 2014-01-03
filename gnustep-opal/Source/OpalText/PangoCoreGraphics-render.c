@@ -113,10 +113,10 @@ pango_coregraphics_renderer_show_text_glyphs (PangoRenderer        *renderer,
         cg_positions[i] = p;
 //        if (glyphInfo->glyph != PANGO_GLYPH_EMPTY) {
 //        }
-        gx += 20;
-//        gx += glyphInfo->geometry.width;
+        gx += glyphInfo->geometry.width/PANGO_SCALE;
     }
-    
+
+    CGContextSelectFont(ctx, "Arial", 14, kCGEncodingMacRoman);
     CGContextShowGlyphsAtPositions(crenderer->ctx, cg_glyphs, cg_positions, glyphs->num_glyphs);
     free(cg_glyphs);
     free(cg_positions);

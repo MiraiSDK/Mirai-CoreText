@@ -28,6 +28,9 @@
 // FIXME: use advanced layout engines if available
 #import "OPSimpleLayoutEngine.h"
 
+#import "PangoCoreGraphics-render.h"
+#import <pango/pangocairo.h>
+
 /* Constants */
 
 const CFStringRef kCTTypesetterOptionDisableBidiProcessing = @"kCTTypesetterOptionDisableBidiProcessing";
@@ -55,13 +58,19 @@ const CFStringRef kCTTypesetterOptionForcedEmbeddingLevel = @"kCTTypesetterOptio
 
 @end
 
-@implementation CTTypesetter
+@implementation CTTypesetter {
+    PangoLayout *_layout;
+}
 
 - (id)initWithAttributedString: (NSAttributedString*)string
                        options: (NSDictionary*)options
 {
   if ((self = [super init]))
   {
+      PangoFontMap *fontmap = pango_cairo_font_map_new();
+      PangoContext *pangoctx = pango_font_map_create_context(fontmap);
+      _layout = pango_layout_new(pangoctx);
+      
     _as = [string retain];
     _options = [options retain];
   }
@@ -101,7 +110,9 @@ const CFStringRef kCTTypesetterOptionForcedEmbeddingLevel = @"kCTTypesetterOptio
 
 @end
 
+
 /* Functions */
+#pragma mark - Functions
 
 CTTypesetterRef CTTypesetterCreateWithAttributedString(CFAttributedStringRef string)
 {
