@@ -26,18 +26,24 @@
 
 /* Constants */
 
-const CFStringRef kCTFontAttributeName = @"kCTFontAttributeName";
-const CFStringRef kCTForegroundColorFromContextAttributeName = @"kCTForegroundColorFromContextAttributeName";
-const CFStringRef kCTKernAttributeName = @"kCTKernAttributeName";
-const CFStringRef kCTLigatureAttributeName = @"kCTLigatureAttributeName";
-const CFStringRef kCTForegroundColorAttributeName = @"kCTForegroundColorAttributeName";
-const CFStringRef kCTParagraphStyleAttributeName = @"kCTParagraphStyleAttributeName";
-const CFStringRef kCTStrokeWidthAttributeName = @"kCTStrokeWidthAttributeName";
-const CFStringRef kCTStrokeColorAttributeName = @"kCTStrokeColorAttributeName";
-const CFStringRef kCTUnderlineStyleAttributeName = @"kCTUnderlineStyleAttributeName";
-const CFStringRef kCTSuperscriptAttributeName = @"kCTSuperscriptAttributeName";
-const CFStringRef kCTUnderlineColorAttributeName = @"kCTUnderlineColorAttributeName";
-const CFStringRef kCTVerticalFormsAttributeName = @"kCTVerticalFormsAttributeName";
-const CFStringRef kCTGlyphInfoAttributeName = @"kCTGlyphInfoAttributeName";
-const CFStringRef kCTCharacterShapeAttributeName = @"kCTCharacterShapeAttributeName";
+const CFStringRef kCTFontAttributeName = CFSTR("NSFont");
+const CFStringRef kCTForegroundColorFromContextAttributeName = CFSTR("CTForegroundColorFromContext");
+const CFStringRef kCTKernAttributeName = CFSTR("NSKern");
+const CFStringRef kCTLigatureAttributeName = CFSTR("NSLigature");
+const CFStringRef kCTForegroundColorAttributeName = CFSTR("CTForegroundColor");
+const CFStringRef kCTParagraphStyleAttributeName = CFSTR("NSParagraphStyle");
+const CFStringRef kCTStrokeWidthAttributeName = CFSTR("NSStrokeWidth");
+const CFStringRef kCTStrokeColorAttributeName = CFSTR("CTStrokeColor");
+const CFStringRef kCTUnderlineStyleAttributeName = CFSTR("NSUnderline");
+const CFStringRef kCTSuperscriptAttributeName = CFSTR("NSSuperScript");
+const CFStringRef kCTUnderlineColorAttributeName = CFSTR("CTUnderlineColor");
+const CFStringRef kCTVerticalFormsAttributeName = CFSTR("CTVerticalForms");
+const CFStringRef kCTGlyphInfoAttributeName = CFSTR("NSGlyphInfo");
+const CFStringRef kCTCharacterShapeAttributeName = CFSTR("NSCharacterShape");
 
+const CFStringRef kCTLanguageAttributeName = CFSTR("NSLanguage");
+const CFStringRef kCTRunDelegateAttributeName = CFSTR("CTRunDelegate");
+const CFStringRef kCTBaselineClassAttributeName = CFSTR("CTBaselineClass");
+const CFStringRef kCTBaselineInfoAttributeName = CFSTR("CTBaselineInfo");
+const CFStringRef kCTBaselineReferenceInfoAttributeName = CFSTR("CTBaselineReferenceInfo");
+const CFStringRef kCTWritingDirectionAttributeName = CFSTR("NSWritingDirection");

@@ -44,6 +44,13 @@ extern const CFStringRef kCTVerticalFormsAttributeName;
 extern const CFStringRef kCTGlyphInfoAttributeName;
 extern const CFStringRef kCTCharacterShapeAttributeName;
 
+//extern const CFStringRef kCTLanguageAttributeName;// CT_AVAILABLE(10_9, 7_0);
+extern const CFStringRef kCTRunDelegateAttributeName;
+//extern const CFStringRef kCTBaselineClassAttributeName;// CT_AVAILABLE(10_8, 6_0);
+//extern const CFStringRef kCTBaselineInfoAttributeName;// CT_AVAILABLE(10_8, 6_0);
+//extern const CFStringRef kCTBaselineReferenceInfoAttributeName;// CT_AVAILABLE(10_8, 6_0);
+//extern const CFStringRef kCTWritingDirectionAttributeName;// CT_AVAILABLE(10_8, 6_0);
+
 typedef enum {
   kCTUnderlineStyleNone = 0,
   kCTUnderlineStyleSingle = 1,
@@ -58,5 +65,10 @@ typedef enum {
   kCTUnderlinePatternDashDot = 0x0300,
   kCTUnderlinePatternDashDotDot = 0x0400
 } CTUnderlineStyleModifiers;
+
+enum {
+    kCTWritingDirectionEmbedding = (0 << 1),
+    kCTWritingDirectionOverride = (1 << 1)
+};
 
 #endif
