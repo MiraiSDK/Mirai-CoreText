@@ -28,14 +28,19 @@
 - (void)awakeFromNib
 {
     _string = @"Hello Miku";
-    _attributedString = [[NSAttributedString alloc] initWithString:_string attributes:[self attributes]];
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:_string attributes:[self attributes]];
+    
+    CGColorRef blue = CGColorCreateGenericRGB(0, 0, 1, 1);
+    [attr setAttributes:@{(__bridge NSString *)kCTForegroundColorAttributeName:(id)CFBridgingRelease(blue),} range:NSMakeRange(5, 4)];
+    _attributedString = attr;
 }
 
 - (NSDictionary *)attributes
 {
+    CGColorRef redColor = CGColorCreateGenericRGB(1, 0, 0, 1);
     return @{
-             NSForegroundColorAttributeName:[NSColor redColor],
-             NSFontAttributeName:[NSFont systemFontOfSize:16]
+             (__bridge NSString *)kCTForegroundColorAttributeName:(id)CFBridgingRelease(redColor),
+             (__bridge NSString *)kCTFontAttributeName:[NSFont systemFontOfSize:16]
              };
 }
 

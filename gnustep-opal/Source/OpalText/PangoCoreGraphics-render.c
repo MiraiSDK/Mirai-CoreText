@@ -78,7 +78,7 @@ set_color (PangoCoreGraphicsRenderer *crenderer,
     PangoColor *color = pango_renderer_get_color ((PangoRenderer *) (crenderer), part);
     
     if (color) {
-        CGColorRef cg_color = CGColorCreateGenericRGB(color->red, color->green, color->blue, 1);
+        CGColorRef cg_color = CGColorCreateGenericRGB(color->red / 65535., color->green / 65535., color->blue / 65535., 1);
         CGContextSetFillColorWithColor(crenderer->ctx, cg_color);
         CGColorRelease(cg_color);
         

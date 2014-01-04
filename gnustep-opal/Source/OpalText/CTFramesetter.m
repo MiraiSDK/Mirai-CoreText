@@ -25,6 +25,7 @@
 #include <CoreText/CTFramesetter.h>
 #import "CTFrame-private.h"
 
+#import "CTStringAttributes.h"
 #import "PangoCoreGraphics-render.h"
 #import <pango/pangocairo.h>
 
@@ -76,6 +77,57 @@
   [super dealloc];
 }
 
+- (PangoAttribute *)createPangoFontAttributeFromNSAttributedValue:(id)obj
+{
+    if ([obj isKindOfClass:NSClassFromString(@"NSFont")]) {
+        
+    } else if ([obj isKindOfClass:NSClassFromString(@"UIFont")]) {
+        
+    } else {
+    }
+//    CFStringRef f = CGFontCopyPostScriptName(obj);
+    PangoFontDescription *desc = pango_font_description_new();
+    pango_font_description_set_family(desc, "Arial");
+//    pango_font_description_set_size(desc, 12);
+    pango_font_description_set_absolute_size(desc, 12*PANGO_SCALE);
+    pango_font_description_set_style(desc, PANGO_STYLE_NORMAL);
+    PangoAttribute *attr =pango_attr_font_desc_new(desc);
+    return attr;
+}
+
+- (PangoAttribute *)createPangoForegroundColorAttributeFromNSAttributedValue:(id)obj
+{
+    CGFloat *components = CGColorGetComponents(obj);
+    PangoAttribute *attr = pango_attr_foreground_new(components[0] * 65535.,
+                                                     components[1] * 65535.,
+                                                     components[2] * 65535.);
+    return attr;
+}
+
+- (PangoAttrList *)createAttrListFromAttributedString:(NSAttributedString *)attrStr
+{
+    PangoAttrList *list = pango_attr_list_new();
+    [attrStr enumerateAttributesInRange:NSMakeRange(0, attrStr.length) options:0 usingBlock:^(NSDictionary *attrs, NSRange range, BOOL *stop) {
+        [attrs enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop) {
+            PangoAttribute *patt = NULL;
+            if ([key isEqualToString:(NSString *)kCTFontAttributeName]) {
+                patt = [self createPangoFontAttributeFromNSAttributedValue:obj];
+            } else if ([key isEqualToString:(NSString *)kCTForegroundColorAttributeName]) {
+                patt = [self createPangoForegroundColorAttributeFromNSAttributedValue:obj];
+            }
+            
+            if (patt != NULL) {
+                patt->start_index = range.location;
+                patt->end_index = NSMaxRange(range);
+                pango_attr_list_insert(list, patt);
+                g_object_unref(patt);
+            }
+        }];
+    }];
+    
+    return list;
+}
+
 - (CTFrameRef)createFrameWithRange: (CFRange)range
                               path: (CGPathRef)path
                         attributes: (NSDictionary*)attributes
@@ -96,6 +148,7 @@
         r.length = _string.length;
     }
     
+    
   CTFrame *frame = [[CTFrame alloc] initWithPath: path
                                        stringRange: r
                                         attributes: attributes];
@@ -106,12 +159,7 @@
     NSString *frameString = [[_string string] substringWithRange:r];
     uint16_t length = frameString.length;
     pango_layout_set_text(layout, [frameString UTF8String], length);
-    PangoAttrList *list = pango_attr_list_new();
-    PangoAttribute *attribute = pango_attr_foreground_new(0, 1, 0);
-    attribute->start_index = 0;
-    attribute->end_index = length;
-    pango_attr_list_insert(list, attribute);
-    
+    PangoAttrList *list = [self createAttrListFromAttributedString:_string];
     pango_layout_set_attributes(layout,list);
     pango_layout_set_width(layout, frameRect.size.width);
     pango_layout_set_height(layout, frameRect.size.height);
@@ -119,7 +167,8 @@
     pango_layout_set_font_description(layout,desc);
 
     pango_font_description_free(desc);
-
+    pango_attr_list_unref(list);
+    
     [frame setPangoLayout:layout];
     
     // set visible range
