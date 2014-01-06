@@ -97,10 +97,10 @@
 
 - (PangoAttribute *)createPangoForegroundColorAttributeFromNSAttributedValue:(id)obj
 {
-    CGFloat *components = CGColorGetComponents(obj);
-    PangoAttribute *attr = pango_attr_foreground_new(components[0] * 65535.,
-                                                     components[1] * 65535.,
-                                                     components[2] * 65535.);
+    CGFloat *rgba = CGColorGetComponents(obj);
+    PangoAttribute *attr = pango_attr_foreground_new(rgba[0] * 65535.,
+                                                     rgba[1] * 65535.,
+                                                     rgba[2] * 65535.);
     return attr;
 }
 
@@ -112,15 +112,62 @@
             PangoAttribute *patt = NULL;
             if ([key isEqualToString:(NSString *)kCTFontAttributeName]) {
                 patt = [self createPangoFontAttributeFromNSAttributedValue:obj];
+            } else if ([key isEqualToString:(NSString *)kCTForegroundColorFromContextAttributeName]) {
+            } else if ([key isEqualToString:(NSString *)kCTKernAttributeName]) {
+                patt = pango_attr_letter_spacing_new([obj intValue]);
+            } else if ([key isEqualToString:(NSString *)kCTLigatureAttributeName]) {
             } else if ([key isEqualToString:(NSString *)kCTForegroundColorAttributeName]) {
                 patt = [self createPangoForegroundColorAttributeFromNSAttributedValue:obj];
+            } else if ([key isEqualToString:(NSString *)kCTParagraphStyleAttributeName]) {
+            } else if ([key isEqualToString:(NSString *)kCTStrokeWidthAttributeName]) {
+            } else if ([key isEqualToString:(NSString *)kCTStrokeColorAttributeName]) {
+            } else if ([key isEqualToString:(NSString *)kCTUnderlineStyleAttributeName]) {
+                CTUnderlineStyle style = [obj intValue];
+                PangoUnderline underline = PANGO_UNDERLINE_NONE;
+                switch (style) {
+                    case kCTUnderlineStyleNone: underline = PANGO_UNDERLINE_NONE; break;
+                    case kCTUnderlineStyleSingle: underline = PANGO_UNDERLINE_SINGLE; break;
+                    case kCTUnderlineStyleThick: underline = PANGO_UNDERLINE_ERROR; break; // FIXME: RIGHT?
+                    case kCTUnderlineStyleDouble:  underline = PANGO_UNDERLINE_DOUBLE;break;
+                }
+                patt = pango_attr_underline_new(underline);
+            } else if ([key isEqualToString:(NSString *)kCTSuperscriptAttributeName]) {
+            } else if ([key isEqualToString:(NSString *)kCTUnderlineColorAttributeName]) {
+                CGFloat *rgba = CGColorGetComponents(obj);
+                patt = pango_attr_underline_color_new(rgba[0] * 65535.,
+                                                      rgba[1] * 65535.,
+                                                      rgba[2] * 65535.);
+            } else if ([key isEqualToString:(NSString *)kCTVerticalFormsAttributeName]) {
+            } else if ([key isEqualToString:(NSString *)kCTGlyphInfoAttributeName]) {
+            } else if ([key isEqualToString:(NSString *)kCTCharacterShapeAttributeName]) {
+            } else if ([key isEqualToString:(NSString *)kCTLanguageAttributeName]) {
+                const char * l = [obj UTF8String];
+                PangoLanguage *language = pango_language_from_string(l);
+                patt = pango_attr_language_new(language);
+            } else if ([key isEqualToString:(NSString *)kCTRunDelegateAttributeName]) {
+                // shape
+                CTRunDelegateRef delegate = obj;
+                // need access delegate's callbacks
+                
+                PangoRectangle logical_rect;
+                logical_rect.width = 20;
+                logical_rect.height = 20;
+                logical_rect.x = 0;
+                logical_rect.y = 0;
+                PangoRectangle ink_rect = logical_rect;
+                
+                patt = pango_attr_shape_new(&ink_rect, &logical_rect);
+            } else if ([key isEqualToString:(NSString *)kCTBaselineClassAttributeName]) {
+            } else if ([key isEqualToString:(NSString *)kCTBaselineInfoAttributeName]) {
+            } else if ([key isEqualToString:(NSString *)kCTBaselineReferenceInfoAttributeName]) {
+            } else if ([key isEqualToString:(NSString *)kCTWritingDirectionAttributeName]) {
             }
             
             if (patt != NULL) {
                 patt->start_index = range.location;
                 patt->end_index = NSMaxRange(range);
                 pango_attr_list_insert(list, patt);
-                g_object_unref(patt);
+                pango_attribute_destroy(patt);
             }
         }];
     }];
