@@ -7,7 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		431DCAE318714896000142AF /* PangoCoreGraphics-render.c in Sources */ = {isa = PBXBuildFile; fileRef = 431DCAE218714896000142AF /* PangoCoreGraphics-render.c */; };
+		431DCAE318714896000142AF /* PangoCoreGraphics-render.m in Sources */ = {isa = PBXBuildFile; fileRef = 431DCAE218714896000142AF /* PangoCoreGraphics-render.m */; };
+		43840615187F2500000D092C /* CTRunDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 43840613187F2500000D092C /* CTRunDelegate.h */; };
+		43840618187F2527000D092C /* CTRunDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 43840617187F2527000D092C /* CTRunDelegate.m */; };
+		43840619187F265E000D092C /* CTRunDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 43840617187F2527000D092C /* CTRunDelegate.m */; };
+		4384061A187F2671000D092C /* CTRunDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 43840613187F2500000D092C /* CTRunDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4384061F18813CC5000D092C /* PangoCoreGraphics-render.m in Sources */ = {isa = PBXBuildFile; fileRef = 431DCAE218714896000142AF /* PangoCoreGraphics-render.m */; };
+		4384062418814069000D092C /* libpangocairo-1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4384062118813FD3000D092C /* libpangocairo-1.0.a */; };
+		438406251881406B000D092C /* libpango-1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 438406231881403D000D092C /* libpango-1.0.a */; };
+		438406291881409A000D092C /* libgobject-2.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 438406281881409A000D092C /* libgobject-2.0.a */; };
+		4384062B188140D6000D092C /* libgthread-2.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4384062A188140D6000D092C /* libgthread-2.0.a */; };
+		4384062D18814134000D092C /* libglib-2.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4384062C18814134000D092C /* libglib-2.0.a */; };
 		439C86F11862E1840089F3DA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 439C86F01862E1840089F3DA /* CoreGraphics.framework */; };
 		439C86F31862E1FC0089F3DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 439C86F21862E1FC0089F3DA /* Foundation.framework */; };
 		43B164401862CF60006B6CE1 /* CTFramesetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111AE185DF1CA00E771B4 /* CTFramesetter.m */; };
@@ -125,8 +135,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		431DCAE218714896000142AF /* PangoCoreGraphics-render.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "PangoCoreGraphics-render.c"; sourceTree = "<group>"; };
+		431DCAE218714896000142AF /* PangoCoreGraphics-render.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PangoCoreGraphics-render.m"; sourceTree = "<group>"; };
 		431DCAE4187148B1000142AF /* PangoCoreGraphics-render.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PangoCoreGraphics-render.h"; sourceTree = "<group>"; };
+		43840613187F2500000D092C /* CTRunDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTRunDelegate.h; sourceTree = "<group>"; };
+		43840617187F2527000D092C /* CTRunDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTRunDelegate.m; sourceTree = "<group>"; };
+		4384062118813FD3000D092C /* libpangocairo-1.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpangocairo-1.0.a"; path = "../../../../../../android-toolchain-arm/sysroot/usr/lib/libpangocairo-1.0.a"; sourceTree = SDKROOT; };
+		438406231881403D000D092C /* libpango-1.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpango-1.0.a"; path = "../../../../../../android-toolchain-arm/sysroot/usr/lib/libpango-1.0.a"; sourceTree = SDKROOT; };
+		4384062618814080000D092C /* libintl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libintl.a; path = "../../../../../../android-toolchain-arm/sysroot/usr/lib/libintl.a"; sourceTree = SDKROOT; };
+		438406281881409A000D092C /* libgobject-2.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libgobject-2.0.a"; path = "../../../../../../android-toolchain-arm/sysroot/usr/lib/libgobject-2.0.a"; sourceTree = SDKROOT; };
+		4384062A188140D6000D092C /* libgthread-2.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libgthread-2.0.a"; path = "../../../../../../android-toolchain-arm/sysroot/usr/lib/libgthread-2.0.a"; sourceTree = SDKROOT; };
+		4384062C18814134000D092C /* libglib-2.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libglib-2.0.a"; path = "../../../../../../android-toolchain-arm/sysroot/usr/lib/libglib-2.0.a"; sourceTree = SDKROOT; };
 		439C86F01862E1840089F3DA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		439C86F21862E1FC0089F3DA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		43B164091862CE38006B6CE1 /* libCoreText-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libCoreText-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -207,6 +225,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				439C86F31862E1FC0089F3DA /* Foundation.framework in Frameworks */,
+				4384062418814069000D092C /* libpangocairo-1.0.a in Frameworks */,
+				438406251881406B000D092C /* libpango-1.0.a in Frameworks */,
+				4384062D18814134000D092C /* libglib-2.0.a in Frameworks */,
+				438406291881409A000D092C /* libgobject-2.0.a in Frameworks */,
+				4384062B188140D6000D092C /* libgthread-2.0.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,6 +259,12 @@
 		43BA6CC3185DDED200526D8E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4384062C18814134000D092C /* libglib-2.0.a */,
+				4384062A188140D6000D092C /* libgthread-2.0.a */,
+				438406281881409A000D092C /* libgobject-2.0.a */,
+				4384062618814080000D092C /* libintl.a */,
+				438406231881403D000D092C /* libpango-1.0.a */,
+				4384062118813FD3000D092C /* libpangocairo-1.0.a */,
 				439C86F21862E1FC0089F3DA /* Foundation.framework */,
 				439C86F01862E1840089F3DA /* CoreGraphics.framework */,
 				43B164171862CE39006B6CE1 /* XCTest.framework */,
@@ -276,6 +305,7 @@
 			isa = PBXGroup;
 			children = (
 				43E111A8185DF1CA00E771B4 /* CTFont.m */,
+				43840617187F2527000D092C /* CTRunDelegate.m */,
 				43E111A9185DF1CA00E771B4 /* CTFontCollection.m */,
 				43E111AA185DF1CA00E771B4 /* CTFontDescriptor.m */,
 				43E111AB185DF1CA00E771B4 /* CTFontTraits.m */,
@@ -291,7 +321,7 @@
 				43E111B5185DF1CA00E771B4 /* CTStringAttributes.m */,
 				43E111B6185DF1CA00E771B4 /* CTTextTab.m */,
 				43E111B7185DF1CA00E771B4 /* CTTypesetter.m */,
-				431DCAE218714896000142AF /* PangoCoreGraphics-render.c */,
+				431DCAE218714896000142AF /* PangoCoreGraphics-render.m */,
 				431DCAE4187148B1000142AF /* PangoCoreGraphics-render.h */,
 				43E111B8185DF1CA00E771B4 /* Fontconfig */,
 				43E111BC185DF1CA00E771B4 /* FreeType */,
@@ -364,6 +394,7 @@
 				43E1121D185DF1E200E771B4 /* CTStringAttributes.h */,
 				43E1121E185DF1E200E771B4 /* CTTextTab.h */,
 				43E1121F185DF1E200E771B4 /* CTTypesetter.h */,
+				43840613187F2500000D092C /* CTRunDelegate.h */,
 			);
 			path = CoreText;
 			sourceTree = "<group>";
@@ -397,6 +428,7 @@
 				43E111CE185DF1CA00E771B4 /* CTFrame-private.h in Headers */,
 				43E111D5185DF1CA00E771B4 /* CTRun-private.h in Headers */,
 				43E111E7185DF1CA00E771B4 /* OPSimpleLayoutEngine.h in Headers */,
+				43840615187F2500000D092C /* CTRunDelegate.h in Headers */,
 				43E111E2185DF1CA00E771B4 /* OPFont.h in Headers */,
 				43E111D2185DF1CA00E771B4 /* CTLine-private.h in Headers */,
 				43E111E4185DF1CA00E771B4 /* OPFontDescriptor.h in Headers */,
@@ -422,6 +454,7 @@
 				43E1127A185DF23100E771B4 /* CTRun.h in Headers */,
 				43E1127B185DF23100E771B4 /* CTStringAttributes.h in Headers */,
 				43E1127C185DF23100E771B4 /* CTTextTab.h in Headers */,
+				4384061A187F2671000D092C /* CTRunDelegate.h in Headers */,
 				43E1127D185DF23100E771B4 /* CTTypesetter.h in Headers */,
 				43E1127E185DF23100E771B4 /* OPFreeTypeUtil.h in Headers */,
 				43E1127F185DF23100E771B4 /* OPLayoutEngine.h in Headers */,
@@ -567,6 +600,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				43E111D6185DF1CA00E771B4 /* CTRun.m in Sources */,
+				43840618187F2527000D092C /* CTRunDelegate.m in Sources */,
 				43E111CA185DF1CA00E771B4 /* CTFont.m in Sources */,
 				43E111CC185DF1CA00E771B4 /* CTFontDescriptor.m in Sources */,
 				43E111D7185DF1CA00E771B4 /* CTStringAttributes.m in Sources */,
@@ -578,7 +612,7 @@
 				43E111CD185DF1CA00E771B4 /* CTFontTraits.m in Sources */,
 				43E111E8185DF1CA00E771B4 /* OPSimpleLayoutEngine.m in Sources */,
 				43E111D9185DF1CA00E771B4 /* CTTypesetter.m in Sources */,
-				431DCAE318714896000142AF /* PangoCoreGraphics-render.c in Sources */,
+				431DCAE318714896000142AF /* PangoCoreGraphics-render.m in Sources */,
 				43E111D1185DF1CA00E771B4 /* CTGlyphInfo.m in Sources */,
 				43E111D0185DF1CA00E771B4 /* CTFramesetter.m in Sources */,
 				43E111CF185DF1CA00E771B4 /* CTFrame.m in Sources */,
@@ -599,8 +633,10 @@
 				43E11260185DF23100E771B4 /* OPFontDescriptor.m in Sources */,
 				43E11261185DF23100E771B4 /* CTParagraphStyle.m in Sources */,
 				43E11262185DF23100E771B4 /* OPFont.m in Sources */,
+				4384061F18813CC5000D092C /* PangoCoreGraphics-render.m in Sources */,
 				43E11264185DF23100E771B4 /* CTFontTraits.m in Sources */,
 				43E11265185DF23100E771B4 /* OPSimpleLayoutEngine.m in Sources */,
+				43840619187F265E000D092C /* CTRunDelegate.m in Sources */,
 				43E11266185DF23100E771B4 /* CTTypesetter.m in Sources */,
 				43E11267185DF23100E771B4 /* CTGlyphInfo.m in Sources */,
 				43E11268185DF23100E771B4 /* CTFramesetter.m in Sources */,
@@ -641,6 +677,10 @@
 					"$(inherited)",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-fblocks",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -662,6 +702,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoreText/CoreText-Prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-fblocks",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -703,7 +747,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
+				SDKROOT = macosx0.0;
 			};
 			name = Debug;
 		};
@@ -734,7 +778,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				SDKROOT = macosx;
+				SDKROOT = macosx0.0;
 			};
 			name = Release;
 		};
@@ -749,12 +793,12 @@
 				GCC_PREFIX_HEADER = "CoreText/CoreText-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
+					"/usr/local/include/pango-1.0/",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"/usr/local/include/freetype2/**",
 					/usr/local/include,
 					"/usr/local/lib/glib-2.0/include",
 					"/usr/local/include/glib-2.0",
-					"/usr/local/include/pango-1.0/",
 					/usr/local/include/cairo,
 				);
 				INFOPLIST_FILE = "CoreText/CoreText-Info.plist";
@@ -785,12 +829,12 @@
 				GCC_PREFIX_HEADER = "CoreText/CoreText-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
+					"/usr/local/include/pango-1.0/",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"/usr/local/include/freetype2/**",
 					/usr/local/include,
 					"/usr/local/lib/glib-2.0/include",
 					"/usr/local/include/glib-2.0",
-					"/usr/local/include/pango-1.0/",
 					/usr/local/include/cairo,
 				);
 				INFOPLIST_FILE = "CoreText/CoreText-Info.plist";
@@ -820,8 +864,22 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoreText/CoreText-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDK_ROOT)/usr/include/freetype2/",
+					"$(SOURCE_ROOT)/gnustep-opal/Source/OpalText",
+					"$(SDK_ROOT)/usr/include/pango-1.0/",
+					"$(SDK_ROOT)/usr/include/glib-2.0",
+					"$(SDK_ROOT)/usr/lib/glib-2.0/include/",
+					"$(SDK_ROOT)/usr/include/cairo/",
+				);
 				INFOPLIST_FILE = "CoreText/CoreText-Info.plist";
 				LD_DEPENDENCY_INFO_FILE = "";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/chyhfj/Development/MiraSDK/Products/android/android-toolchain-arm/sysroot/usr/lib",
+					"$(SDKROOT)/../../../../../../android-toolchain-arm/sysroot/usr/lib",
+				);
 				MACOSX_DEPLOYMENT_TARGET = "";
 				PRODUCT_NAME = CoreText;
 				SDKROOT = macosx0.0;
@@ -839,8 +897,22 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoreText/CoreText-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDK_ROOT)/usr/include/freetype2/",
+					"$(SOURCE_ROOT)/gnustep-opal/Source/OpalText",
+					"$(SDK_ROOT)/usr/include/pango-1.0/",
+					"$(SDK_ROOT)/usr/include/glib-2.0",
+					"$(SDK_ROOT)/usr/lib/glib-2.0/include/",
+					"$(SDK_ROOT)/usr/include/cairo/",
+				);
 				INFOPLIST_FILE = "CoreText/CoreText-Info.plist";
 				LD_DEPENDENCY_INFO_FILE = "";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/chyhfj/Development/MiraSDK/Products/android/android-toolchain-arm/sysroot/usr/lib",
+					"$(SDKROOT)/../../../../../../android-toolchain-arm/sysroot/usr/lib",
+				);
 				MACOSX_DEPLOYMENT_TARGET = "";
 				PRODUCT_NAME = CoreText;
 				SDKROOT = macosx0.0;

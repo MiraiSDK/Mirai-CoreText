@@ -23,9 +23,31 @@
    */
 
 #include <CoreText/CTStringAttributes.h>
-
 /* Constants */
+#if ANDROID
+const CFStringRef kCTFontAttributeName = @"NSFont";
+const CFStringRef kCTForegroundColorFromContextAttributeName = @"CTForegroundColorFromContext";
+const CFStringRef kCTKernAttributeName = @"NSKern";
+const CFStringRef kCTLigatureAttributeName = @"NSLigature";
+const CFStringRef kCTForegroundColorAttributeName = @"CTForegroundColor";
+const CFStringRef kCTParagraphStyleAttributeName = @"NSParagraphStyle";
+const CFStringRef kCTStrokeWidthAttributeName = @"NSStrokeWidth";
+const CFStringRef kCTStrokeColorAttributeName = @"CTStrokeColor";
+const CFStringRef kCTUnderlineStyleAttributeName = @"NSUnderline";
+const CFStringRef kCTSuperscriptAttributeName = @"NSSuperScript";
+const CFStringRef kCTUnderlineColorAttributeName = @"CTUnderlineColor";
+const CFStringRef kCTVerticalFormsAttributeName = @"CTVerticalForms";
+const CFStringRef kCTGlyphInfoAttributeName = @"NSGlyphInfo";
+const CFStringRef kCTCharacterShapeAttributeName = @"NSCharacterShape";
 
+const CFStringRef kCTLanguageAttributeName = @"NSLanguage";
+const CFStringRef kCTRunDelegateAttributeName = @"CTRunDelegate";
+const CFStringRef kCTBaselineClassAttributeName = @"CTBaselineClass";
+const CFStringRef kCTBaselineInfoAttributeName = @"CTBaselineInfo";
+const CFStringRef kCTBaselineReferenceInfoAttributeName = @"CTBaselineReferenceInfo";
+const CFStringRef kCTWritingDirectionAttributeName = @"NSWritingDirection";
+
+#else
 const CFStringRef kCTFontAttributeName = CFSTR("NSFont");
 const CFStringRef kCTForegroundColorFromContextAttributeName = CFSTR("CTForegroundColorFromContext");
 const CFStringRef kCTKernAttributeName = CFSTR("NSKern");
@@ -47,3 +69,5 @@ const CFStringRef kCTBaselineClassAttributeName = CFSTR("CTBaselineClass");
 const CFStringRef kCTBaselineInfoAttributeName = CFSTR("CTBaselineInfo");
 const CFStringRef kCTBaselineReferenceInfoAttributeName = CFSTR("CTBaselineReferenceInfo");
 const CFStringRef kCTWritingDirectionAttributeName = CFSTR("NSWritingDirection");
+
+#endif

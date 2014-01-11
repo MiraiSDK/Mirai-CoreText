@@ -23,6 +23,7 @@
    */
 
 #include <CoreText/CTFramesetter.h>
+#include <CoreText/CTRunDelegate.h>
 #import "CTFrame-private.h"
 
 #import "CTStringAttributes.h"
