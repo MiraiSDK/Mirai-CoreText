@@ -149,12 +149,20 @@ buildPango()
 		fi
 		
 		tar -xvf pango-1.36.1.tar.xz
+		
+		pushd pango-1.36.1
+			patch -p1 -i ../pango_language_locale.patch
+		popd
+		
 	fi
 	
 	pushd pango-1.36.1
 	
-	CC=arm-linux-androideabi-clang CXX=arm-linux-androideabi-clang++ AR=arm-linux-androideabi-ar CPPFLAGS="$FLAGS" CFLAGS="$FLAGS" ./configure --host=arm-linux-androideabi --prefix="$PREFIX" --enable-static
+	CC=arm-linux-androideabi-clang CXX=arm-linux-androideabi-clang++ AR=arm-linux-androideabi-ar CPPFLAGS="-DANDROID=1 -g $FLAGS" CFLAGS="-DANDROID=1 -g $FLAGS" ./configure --host=arm-linux-androideabi --prefix="$PREFIX" --enable-static
 	checkError $? "configure pango failed"
+	
+	#patch compile pangofc-font.o
+	
 	
 	popd
 }

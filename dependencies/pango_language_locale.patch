@@ -1,0 +1,11 @@
+--- pango-1.36.1/pango/pango-language.c	2013-12-30 15:58:16.000000000 +0800
++++ pango-1.36.1/pango/pango-language.c	2014-01-13 02:42:43.000000000 +0800
+@@ -218,6 +218,8 @@
+   CFRelease (languages);
+ 
+   return g_strdup (ret);
++#elif defined(ANDROID)
++  return g_strdup ("");
+ #else
+   return g_strdup (setlocale (LC_CTYPE, NULL));
+ #endif
