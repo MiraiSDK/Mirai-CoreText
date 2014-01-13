@@ -30,6 +30,8 @@
 #import "PangoCoreGraphics-render.h"
 #import <pango/pangocairo.h>
 
+#import "CTFoundationExtended.h"
+
 /* Classes */
 
 /**
