@@ -104,7 +104,7 @@ static void glib_log_handler_NSLog(const gchar *log_domain, GLogLevelFlags log_l
     }
 //    CFStringRef f = CGFontCopyPostScriptName(obj);
     PangoFontDescription *desc = pango_font_description_new();
-    pango_font_description_set_family(desc, "Arial");
+    pango_font_description_set_family(desc, "Roboto");
 //    pango_font_description_set_size(desc, 12);
     pango_font_description_set_absolute_size(desc, 12*PANGO_SCALE);
     pango_font_description_set_style(desc, PANGO_STYLE_NORMAL);
@@ -227,7 +227,7 @@ static void glib_log_handler_NSLog(const gchar *log_domain, GLogLevelFlags log_l
     pango_layout_set_attributes(layout,list);
     pango_layout_set_width(layout, frameRect.size.width);
     pango_layout_set_height(layout, frameRect.size.height);
-    PangoFontDescription *desc = pango_font_description_from_string("Helvetica Regular 12");
+    PangoFontDescription *desc = pango_font_description_from_string("Roboto Regular 12");
     pango_layout_set_font_description(layout,desc);
 
     pango_attr_list_unref(list);
