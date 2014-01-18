@@ -60,6 +60,7 @@ struct _PangoCoreGraphicsRenderer
     PangoRenderer parent_instance;
     
     CGContextRef ctx;
+    CGRect rect;
     gboolean is_cached_renderer;
     
 };
@@ -111,12 +112,13 @@ pango_coregraphics_renderer_show_text_glyphs (PangoRenderer        *renderer,
     
     
     gint num_glyphs = glyphs->num_glyphs;
+    CGFloat height = crenderer->rect.size.height;
     
     CGGlyph *cg_glyphs = malloc(sizeof(CGGlyph) * glyphs->num_glyphs);
     CGPoint *cg_positions = malloc(sizeof(CGPoint) * glyphs->num_glyphs);
     
-    set_color(crenderer, PANGO_RENDER_PART_FOREGROUND);
     CGContextSaveGState(ctx);
+    set_color(crenderer, PANGO_RENDER_PART_FOREGROUND);
 
     
     for (i = 0; i< glyphs->num_glyphs; i++) {
@@ -125,6 +127,10 @@ pango_coregraphics_renderer_show_text_glyphs (PangoRenderer        *renderer,
         
         CGPoint p = CGPointMake(base_x + gx + glyphInfo->geometry.x_offset,
                                 base_y +gy);
+        
+        //flip coordination
+        p.y = height - p.y;
+        
         cg_positions[i] = p;
 //        if (glyphInfo->glyph != PANGO_GLYPH_EMPTY) {
 //        }
@@ -140,7 +146,8 @@ pango_coregraphics_renderer_show_text_glyphs (PangoRenderer        *renderer,
     CFRelease(familyRef);
     
     gint fontSize = pango_font_description_get_size(fontDescription);
-    CGContextSetFontSize(ctx, fontSize/PANGO_SCALE);
+    CGFloat cg_fontSize = fontSize/PANGO_SCALE;
+    CGContextSetFontSize(ctx, cg_fontSize);
     
     CGContextShowGlyphsAtPositions(crenderer->ctx, cg_glyphs, cg_positions, glyphs->num_glyphs);
     free(cg_glyphs);
@@ -299,6 +306,7 @@ release_renderer (PangoCoreGraphicsRenderer *renderer)
 static void
 _pango_coregraphics_do_layout (CGContextRef     ctx,
                                PangoLayout *layout,
+                               CGRect rect,
                                gboolean     do_path)
 {
     printf("%s\n",__PRETTY_FUNCTION__);
@@ -306,6 +314,7 @@ _pango_coregraphics_do_layout (CGContextRef     ctx,
     PangoCoreGraphicsRenderer *crenderer = acquire_renderer();
     PangoRenderer *renderer = (PangoRenderer *) crenderer;
     crenderer->ctx = ctx;
+    crenderer->rect = rect;
 
     pango_renderer_draw_layout(renderer, layout, 0, 0);
     
@@ -315,9 +324,9 @@ _pango_coregraphics_do_layout (CGContextRef     ctx,
 
 #pragma mark - Public API
 #pragma mark Rendering
-void pango_coregraphics_show_layout(CGContextRef ctx, PangoLayout *layout)
+void pango_coregraphics_show_layout_in_rect(CGContextRef ctx, PangoLayout *layout, CGRect rect)
 {
-    _pango_coregraphics_do_layout(ctx, layout, FALSE);
+    _pango_coregraphics_do_layout(ctx, layout, rect, FALSE);
 }
 
 void pango_coregraphics_show_layout_line(CGContextRef ctx, PangoLayoutLine *line)

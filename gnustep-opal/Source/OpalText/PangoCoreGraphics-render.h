@@ -28,7 +28,8 @@ pango_coregraphics_font_map_new (void);
 /*
  * Rendering
  */
-void pango_coregraphics_show_layout(CGContextRef ctx, PangoLayout *layout);
+void pango_coregraphics_show_layout_in_rect(CGContextRef ctx, PangoLayout *layout, CGRect rect);
+
 void pango_coregraphics_show_layout_line(CGContextRef ctx, PangoLayoutLine *line);
 void pango_coregraphics_show_glyph_item(CGContextRef ctx, const char *text, PangoGlyphItem *glyph_item);
 void pango_coregraphics_show_glyph_string(CGContextRef ctx, PangoFont *font, PangoGlyphString *glyphs);

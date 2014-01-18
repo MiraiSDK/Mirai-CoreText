@@ -123,7 +123,10 @@ const CFStringRef kCTFrameProgressionAttributeName = @"kCTFrameProgressionAttrib
 - (void)drawOnContext: (CGContextRef)ctx
 {
     CGContextSaveGState(ctx);
-    pango_coregraphics_show_layout(ctx, _layout);
+    
+    CGRect rect;
+    CGPathIsRect(_path, &rect);
+    pango_coregraphics_show_layout_in_rect(ctx, _layout,rect);
     CGContextRestoreGState(ctx);
 
 //  // FIXME: see CTFrameProgression docs comment about rotating 90 degrees
