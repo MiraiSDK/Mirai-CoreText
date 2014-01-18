@@ -170,7 +170,7 @@
                 patt->start_index = range.location;
                 patt->end_index = NSMaxRange(range);
                 pango_attr_list_insert(list, patt);
-                pango_attribute_destroy(patt);
+                g_object_unref(patt);
             }
         }];
     }];
@@ -216,7 +216,6 @@
     PangoFontDescription *desc = pango_font_description_from_string("Helvetica Regular 12");
     pango_layout_set_font_description(layout,desc);
 
-    pango_font_description_free(desc);
     pango_attr_list_unref(list);
     
     [frame setPangoLayout:layout];
