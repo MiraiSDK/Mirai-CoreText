@@ -28,7 +28,7 @@ buildHarfbuzz()
 	pushd harfbuzz-0.9.25
 	
 	
-	CC=arm-linux-androideabi-clang CXX=arm-linux-androideabi-clang++ AR=arm-linux-androideabi-ar CPPFLAGS="$FLAGS" CFLAGS="$FLAGS" ./configure --host=arm-linux-androideabi --prefix=$ARMSYSROOT/usr
+	CC=arm-linux-androideabi-clang CXX=arm-linux-androideabi-clang++ AR=arm-linux-androideabi-ar CPPFLAGS="$FLAGS" CFLAGS="$FLAGS" ./configure --host=arm-linux-androideabi --prefix=$ARMSYSROOT/usr --enable-static
 	checkError $? "configure harfbuzz failed"
 	
 	#patch makefile
@@ -158,7 +158,7 @@ buildPango()
 	
 	pushd pango-1.36.1
 	
-	CC=arm-linux-androideabi-clang CXX=arm-linux-androideabi-clang++ AR=arm-linux-androideabi-ar CPPFLAGS="-DANDROID=1 -g $FLAGS" CFLAGS="-DANDROID=1 -g $FLAGS" ./configure --host=arm-linux-androideabi --prefix="$PREFIX" --enable-static
+	CC=arm-linux-androideabi-clang CXX=arm-linux-androideabi-clang++ AR=arm-linux-androideabi-ar CPPFLAGS="-DANDROID=1 -g $FLAGS" CFLAGS="-DANDROID=1 -g $FLAGS" ./configure --host=arm-linux-androideabi --prefix="$PREFIX" --enable-static --with-included-modules=yes --with-dynamic-modules=no
 	checkError $? "configure pango failed"
 	
 	#patch compile pangofc-font.o
