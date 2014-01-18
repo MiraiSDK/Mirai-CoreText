@@ -59,6 +59,20 @@
 
 @implementation CTFramesetter
 
+static void glib_NSLog_print_handler(const gchar *string)
+{
+    NSLog(@"%s",string);
+}
+
+static void glib_log_handler_NSLog(const gchar *log_domain, GLogLevelFlags log_level, const gchar *message, gpointer unused_data)
+{
+    NSLog(@"[%s]%s",log_domain, message);
+}
++(void)load
+{
+    g_log_set_default_handler(&glib_log_handler_NSLog, NULL);
+}
+
 - (id)initWithAttributedString: (NSAttributedString*)string
 {
   self = [super init];
