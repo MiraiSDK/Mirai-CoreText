@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#if ANDROID
 typedef enum {
     NSAttributedStringEnumerationReverse = (1UL << 1),
     NSAttributedStringEnumerationLongestEffectiveRangeNotRequired = (1UL << 20)
@@ -24,3 +24,4 @@ typedef enum {
 //- (void)enumerateKeysAndObjectsWithOptions:(NSEnumerationOptions)opts usingBlock:(void (^)(id key, id obj, BOOL *stop))block;
 
 @end
+#endif
