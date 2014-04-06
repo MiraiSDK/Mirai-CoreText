@@ -51,10 +51,22 @@ CTTypesetterRef CTTypesetterCreateWithAttributedStringAndOptions(
   CFDictionaryRef opts
 );
 
+CTLineRef CTTypesetterCreateLineWithOffset(
+  CTTypesetterRef typesetter,
+  CFRange stringRange,
+  double offset );
+
 CTLineRef CTTypesetterCreateLine(
   CTTypesetterRef typesetter,
   CFRange range
 );
+
+CFIndex CTTypesetterSuggestLineBreakWithOffset(
+  CTTypesetterRef typesetter,
+  CFIndex startIndex,
+  double width,
+  double offset );
+
 
 CFIndex CTTypesetterSuggestClusterBreak(
   CTTypesetterRef typesetter,
@@ -67,6 +79,12 @@ CFIndex CTTypesetterSuggestLineBreak(
   CFIndex start,
   double width
 );
+
+CFIndex CTTypesetterSuggestClusterBreakWithOffset(
+                                                  CTTypesetterRef typesetter,
+                                                  CFIndex startIndex,
+                                                  double width,
+                                                  double offset );
 
 CFTypeID CTTypesetterGetTypeID();
 

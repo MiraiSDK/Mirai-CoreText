@@ -133,6 +133,14 @@ CTLineRef CTTypesetterCreateLine(CTTypesetterRef ts, CFRange range)
   return [ts createLineWithRange: range];
 }
 
+CTLineRef CTTypesetterCreateLineWithOffset(
+                                           CTTypesetterRef typesetter,
+                                           CFRange stringRange,
+                                           double offset )
+{
+    return NULL;
+}
+
 CFIndex CTTypesetterSuggestClusterBreak(
 	CTTypesetterRef ts,
 	CFIndex start,
@@ -147,6 +155,24 @@ CFIndex CTTypesetterSuggestLineBreak(
 	double width)
 {
   return [ts suggestLineBreakAtIndex: start width: width];
+}
+
+CFIndex CTTypesetterSuggestLineBreakWithOffset(
+                                               CTTypesetterRef typesetter,
+                                               CFIndex startIndex,
+                                               double width,
+                                               double offset )
+{
+    return 0;
+}
+
+CFIndex CTTypesetterSuggestClusterBreakWithOffset(
+                                                  CTTypesetterRef typesetter,
+                                                  CFIndex startIndex,
+                                                  double width,
+                                                  double offset )
+{
+    return 0;
 }
 
 CFTypeID CTTypesetterGetTypeID()
