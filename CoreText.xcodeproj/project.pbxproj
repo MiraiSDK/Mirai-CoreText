@@ -34,6 +34,7 @@
 		43B1644E1862CF79006B6CE1 /* OPFontDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111C6185DF1CA00E771B4 /* OPFontDescriptor.m */; };
 		43B1644F1862CF79006B6CE1 /* OPSimpleLayoutEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111C9185DF1CA00E771B4 /* OPSimpleLayoutEngine.m */; };
 		43BA6CCF185DDED200526D8E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43BA6CCD185DDED200526D8E /* InfoPlist.strings */; };
+		43C200F918ED2D9C00490D59 /* CTFontManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C200F818ED2D9C00490D59 /* CTFontManager.m */; };
 		43E111CA185DF1CA00E771B4 /* CTFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111A8185DF1CA00E771B4 /* CTFont.m */; };
 		43E111CB185DF1CA00E771B4 /* CTFontCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111A9185DF1CA00E771B4 /* CTFontCollection.m */; };
 		43E111CC185DF1CA00E771B4 /* CTFontDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111AA185DF1CA00E771B4 /* CTFontDescriptor.m */; };
@@ -147,6 +148,7 @@
 		43BA6CCC185DDED200526D8E /* CoreText-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CoreText-Info.plist"; sourceTree = "<group>"; };
 		43BA6CCE185DDED200526D8E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		43BA6CD0185DDED200526D8E /* CoreText-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoreText-Prefix.pch"; sourceTree = "<group>"; };
+		43C200F818ED2D9C00490D59 /* CTFontManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTFontManager.m; sourceTree = "<group>"; };
 		43E111A8185DF1CA00E771B4 /* CTFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTFont.m; sourceTree = "<group>"; };
 		43E111A9185DF1CA00E771B4 /* CTFontCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTFontCollection.m; sourceTree = "<group>"; };
 		43E111AA185DF1CA00E771B4 /* CTFontDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTFontDescriptor.m; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 				43E111AC185DF1CA00E771B4 /* CTFrame-private.h */,
 				43E111AD185DF1CA00E771B4 /* CTFrame.m */,
 				43E111AE185DF1CA00E771B4 /* CTFramesetter.m */,
+				43C200F818ED2D9C00490D59 /* CTFontManager.m */,
 				43E111AF185DF1CA00E771B4 /* CTGlyphInfo.m */,
 				43E111B0185DF1CA00E771B4 /* CTLine-private.h */,
 				43E111B1185DF1CA00E771B4 /* CTLine.m */,
@@ -620,6 +623,7 @@
 				43E11262185DF23100E771B4 /* OPFont.m in Sources */,
 				4384061F18813CC5000D092C /* PangoCoreGraphics-render.m in Sources */,
 				43E11264185DF23100E771B4 /* CTFontTraits.m in Sources */,
+				43C200F918ED2D9C00490D59 /* CTFontManager.m in Sources */,
 				43E11265185DF23100E771B4 /* OPSimpleLayoutEngine.m in Sources */,
 				43840619187F265E000D092C /* CTRunDelegate.m in Sources */,
 				43E11266185DF23100E771B4 /* CTTypesetter.m in Sources */,

@@ -29,6 +29,8 @@
 #include <CoreText/CTFontDescriptor.h>
 #include <CoreFoundation/CoreFoundation.h>
 
+#include <CoreGraphics/CGFont.h>
+
 /* Constants */
 
 extern const CFStringRef kCTFontManagerBundleIdentifier;
@@ -113,4 +115,10 @@ CTFontManagerAutoActivationSetting CTFontManagerGetAutoActivationSetting(
   CFStringRef bundleIdentifier
 );
 
+bool CTFontManagerRegisterGraphicsFont(
+                                       CGFontRef               font,
+                                       CFErrorRef *            error );
+bool CTFontManagerUnregisterGraphicsFont(
+                                         CGFontRef               font,
+                                         CFErrorRef *            error );
 #endif
