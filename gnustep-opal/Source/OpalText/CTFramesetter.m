@@ -31,6 +31,7 @@
 #import <pango/pangocairo.h>
 
 #import "CTFoundationExtended.h"
+#import "CTFont.h"
 
 /* Classes */
 
@@ -96,17 +97,36 @@ static void glib_log_handler_NSLog(const gchar *log_domain, GLogLevelFlags log_l
 
 - (PangoAttribute *)createPangoFontAttributeFromNSAttributedValue:(id)obj
 {
+    char *family = "Droid Sans Fallback";
+    int size = 12;
+    
     if ([obj isKindOfClass:NSClassFromString(@"NSFont")]) {
         
     } else if ([obj isKindOfClass:NSClassFromString(@"UIFont")]) {
         
+    } else if ([obj isKindOfClass:NSClassFromString(@"OPFont")]){
+//        size = CTFontGetSize(obj);
+//        CFStringRef f = CTFontCopyFamilyName(obj);
+//        family = [f UTF8String];
     } else {
+        
+    }
+    
+    
+    if (family == NULL) {
+        NSLog(@"[Warning]Create font with NULL family name, set to 12 Droid Sans Fallback");
+        family = "Droid Sans Fallback";
+    }
+    
+    if (size == 0) {
+        NSLog(@"[Warning]Create font attribute with 0 font size, set to 12");
+        size = 12;
     }
 //    CFStringRef f = CGFontCopyPostScriptName(obj);
     PangoFontDescription *desc = pango_font_description_new();
-    pango_font_description_set_family(desc, "Roboto");
+    pango_font_description_set_family(desc, family);
 //    pango_font_description_set_size(desc, 12);
-    pango_font_description_set_absolute_size(desc, 12*PANGO_SCALE);
+    pango_font_description_set_absolute_size(desc, size*PANGO_SCALE);
     pango_font_description_set_style(desc, PANGO_STYLE_NORMAL);
     PangoAttribute *attr =pango_attr_font_desc_new(desc);
     return attr;
@@ -183,6 +203,7 @@ static void glib_log_handler_NSLog(const gchar *log_domain, GLogLevelFlags log_l
             if (patt != NULL) {
                 patt->start_index = range.location;
                 patt->end_index = NSMaxRange(range);
+                NSLog(@"insert attribute: %@, range:%@",key,NSStringFromRange(range));
                 pango_attr_list_insert(list, patt);
                 g_object_unref(patt);
             }
@@ -222,13 +243,14 @@ static void glib_log_handler_NSLog(const gchar *log_domain, GLogLevelFlags log_l
     PangoLayout *layout = pango_layout_new(pangoctx);
     NSString *frameString = [[_string string] substringWithRange:r];
     uint16_t length = frameString.length;
-    pango_layout_set_text(layout, [frameString UTF8String], length);
+    pango_layout_set_text(layout, [frameString UTF8String], -1);
     PangoAttrList *list = [self createAttrListFromAttributedString:_string];
     pango_layout_set_attributes(layout,list);
-    pango_layout_set_width(layout, frameRect.size.width);
-    pango_layout_set_height(layout, frameRect.size.height);
-    PangoFontDescription *desc = pango_font_description_from_string("Roboto Regular 12");
+//    pango_layout_set_width(layout, frameRect.size.width);
+//    pango_layout_set_height(layout, frameRect.size.height);
+    PangoFontDescription *desc = pango_font_description_from_string("Droid Sans Fallback Regular 12");
     pango_layout_set_font_description(layout,desc);
+
 
     pango_attr_list_unref(list);
     
