@@ -38,16 +38,16 @@ enum {
   kCTFontClassMaskShift = 28
 };
 
-typedef enum {
-  kCTFontItalicTrait = (1 << 0),
-  kCTFontBoldTrait = (1 << 1),
-  kCTFontExpandedTrait = (1 << 5),
-  kCTFontCondensedTrait = (1 << 6),
-  kCTFontMonoSpaceTrait = (1 << 10),
-  kCTFontVerticalTrait = (1 << 11),
-  kCTFontUIOptimizedTrait = (1 << 12),
-  kCTFontClassMaskTrait = (15 << 28)
-} CTFontSymbolicTraits;
+//typedef enum {
+//  kCTFontItalicTrait = (1 << 0),
+//  kCTFontBoldTrait = (1 << 1),
+//  kCTFontExpandedTrait = (1 << 5),
+//  kCTFontCondensedTrait = (1 << 6),
+//  kCTFontMonoSpaceTrait = (1 << 10),
+//  kCTFontVerticalTrait = (1 << 11),
+//  kCTFontUIOptimizedTrait = (1 << 12),
+//  kCTFontClassMaskTrait = (15 << 28)
+//} CTFontSymbolicTraits;
 
 typedef enum {
   kCTFontUnknownClass = (0 << 28),
@@ -62,5 +62,35 @@ typedef enum {
   kCTFontScriptsClass = (10 << 28),
   kCTFontSymbolicClass = (12 << 28)
 } CTFontStylisticClass;
+
+#ifndef CF_OPTIONS
+#define CF_OPTIONS(_type, _name) enum _name : _type _name; enum _name : _type
+#endif
+
+typedef CF_OPTIONS(uint32_t, CTFontSymbolicTraits) {
+    kCTFontTraitItalic              = (1 << 0),     // Additional detail available via kCTFontSlantTrait
+    kCTFontTraitBold                = (1 << 1),     // Additional detail available via kCTFontWeightTrait
+    kCTFontTraitExpanded            = (1 << 5),     // Expanded and condensed traits are mutually exclusive
+    kCTFontTraitCondensed           = (1 << 6),     // Additional detail available via kCTFontWidthTrait
+    kCTFontTraitMonoSpace           = (1 << 10),    // Use fixed-pitch glyphs if available. May have multiple glyph advances (most CJK glyphs may contain two spaces)
+    kCTFontTraitVertical            = (1 << 11),    // Use vertical glyph variants and metrics
+    kCTFontTraitUIOptimized         = (1 << 12),    // Synthesize appropriate attributes for UI rendering such as control titles if necessary
+    kCTFontTraitColorGlyphs         = (1 << 13),    // Color bitmap glyphs are available.
+    kCTFontTraitComposite           = (1 << 14),    // The font is a CFR (Composite font reference), a cascade list is expected per font.
+    
+    kCTFontTraitClassMask           = (15U << kCTFontClassMaskShift),
+    // Mask for the font class
+    
+    kCTFontItalicTrait = kCTFontTraitItalic,
+    kCTFontBoldTrait = kCTFontTraitBold,
+    kCTFontExpandedTrait = kCTFontTraitExpanded,
+    kCTFontCondensedTrait = kCTFontTraitCondensed,
+    kCTFontMonoSpaceTrait = kCTFontTraitMonoSpace,
+    kCTFontVerticalTrait = kCTFontTraitVertical,
+    kCTFontUIOptimizedTrait = kCTFontTraitUIOptimized,
+    kCTFontColorGlyphsTrait = kCTFontTraitColorGlyphs,
+    kCTFontCompositeTrait = kCTFontTraitComposite,
+    kCTFontClassMaskTrait = kCTFontTraitClassMask
+};
 
 #endif
