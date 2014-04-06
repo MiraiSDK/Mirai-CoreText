@@ -102,16 +102,15 @@ pango_coregraphics_renderer_show_text_glyphs (PangoRenderer        *renderer,
     PangoCoreGraphicsRenderer *crenderer = (PangoCoreGraphicsRenderer *) (renderer);
     CGContextRef ctx = crenderer->ctx;
     
-    int i, count;
-    
     CGFloat gx = 0;
     CGFloat gy = 0;
     
     double base_x = x / PANGO_SCALE;
     double base_y = y / PANGO_SCALE;
     
+    NSLog(@"x:%d y:%d,base_x:%.2f, base_y:%.2f",x,y,base_x,base_y);
     
-    gint num_glyphs = glyphs->num_glyphs;
+    NSLog(@"will rendering: %d glyphs",glyphs->num_glyphs);
     CGFloat height = crenderer->rect.size.height;
     
     CGGlyph *cg_glyphs = malloc(sizeof(CGGlyph) * glyphs->num_glyphs);
@@ -120,33 +119,55 @@ pango_coregraphics_renderer_show_text_glyphs (PangoRenderer        *renderer,
     CGContextSaveGState(ctx);
     set_color(crenderer, PANGO_RENDER_PART_FOREGROUND);
 
-    
-    for (i = 0; i< glyphs->num_glyphs; i++) {
+    for (int i = 0; i< glyphs->num_glyphs; i++) {
         PangoGlyphInfo *glyphInfo = &glyphs->glyphs[i];
-        cg_glyphs[i] = glyphInfo->glyph;
         
         CGPoint p = CGPointMake(base_x + gx + glyphInfo->geometry.x_offset,
                                 base_y +gy);
+        CGFloat width = glyphInfo->geometry.width/PANGO_SCALE;
+
+//        NSLog(@"idx: %d, glyph:%d, position:{%.2f,%.2f}",i, glyphInfo->glyph,p.x,p.y);
+        cg_glyphs[i] = glyphInfo->glyph;
         
         //flip coordination
         p.y = height - p.y;
         
         cg_positions[i] = p;
-//        if (glyphInfo->glyph != PANGO_GLYPH_EMPTY) {
-//        }
-        gx += glyphInfo->geometry.width/PANGO_SCALE;
+        gx += width;
+        
+        if (glyphInfo->glyph & PANGO_GLYPH_UNKNOWN_FLAG) {
+            NSLog(@"idx: %d/%d unknown glyph: %d",i,glyphs->num_glyphs,glyphInfo->glyph);
+            CGContextStrokeRect(ctx, CGRectMake(p.x, p.y, width, width));
+        }
     }
 
     PangoFontDescription *fontDescription = pango_font_describe_with_absolute_size(font);
     const char * fontFamily = pango_font_description_get_family(fontDescription);
+
+    if (fontFamily == NULL) {
+        NSLog(@"[Warning] can't get font family from font description, fallback to Droid Sans Fallback");
+        fontFamily = "Droid Sans Fallback";
+    } else {
+        NSLog(@"use font family: %s",fontFamily);
+    }
+    
     CFStringRef familyRef = CFStringCreateWithCString(kCFAllocatorDefault, fontFamily, kCFStringEncodingUTF8);
     CGFontRef f = CGFontCreateWithFontName(familyRef);
+    if (f == NULL) {
+        NSLog(@"[ERROR] can not create font");
+    }
     CGContextSetFont(ctx, f);
     CGFontRelease(f);
     CFRelease(familyRef);
     
     gint fontSize = pango_font_description_get_size(fontDescription);
     CGFloat cg_fontSize = fontSize/PANGO_SCALE;
+    if (cg_fontSize == 0) {
+        NSLog(@"[ERROR] fontSize is 0, fix it to 12");
+        cg_fontSize = 12;
+    }
+
+
     CGContextSetFontSize(ctx, cg_fontSize);
     
     CGContextShowGlyphsAtPositions(crenderer->ctx, cg_glyphs, cg_positions, glyphs->num_glyphs);
