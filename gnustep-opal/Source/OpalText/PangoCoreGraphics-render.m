@@ -163,7 +163,7 @@ pango_coregraphics_renderer_draw_glyphs (PangoRenderer       *renderer,
                                          int                 x,
                                          int                 y)
 {
-    printf("%s\n",__PRETTY_FUNCTION__);
+    NSLog(@"%s",__PRETTY_FUNCTION__);
     
 //    gint num_glyphs = glyphs.num_glyphs;
 //    PangoGlyphInfo gi = glyphs.glyphs[0];
@@ -184,7 +184,7 @@ pango_coregraphics_renderer_draw_glyphs_item (PangoRenderer     *renderer,
                                               int               x,
                                               int               y)
 {
-    printf("%s\n",__PRETTY_FUNCTION__);
+    NSLog(@"%s",__PRETTY_FUNCTION__);
 
 }
 
@@ -196,7 +196,7 @@ pango_coregraphics_renderer_draw_rectangle (PangoRenderer     *renderer,
                                             int                width,
                                             int                height)
 {
-    printf("%s\n",__PRETTY_FUNCTION__);
+    NSLog(@"%s",__PRETTY_FUNCTION__);
 }
 
 static void
@@ -209,14 +209,14 @@ pango_coregraphics_renderer_draw_trapezoid (PangoRenderer     *renderer,
                                             double             x12,
                                             double             x22)
 {
-    printf("%s\n",__PRETTY_FUNCTION__);
+    NSLog(@"%s",__PRETTY_FUNCTION__);
 
 }
 // instance init
 static void
 pango_coregraphics_renderer_init (PangoCoreGraphicsRenderer *renderer G_GNUC_UNUSED)
 {
-    printf("%s\n",__PRETTY_FUNCTION__);
+    NSLog(@"%s",__PRETTY_FUNCTION__);
 
 }
 
@@ -227,7 +227,7 @@ pango_coregraphics_renderer_draw_error_underline (PangoRenderer *renderer,
                                            int            width,
                                            int            height)
 {
-    printf("%s\n",__PRETTY_FUNCTION__);
+    NSLog(@"%s",__PRETTY_FUNCTION__);
 
 }
 
@@ -237,7 +237,7 @@ pango_coregraphics_renderer_draw_shape (PangoRenderer  *renderer,
                                  int             x,
                                  int             y)
 {
-    printf("%s\n",__PRETTY_FUNCTION__);
+    NSLog(@"%s",__PRETTY_FUNCTION__);
 
 }
 
@@ -309,12 +309,14 @@ _pango_coregraphics_do_layout (CGContextRef     ctx,
                                CGRect rect,
                                gboolean     do_path)
 {
-    printf("%s\n",__PRETTY_FUNCTION__);
+    NSLog(@"%s",__PRETTY_FUNCTION__);
 
     PangoCoreGraphicsRenderer *crenderer = acquire_renderer();
     PangoRenderer *renderer = (PangoRenderer *) crenderer;
     crenderer->ctx = ctx;
     crenderer->rect = rect;
+    const char * text = pango_layout_get_text(layout);
+    NSLog(@"layout text: %s",text);
 
     pango_renderer_draw_layout(renderer, layout, 0, 0);
     
