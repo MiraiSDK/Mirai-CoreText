@@ -39,11 +39,18 @@ typedef struct CTParagraphStyle* CTParagraphStyleRef;
 /* Constants */
 
 typedef enum {
-  kCTLeftTextAlignment = 0,
-  kCTRightTextAlignment = 1,
-  kCTCenterTextAlignment = 2,
-  kCTJustifiedTextAlignment = 3,
-  kCTNaturalTextAlignment = 4
+    kCTTextAlignmentLeft = 0,
+    kCTTextAlignmentRight = 1,
+    kCTTextAlignmentCenter = 2,
+    kCTTextAlignmentJustified = 3,
+    kCTTextAlignmentNatural = 4,
+    
+    kCTLeftTextAlignment = kCTTextAlignmentLeft,
+    kCTRightTextAlignment = kCTTextAlignmentRight,
+    kCTCenterTextAlignment = kCTTextAlignmentCenter,
+    kCTJustifiedTextAlignment = kCTTextAlignmentJustified,
+    kCTNaturalTextAlignment = kCTTextAlignmentNatural
+    
 } CTTextAlignment;
 
 typedef enum {
