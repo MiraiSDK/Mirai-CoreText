@@ -7,12 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		431DCAE318714896000142AF /* PangoCoreGraphics-render.m in Sources */ = {isa = PBXBuildFile; fileRef = 431DCAE218714896000142AF /* PangoCoreGraphics-render.m */; };
 		43840615187F2500000D092C /* CTRunDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 43840613187F2500000D092C /* CTRunDelegate.h */; };
 		43840618187F2527000D092C /* CTRunDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 43840617187F2527000D092C /* CTRunDelegate.m */; };
 		43840619187F265E000D092C /* CTRunDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 43840617187F2527000D092C /* CTRunDelegate.m */; };
 		4384061A187F2671000D092C /* CTRunDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 43840613187F2500000D092C /* CTRunDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4384061F18813CC5000D092C /* PangoCoreGraphics-render.m in Sources */ = {isa = PBXBuildFile; fileRef = 431DCAE218714896000142AF /* PangoCoreGraphics-render.m */; };
 		438462D01883E4BC006DA1AA /* CTFoundationExtended.h in Headers */ = {isa = PBXBuildFile; fileRef = 438462CE1883E4BC006DA1AA /* CTFoundationExtended.h */; };
 		438462D11883E4BC006DA1AA /* CTFoundationExtended.m in Sources */ = {isa = PBXBuildFile; fileRef = 438462CF1883E4BC006DA1AA /* CTFoundationExtended.m */; };
 		439C86F11862E1840089F3DA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 439C86F01862E1840089F3DA /* CoreGraphics.framework */; };
@@ -118,6 +116,11 @@
 		43E11285185DF23100E771B4 /* CTLine-private.h in Headers */ = {isa = PBXBuildFile; fileRef = 43E111B0185DF1CA00E771B4 /* CTLine-private.h */; };
 		43E11286185DF23100E771B4 /* OPFontDescriptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 43E111C5185DF1CA00E771B4 /* OPFontDescriptor.h */; };
 		43E11288185DF23100E771B4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43BA6CCD185DDED200526D8E /* InfoPlist.strings */; };
+		43E3429A18F92FAB00463092 /* OPFontconfigFontDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111BB185DF1CA00E771B4 /* OPFontconfigFontDescriptor.m */; };
+		43E342A318F9368F00463092 /* OPPangoFontDescriptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 43E342A118F9368F00463092 /* OPPangoFontDescriptor.h */; };
+		43E342A718F936A800463092 /* PangoCoreGraphics-render.h in Headers */ = {isa = PBXBuildFile; fileRef = 43E342A518F936A800463092 /* PangoCoreGraphics-render.h */; };
+		43E342A818F936A800463092 /* PangoCoreGraphics-render.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E342A618F936A800463092 /* PangoCoreGraphics-render.m */; };
+		43E342A918F936AA00463092 /* OPPangoFontDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E342A218F9368F00463092 /* OPPangoFontDescriptor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -133,8 +136,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		431DCAE218714896000142AF /* PangoCoreGraphics-render.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PangoCoreGraphics-render.m"; sourceTree = "<group>"; };
-		431DCAE4187148B1000142AF /* PangoCoreGraphics-render.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PangoCoreGraphics-render.h"; sourceTree = "<group>"; };
 		43840613187F2500000D092C /* CTRunDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTRunDelegate.h; sourceTree = "<group>"; };
 		43840617187F2527000D092C /* CTRunDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTRunDelegate.m; sourceTree = "<group>"; };
 		438462CE1883E4BC006DA1AA /* CTFoundationExtended.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTFoundationExtended.h; sourceTree = "<group>"; };
@@ -197,6 +198,10 @@
 		43E1121F185DF1E200E771B4 /* CTTypesetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTTypesetter.h; sourceTree = "<group>"; };
 		43E1128C185DF23100E771B4 /* CoreText.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreText.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43E11290185DF55600E771B4 /* Android.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Android.xcconfig; path = CoreText/Android.xcconfig; sourceTree = "<group>"; };
+		43E342A118F9368F00463092 /* OPPangoFontDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPPangoFontDescriptor.h; sourceTree = "<group>"; };
+		43E342A218F9368F00463092 /* OPPangoFontDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPPangoFontDescriptor.m; sourceTree = "<group>"; };
+		43E342A518F936A800463092 /* PangoCoreGraphics-render.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PangoCoreGraphics-render.h"; sourceTree = "<group>"; };
+		43E342A618F936A800463092 /* PangoCoreGraphics-render.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PangoCoreGraphics-render.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -306,13 +311,12 @@
 				43E111B5185DF1CA00E771B4 /* CTStringAttributes.m */,
 				43E111B6185DF1CA00E771B4 /* CTTextTab.m */,
 				43E111B7185DF1CA00E771B4 /* CTTypesetter.m */,
-				431DCAE218714896000142AF /* PangoCoreGraphics-render.m */,
-				431DCAE4187148B1000142AF /* PangoCoreGraphics-render.h */,
 				438462CE1883E4BC006DA1AA /* CTFoundationExtended.h */,
 				438462CF1883E4BC006DA1AA /* CTFoundationExtended.m */,
 				43E111B8185DF1CA00E771B4 /* Fontconfig */,
 				43E111BC185DF1CA00E771B4 /* FreeType */,
 				43E111C0185DF1CA00E771B4 /* GDI */,
+				43E342A018F9368F00463092 /* Pango */,
 				43E111C3185DF1CA00E771B4 /* OPFont.h */,
 				43E111C4185DF1CA00E771B4 /* OPFont.m */,
 				43E111C5185DF1CA00E771B4 /* OPFontDescriptor.h */,
@@ -386,6 +390,17 @@
 			path = CoreText;
 			sourceTree = "<group>";
 		};
+		43E342A018F9368F00463092 /* Pango */ = {
+			isa = PBXGroup;
+			children = (
+				43E342A118F9368F00463092 /* OPPangoFontDescriptor.h */,
+				43E342A218F9368F00463092 /* OPPangoFontDescriptor.m */,
+				43E342A518F936A800463092 /* PangoCoreGraphics-render.h */,
+				43E342A618F936A800463092 /* PangoCoreGraphics-render.m */,
+			);
+			path = Pango;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -415,6 +430,7 @@
 				43E111CE185DF1CA00E771B4 /* CTFrame-private.h in Headers */,
 				43E111D5185DF1CA00E771B4 /* CTRun-private.h in Headers */,
 				43E111E7185DF1CA00E771B4 /* OPSimpleLayoutEngine.h in Headers */,
+				43E342A318F9368F00463092 /* OPPangoFontDescriptor.h in Headers */,
 				43840615187F2500000D092C /* CTRunDelegate.h in Headers */,
 				43E111E2185DF1CA00E771B4 /* OPFont.h in Headers */,
 				43E111D2185DF1CA00E771B4 /* CTLine-private.h in Headers */,
@@ -430,6 +446,7 @@
 				43E1126E185DF23100E771B4 /* CoreText.h in Headers */,
 				43E1126F185DF23100E771B4 /* CTFont.h in Headers */,
 				43E11270185DF23100E771B4 /* CTFontCollection.h in Headers */,
+				43E342A718F936A800463092 /* PangoCoreGraphics-render.h in Headers */,
 				43E11271185DF23100E771B4 /* CTFontDescriptor.h in Headers */,
 				43E11272185DF23100E771B4 /* CTFontManager.h in Headers */,
 				43E11273185DF23100E771B4 /* CTFontManagerErrors.h in Headers */,
@@ -600,7 +617,6 @@
 				43E111CD185DF1CA00E771B4 /* CTFontTraits.m in Sources */,
 				43E111E8185DF1CA00E771B4 /* OPSimpleLayoutEngine.m in Sources */,
 				43E111D9185DF1CA00E771B4 /* CTTypesetter.m in Sources */,
-				431DCAE318714896000142AF /* PangoCoreGraphics-render.m in Sources */,
 				43E111D1185DF1CA00E771B4 /* CTGlyphInfo.m in Sources */,
 				43E111D0185DF1CA00E771B4 /* CTFramesetter.m in Sources */,
 				43E111CF185DF1CA00E771B4 /* CTFrame.m in Sources */,
@@ -620,8 +636,9 @@
 				43E1125F185DF23100E771B4 /* CTTextTab.m in Sources */,
 				43E11260185DF23100E771B4 /* OPFontDescriptor.m in Sources */,
 				43E11261185DF23100E771B4 /* CTParagraphStyle.m in Sources */,
+				43E342A818F936A800463092 /* PangoCoreGraphics-render.m in Sources */,
 				43E11262185DF23100E771B4 /* OPFont.m in Sources */,
-				4384061F18813CC5000D092C /* PangoCoreGraphics-render.m in Sources */,
+				43E342A918F936AA00463092 /* OPPangoFontDescriptor.m in Sources */,
 				43E11264185DF23100E771B4 /* CTFontTraits.m in Sources */,
 				43C200F918ED2D9C00490D59 /* CTFontManager.m in Sources */,
 				43E11265185DF23100E771B4 /* OPSimpleLayoutEngine.m in Sources */,
@@ -632,6 +649,7 @@
 				43E11268185DF23100E771B4 /* CTFramesetter.m in Sources */,
 				43E11269185DF23100E771B4 /* CTFrame.m in Sources */,
 				43E1126A185DF23100E771B4 /* CTFontCollection.m in Sources */,
+				43E3429A18F92FAB00463092 /* OPFontconfigFontDescriptor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

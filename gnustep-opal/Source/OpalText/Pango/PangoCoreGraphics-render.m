@@ -144,28 +144,28 @@ pango_coregraphics_renderer_show_text_glyphs (PangoRenderer        *renderer,
     PangoFontDescription *fontDescription = pango_font_describe_with_absolute_size(font);
     const char * fontFamily = pango_font_description_get_family(fontDescription);
 
-    if (fontFamily == NULL) {
-        NSLog(@"[Warning] can't get font family from font description, fallback to Droid Sans Fallback");
-        fontFamily = "Droid Sans Fallback";
-    } else {
-        NSLog(@"use font family: %s",fontFamily);
-    }
+//    if (fontFamily == NULL) {
+//        NSLog(@"[Warning] can't get font family from font description, fallback to Droid Sans Fallback");
+//        fontFamily = "Droid Sans Fallback";
+//    } else {
+//        NSLog(@"use font family: %s",fontFamily);
+//    }
     
     CFStringRef familyRef = CFStringCreateWithCString(kCFAllocatorDefault, fontFamily, kCFStringEncodingUTF8);
     CGFontRef f = CGFontCreateWithFontName(familyRef);
-    if (f == NULL) {
-        NSLog(@"[ERROR] can not create font");
-    }
+//    if (f == NULL) {
+//        NSLog(@"[ERROR] can not create font");
+//    }
     CGContextSetFont(ctx, f);
     CGFontRelease(f);
     CFRelease(familyRef);
     
     gint fontSize = pango_font_description_get_size(fontDescription);
     CGFloat cg_fontSize = fontSize/PANGO_SCALE;
-    if (cg_fontSize == 0) {
-        NSLog(@"[ERROR] fontSize is 0, fix it to 12");
-        cg_fontSize = 12;
-    }
+//    if (cg_fontSize == 0) {
+//        NSLog(@"[ERROR] fontSize is 0, fix it to 12");
+//        cg_fontSize = 12;
+//    }
 
 
     CGContextSetFontSize(ctx, cg_fontSize);
