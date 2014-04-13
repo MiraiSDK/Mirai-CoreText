@@ -97,19 +97,22 @@ static void glib_log_handler_NSLog(const gchar *log_domain, GLogLevelFlags log_l
 
 - (PangoAttribute *)createPangoFontAttributeFromNSAttributedValue:(id)obj
 {
-    char *family = "Droid Sans Fallback";
+    const char *family = "Droid Sans Fallback";
     int size = 12;
     
     if ([obj isKindOfClass:NSClassFromString(@"NSFont")]) {
         
     } else if ([obj isKindOfClass:NSClassFromString(@"UIFont")]) {
-        
+        CTFontRef font = [obj _CTFont];
+        size = CTFontGetSize(font);
+        CFStringRef f = CTFontCopyFamilyName(obj);
+        family = [f UTF8String];
     } else if ([obj isKindOfClass:NSClassFromString(@"OPFont")]){
-//        size = CTFontGetSize(obj);
-//        CFStringRef f = CTFontCopyFamilyName(obj);
-//        family = [f UTF8String];
+        size = CTFontGetSize(obj);
+        CFStringRef f = CTFontCopyFamilyName(obj);
+        family = [f UTF8String];
     } else {
-        
+        NSLog(@"unknow font value:%@",obj);
     }
     
     
@@ -134,7 +137,14 @@ static void glib_log_handler_NSLog(const gchar *log_domain, GLogLevelFlags log_l
 
 - (PangoAttribute *)createPangoForegroundColorAttributeFromNSAttributedValue:(id)obj
 {
-    CGFloat *rgba = CGColorGetComponents(obj);
+    CGColorRef color;
+    Class uiColorClass = NSClassFromString(@"UIColor");
+    if ([obj isKindOfClass:uiColorClass]) {
+        color = (CGColorRef)[obj CGColor];
+    } else {
+        color = obj;
+    }
+    const CGFloat *rgba = CGColorGetComponents(color);
     PangoAttribute *attr = pango_attr_foreground_new(rgba[0] * 65535.,
                                                      rgba[1] * 65535.,
                                                      rgba[2] * 65535.);
@@ -170,7 +180,7 @@ static void glib_log_handler_NSLog(const gchar *log_domain, GLogLevelFlags log_l
                 patt = pango_attr_underline_new(underline);
             } else if ([key isEqualToString:(NSString *)kCTSuperscriptAttributeName]) {
             } else if ([key isEqualToString:(NSString *)kCTUnderlineColorAttributeName]) {
-                CGFloat *rgba = CGColorGetComponents(obj);
+                const CGFloat *rgba = CGColorGetComponents(obj);
                 patt = pango_attr_underline_color_new(rgba[0] * 65535.,
                                                       rgba[1] * 65535.,
                                                       rgba[2] * 65535.);
@@ -237,7 +247,7 @@ static void glib_log_handler_NSLog(const gchar *log_domain, GLogLevelFlags log_l
   CTFrame *frame = [[CTFrame alloc] initWithPath: path
                                        stringRange: r
                                         attributes: attributes];
-		
+    
     PangoFontMap *fontmap = pango_cairo_font_map_new();
     PangoContext *pangoctx = pango_font_map_create_context(fontmap);
     PangoLayout *layout = pango_layout_new(pangoctx);
