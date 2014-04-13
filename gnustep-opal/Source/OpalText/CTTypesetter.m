@@ -71,6 +71,11 @@ const CFStringRef kCTTypesetterOptionForcedEmbeddingLevel = @"kCTTypesetterOptio
       PangoContext *pangoctx = pango_font_map_create_context(fontmap);
       _layout = pango_layout_new(pangoctx);
       
+      // FIXME: set attrubites
+      NSLog(@"[%@]init with string:%@ ",self.class,string.string);
+      
+      pango_layout_set_text(_layout, string.string.UTF8String, string.string.length);
+      
     _as = [string retain];
     _options = [options retain];
   }
@@ -94,18 +99,48 @@ const CFStringRef kCTTypesetterOptionForcedEmbeddingLevel = @"kCTTypesetterOptio
   NSArray *runs = [NSMutableArray array];
   
   CTLineRef line = [[CTLine alloc] initWithRuns: runs];
-  
   return line;
 }
+
 - (CFIndex)suggestClusterBreakAtIndex: (CFIndex)start
                                 width: (double)width
 {
-  return 0;
+    NSLog(@"%s unimplemented: idx:%d,%.2f",__PRETTY_FUNCTION__,start,width);
+    PangoLayoutIter *iter = pango_layout_get_iter(_layout);
+    int clusterIdx = 0;
+    while (clusterIdx <= start) {
+        bool su = pango_layout_iter_next_cluster(iter);
+        clusterIdx = pango_layout_iter_get_index(iter);
+        
+        if (!su) {
+            clusterIdx = _as.string.length;
+            break;
+        }
+    }
+    
+    pango_layout_iter_free(iter);
+    NSLog(@"suggest: %d",clusterIdx);
+  return clusterIdx;
 }
 - (CFIndex)suggestLineBreakAtIndex: (CFIndex)start
                              width: (double)width
 {
-  return 0;
+    NSLog(@"%s unimplemented: idx:%d,%.2f",__PRETTY_FUNCTION__,start,width);
+    PangoLayoutIter *iter = pango_layout_get_iter(_layout);
+    int lineIdx = 0;
+    while (lineIdx <= start) {
+        bool su = pango_layout_iter_next_line(iter);
+        lineIdx = pango_layout_iter_get_index(iter);
+        
+        if (!su) {
+            lineIdx = _as.string.length;
+            break;
+        }
+    }
+    
+    pango_layout_iter_free(iter);
+    NSLog(@"suggest: %d",lineIdx);
+    return lineIdx;
 }
 
 @end
@@ -138,7 +173,8 @@ CTLineRef CTTypesetterCreateLineWithOffset(
                                            CFRange stringRange,
                                            double offset )
 {
-    return NULL;
+    NSLog(@"%s unimplemented",__PRETTY_FUNCTION__);
+    return CTTypesetterCreateLine(typesetter, stringRange);
 }
 
 CFIndex CTTypesetterSuggestClusterBreak(
@@ -163,7 +199,8 @@ CFIndex CTTypesetterSuggestLineBreakWithOffset(
                                                double width,
                                                double offset )
 {
-    return 0;
+    NSLog(@"%s unimplemented",__PRETTY_FUNCTION__);
+    return CTTypesetterSuggestLineBreak(typesetter, startIndex, width);
 }
 
 CFIndex CTTypesetterSuggestClusterBreakWithOffset(
@@ -172,6 +209,8 @@ CFIndex CTTypesetterSuggestClusterBreakWithOffset(
                                                   double width,
                                                   double offset )
 {
+    NSLog(@"%s unimplemented",__PRETTY_FUNCTION__);
+    return CTTypesetterSuggestClusterBreak(typesetter, startIndex, width);
     return 0;
 }
 
