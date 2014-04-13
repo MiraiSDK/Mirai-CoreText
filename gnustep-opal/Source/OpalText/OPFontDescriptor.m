@@ -39,6 +39,12 @@
 #include <CoreText/CTFontDescriptor.h>
 #import "OPFontDescriptor.h"
 
+NSString *OPFontFamilyAttribute = @"kCTFontFamilyNameAttribute";
+NSString *OPFontNameAttribute = @"kCTFontNameAttribute";
+//NSString *OPFontFaceAttribute;
+NSString *OPFontSizeAttribute = @"kCTFontSizeAttribute";
+//NSString *OPFontVisibleNameAttribute;
+//NSString *OPFontColorAttribute;
 
 @implementation OPFontDescriptor
 
