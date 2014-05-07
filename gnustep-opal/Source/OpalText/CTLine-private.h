@@ -25,6 +25,8 @@
 #include <CoreText/CTLine.h>
 #include <CoreText/CTTypesetter.h>
 
+#import <pango/pango.h>
+
 /**
  * Container of CTRun objects (glyph runs)
  */
@@ -34,5 +36,10 @@
 }
 
 - (id)initWithRuns: (NSArray*)runs;
+
+@property (nonatomic, assign) CFRange range;
+@property (nonatomic, strong) NSAttributedString * attributedString;
+
+
 
 @end

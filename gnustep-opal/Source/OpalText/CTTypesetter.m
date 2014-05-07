@@ -23,6 +23,7 @@
    */
 
 #include <CoreText/CTTypesetter.h>
+#include <CoreText/CTRunDelegate.h>
 
 #import "CTLine-private.h"
 // FIXME: use advanced layout engines if available
@@ -30,6 +31,10 @@
 
 #import "PangoCoreGraphics-render.h"
 #import <pango/pangocairo.h>
+#import "CTFont.h"
+#import "CTStringAttributes.h"
+#import "CTFoundationExtended.h"
+#import "NSAttributedString+Pango.h"
 
 /* Constants */
 
@@ -45,6 +50,8 @@ const CFStringRef kCTTypesetterOptionForcedEmbeddingLevel = @"kCTTypesetterOptio
 {
   NSAttributedString *_as;
   NSDictionary *_options;
+    
+    PangoLayout *_layout;
 }
 
 - (id)initWithAttributedString: (NSAttributedString*)string
@@ -58,23 +65,19 @@ const CFStringRef kCTTypesetterOptionForcedEmbeddingLevel = @"kCTTypesetterOptio
 
 @end
 
-@implementation CTTypesetter {
-    PangoLayout *_layout;
-}
+@implementation CTTypesetter
 
 - (id)initWithAttributedString: (NSAttributedString*)string
                        options: (NSDictionary*)options
 {
   if ((self = [super init]))
   {
+      NSLog(@"Create typesetter with attributed string:%@, length:%d",string,string.length);
       PangoFontMap *fontmap = pango_cairo_font_map_new();
       PangoContext *pangoctx = pango_font_map_create_context(fontmap);
       _layout = pango_layout_new(pangoctx);
       
-      // FIXME: set attrubites
-      NSLog(@"[%@]init with string:%@ ",self.class,string.string);
-      
-      pango_layout_set_text(_layout, string.string.UTF8String, string.string.length);
+      pango_layout_set_attributedString_with_options(_layout, string, options);
       
     _as = [string retain];
     _options = [options retain];
@@ -86,11 +89,18 @@ const CFStringRef kCTTypesetterOptionForcedEmbeddingLevel = @"kCTTypesetterOptio
 {
   [_as release];
   [_options release];
+    g_object_unref(_layout);
   [super dealloc];
 }
 
 - (CTLineRef)createLineWithRange: (CFRange)range
 {
+    
+    CTLine *l = [[CTLine alloc] init];
+    l.range = range;
+    l.attributedString = _as;
+    return l;
+
   // FIXME: This should do the core typesetting stuff:
   // - divide the attributed string into runs with the same attributes.
   // - run the bidirectional algorithm if needed

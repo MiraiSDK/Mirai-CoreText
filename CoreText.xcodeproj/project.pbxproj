@@ -31,6 +31,8 @@
 		43B1644D1862CF79006B6CE1 /* OPFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111C4185DF1CA00E771B4 /* OPFont.m */; };
 		43B1644E1862CF79006B6CE1 /* OPFontDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111C6185DF1CA00E771B4 /* OPFontDescriptor.m */; };
 		43B1644F1862CF79006B6CE1 /* OPSimpleLayoutEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111C9185DF1CA00E771B4 /* OPSimpleLayoutEngine.m */; };
+		43B6B6461913985E005D09ED /* NSAttributedString+Pango.h in Headers */ = {isa = PBXBuildFile; fileRef = 43B6B6441913985E005D09ED /* NSAttributedString+Pango.h */; };
+		43B6B6471913985E005D09ED /* NSAttributedString+Pango.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B6B6451913985E005D09ED /* NSAttributedString+Pango.m */; };
 		43BA6CCF185DDED200526D8E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43BA6CCD185DDED200526D8E /* InfoPlist.strings */; };
 		43C200F918ED2D9C00490D59 /* CTFontManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C200F818ED2D9C00490D59 /* CTFontManager.m */; };
 		43E111CA185DF1CA00E771B4 /* CTFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111A8185DF1CA00E771B4 /* CTFont.m */; };
@@ -145,6 +147,8 @@
 		43B164091862CE38006B6CE1 /* libCoreText-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libCoreText-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		43B164171862CE39006B6CE1 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		43B1641A1862CE39006B6CE1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		43B6B6441913985E005D09ED /* NSAttributedString+Pango.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+Pango.h"; sourceTree = "<group>"; };
+		43B6B6451913985E005D09ED /* NSAttributedString+Pango.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+Pango.m"; sourceTree = "<group>"; };
 		43BA6CC1185DDED200526D8E /* TNCoreText.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TNCoreText.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43BA6CCC185DDED200526D8E /* CoreText-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CoreText-Info.plist"; sourceTree = "<group>"; };
 		43BA6CCE185DDED200526D8E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -397,6 +401,8 @@
 				43E342A218F9368F00463092 /* OPPangoFontDescriptor.m */,
 				43E342A518F936A800463092 /* PangoCoreGraphics-render.h */,
 				43E342A618F936A800463092 /* PangoCoreGraphics-render.m */,
+				43B6B6441913985E005D09ED /* NSAttributedString+Pango.h */,
+				43B6B6451913985E005D09ED /* NSAttributedString+Pango.m */,
 			);
 			path = Pango;
 			sourceTree = "<group>";
@@ -445,6 +451,7 @@
 				438462D01883E4BC006DA1AA /* CTFoundationExtended.h in Headers */,
 				43E1126E185DF23100E771B4 /* CoreText.h in Headers */,
 				43E1126F185DF23100E771B4 /* CTFont.h in Headers */,
+				43B6B6461913985E005D09ED /* NSAttributedString+Pango.h in Headers */,
 				43E11270185DF23100E771B4 /* CTFontCollection.h in Headers */,
 				43E342A718F936A800463092 /* PangoCoreGraphics-render.h in Headers */,
 				43E11271185DF23100E771B4 /* CTFontDescriptor.h in Headers */,
@@ -643,6 +650,7 @@
 				43C200F918ED2D9C00490D59 /* CTFontManager.m in Sources */,
 				43E11265185DF23100E771B4 /* OPSimpleLayoutEngine.m in Sources */,
 				43840619187F265E000D092C /* CTRunDelegate.m in Sources */,
+				43B6B6471913985E005D09ED /* NSAttributedString+Pango.m in Sources */,
 				43E11266185DF23100E771B4 /* CTTypesetter.m in Sources */,
 				43E11267185DF23100E771B4 /* CTGlyphInfo.m in Sources */,
 				438462D11883E4BC006DA1AA /* CTFoundationExtended.m in Sources */,

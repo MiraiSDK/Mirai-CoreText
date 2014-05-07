@@ -24,6 +24,11 @@
 
 #import "CTLine-private.h"
 
+#import <pango/pango.h>
+#import "PangoCoreGraphics-render.h"
+#import <pango/pangocairo.h>
+#import "NSAttributedString+Pango.h"
+
 /* Classes */
 
 @implementation CTLine
@@ -44,12 +49,41 @@
 
 - (void)drawOnContext: (CGContextRef)ctx
 {
-  const NSUInteger runsCount = [_runs count];
-  for (NSUInteger i=0; i<runsCount; i++)
-  {
-    CTRunRef run = [_runs objectAtIndex: i];
-    CTRunDraw(run, ctx, CFRangeMake(0, 0));
-  }
+    if (self.attributedString) {
+        CGContextSaveGState(ctx);
+        
+        NSLog(@"str:%@ length:%d",self.attributedString.string,self.attributedString.length);
+        NSLog(@"lineRange:{%d,%d}",self.range.location,self.range.length);
+        NSAttributedString *lineAS = [self.attributedString attributedSubstringWithRange:NSMakeRange(self.range.location, self.range.length)];
+
+        // prepare pango 
+        PangoFontMap *fm = pango_cairo_font_map_new();
+        PangoContext *pangoCtx = pango_font_map_create_context(fm);
+        PangoLayout *layout = pango_layout_new(pangoCtx);
+        pango_layout_set_attributedString(layout, lineAS);
+        pango_layout_set_single_paragraph_mode(layout, true);
+        
+        // calculate line rect
+        CGPoint textPosition = CGContextGetTextPosition(ctx);
+        int width,height;
+        pango_layout_get_pixel_size(layout, &width, &height);
+        CGRect rect = CGRectMake(textPosition.x, textPosition.y, width, height);
+        
+        NSLog(@"draw line at rect:{{%.2f,%.2f},{%.2f,%.2f}} str:%@",rect.origin.x,rect.origin.y,rect.size.width,rect.size.height,lineAS.string);
+        
+        pango_coregraphics_show_layout_in_rect(ctx, layout, rect);
+        
+        g_object_unref(layout);
+        
+        CGContextRestoreGState(ctx);
+    } else {
+        const NSUInteger runsCount = [_runs count];
+        for (NSUInteger i=0; i<runsCount; i++)
+        {
+            CTRunRef run = [_runs objectAtIndex: i];
+            CTRunDraw(run, ctx, CFRangeMake(0, 0));
+        }
+    }
 }
 
 - (CFIndex)glyphCount

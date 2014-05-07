@@ -265,6 +265,27 @@ static void glib_log_handler_NSLog(const gchar *log_domain, GLogLevelFlags log_l
 
     pango_attr_list_unref(list);
     
+    PangoLayoutIter *iter = pango_layout_get_iter(layout);
+    NSInteger pos = 0;
+    NSString *s = [_string string];
+    NSInteger l = [s length];
+    
+    while (pos < l) {
+        bool success = pango_layout_iter_next_line(iter);
+        int idx = 0;
+        if (!success) {
+            //last line
+            idx = l;
+        } else {
+            idx =pango_layout_iter_get_index(iter);
+        }
+        
+        NSString *line = [s substringWithRange:NSMakeRange(pos, idx-pos)];
+        NSLog(@"break at %d, str:%@",idx,line);
+        
+        pos += (idx - pos);
+    }
+    
     [frame setPangoLayout:layout];
     
     // set visible range
