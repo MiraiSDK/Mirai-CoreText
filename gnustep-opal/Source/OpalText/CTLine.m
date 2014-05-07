@@ -148,7 +148,7 @@ CTLineRef CTLineCreateJustifiedLine(
 	CGFloat justificationFactor,
 	double justificationWidth)
 {
-  return nil;
+  return line;
 }
 
 CFIndex CTLineGetGlyphCount(CTLineRef line)
@@ -191,6 +191,17 @@ double CTLineGetTypographicBounds(
 	CGFloat* descent,
 	CGFloat* leading)
 {
+    if (ascent) {
+        *ascent = 0;
+    }
+    
+    if (descent) {
+        *descent = 0;
+    }
+    
+    if (leading) {
+        *leading = 0;
+    }
   return 0;
 }
 
