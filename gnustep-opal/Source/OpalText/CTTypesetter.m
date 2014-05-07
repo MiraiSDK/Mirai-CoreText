@@ -106,6 +106,8 @@ const CFStringRef kCTTypesetterOptionForcedEmbeddingLevel = @"kCTTypesetterOptio
                                 width: (double)width
 {
     NSLog(@"%s unimplemented: idx:%d,%.2f",__PRETTY_FUNCTION__,start,width);
+    pango_layout_set_width(_layout, width*PANGO_SCALE);
+
     PangoLayoutIter *iter = pango_layout_get_iter(_layout);
     int clusterIdx = 0;
     while (clusterIdx <= start) {
@@ -119,13 +121,18 @@ const CFStringRef kCTTypesetterOptionForcedEmbeddingLevel = @"kCTTypesetterOptio
     }
     
     pango_layout_iter_free(iter);
-    NSLog(@"suggest: %d",clusterIdx);
-  return clusterIdx;
+    NSLog(@"suggest at idx: %d",clusterIdx);
+    CFIndex textCount = clusterIdx - start;
+    NSLog(@"suggest textcount:%d",textCount);
+  return textCount;
 }
+
 - (CFIndex)suggestLineBreakAtIndex: (CFIndex)start
                              width: (double)width
 {
     NSLog(@"%s unimplemented: idx:%d,%.2f",__PRETTY_FUNCTION__,start,width);
+    pango_layout_set_width(_layout, width*PANGO_SCALE);
+    
     PangoLayoutIter *iter = pango_layout_get_iter(_layout);
     int lineIdx = 0;
     while (lineIdx <= start) {
@@ -139,8 +146,11 @@ const CFStringRef kCTTypesetterOptionForcedEmbeddingLevel = @"kCTTypesetterOptio
     }
     
     pango_layout_iter_free(iter);
-    NSLog(@"suggest: %d",lineIdx);
-    return lineIdx;
+    NSLog(@"suggest at idx: %d",lineIdx);
+    CFIndex textCount = lineIdx - start;
+    NSLog(@"suggest textcount:%d",textCount);
+
+    return textCount;
 }
 
 @end
