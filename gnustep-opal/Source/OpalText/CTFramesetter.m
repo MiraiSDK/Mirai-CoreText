@@ -251,9 +251,10 @@ static void glib_log_handler_NSLog(const gchar *log_domain, GLogLevelFlags log_l
     PangoFontMap *fontmap = pango_cairo_font_map_new();
     PangoContext *pangoctx = pango_font_map_create_context(fontmap);
     PangoLayout *layout = pango_layout_new(pangoctx);
+    
     NSString *frameString = [[_string string] substringWithRange:r];
     uint16_t length = frameString.length;
-    pango_layout_set_text(layout, [frameString UTF8String], -1);
+    pango_layout_set_text(layout, [frameString UTF8String], frameString.length);
     PangoAttrList *list = [self createAttrListFromAttributedString:_string];
     pango_layout_set_attributes(layout,list);
 //    pango_layout_set_width(layout, frameRect.size.width);
