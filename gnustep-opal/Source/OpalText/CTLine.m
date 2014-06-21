@@ -67,7 +67,7 @@
         CGPoint textPosition = CGContextGetTextPosition(ctx);
         int width,height;
         pango_layout_get_pixel_size(layout, &width, &height);
-        CGRect rect = CGRectMake(textPosition.x, textPosition.y, width, height);
+        CGRect rect = CGRectMake(textPosition.x, textPosition.y - height, width, height);
         
         NSLog(@"draw line at rect:{{%.2f,%.2f},{%.2f,%.2f}} str:%@",rect.origin.x,rect.origin.y,rect.size.width,rect.size.height,lineAS.string);
         
