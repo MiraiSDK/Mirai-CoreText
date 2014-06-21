@@ -112,6 +112,8 @@ const CFStringRef kCTTypesetterOptionForcedEmbeddingLevel = @"kCTTypesetterOptio
   return line;
 }
 
+//FIXME: this implemente is wrong
+//       pango cluster iter doesn't means 'cluster-break'
 - (CFIndex)suggestClusterBreakAtIndex: (CFIndex)start
                                 width: (double)width
 {
@@ -202,7 +204,7 @@ CFIndex CTTypesetterSuggestClusterBreak(
 	CFIndex start,
 	double width)
 {
-  return [ts suggestClusterBreakAtIndex: start width: width];
+  return [ts suggestLineBreakAtIndex: start width: width];
 }
 
 CFIndex CTTypesetterSuggestLineBreak(
