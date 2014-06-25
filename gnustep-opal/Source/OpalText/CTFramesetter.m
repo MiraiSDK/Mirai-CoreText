@@ -333,11 +333,32 @@ static void glib_log_handler_NSLog(const gchar *log_domain, GLogLevelFlags log_l
                         constraints: (CGSize)constraints
                            fitRange: (CFRange*)fitRange
 {
-  // FIXME: Implement.
-  // This calculates whether (/ how much of) an attributed string fits in a
-  // given rect. This will have to pretty much do a full typesetting
-  // like for CTFramesetterCreateFrame
-  return CGSizeMake(0,0);
+  // FIXME: correct string attributes
+    PangoFontMap *fontmap = pango_cairo_font_map_new();
+    PangoContext *pangoctx = pango_font_map_create_context(fontmap);
+    PangoLayout *layout = pango_layout_new(pangoctx);
+
+    pango_layout_set_width(layout, constraints.width);
+    pango_layout_set_height(layout, constraints.height);
+    
+    NSString *frameString = nil;
+    if (stringRange.length == 0) {
+        frameString = [_string string];
+    } else {
+        NSRange makeRange = NSMakeRange(stringRange.location, stringRange.length);
+        frameString = [[_string string] substringWithRange:makeRange];
+    }
+    pango_layout_set_text(layout, [frameString UTF8String], frameString.length);
+    PangoAttrList *list = [self createAttrListFromAttributedString:_string];
+    pango_layout_set_attributes(layout,list);
+    PangoFontDescription *desc = pango_font_description_from_string("Droid Sans Fallback Regular 12");
+    pango_layout_set_font_description(layout,desc);
+    
+    
+    int width,height;
+    pango_layout_get_pixel_size(layout, &width, &height);
+    CGSize suggestSize = CGSizeMake(width, height);
+    return suggestSize;
 }
 
 @end
