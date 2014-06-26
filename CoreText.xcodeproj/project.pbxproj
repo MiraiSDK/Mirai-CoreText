@@ -13,7 +13,6 @@
 		4384061A187F2671000D092C /* CTRunDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 43840613187F2500000D092C /* CTRunDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		438462D01883E4BC006DA1AA /* CTFoundationExtended.h in Headers */ = {isa = PBXBuildFile; fileRef = 438462CE1883E4BC006DA1AA /* CTFoundationExtended.h */; };
 		438462D11883E4BC006DA1AA /* CTFoundationExtended.m in Sources */ = {isa = PBXBuildFile; fileRef = 438462CF1883E4BC006DA1AA /* CTFoundationExtended.m */; };
-		439C86F11862E1840089F3DA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 439C86F01862E1840089F3DA /* CoreGraphics.framework */; };
 		439C86F31862E1FC0089F3DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 439C86F21862E1FC0089F3DA /* Foundation.framework */; };
 		43B164401862CF60006B6CE1 /* CTFramesetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111AE185DF1CA00E771B4 /* CTFramesetter.m */; };
 		43B164411862CF64006B6CE1 /* CTFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111A8185DF1CA00E771B4 /* CTFont.m */; };
@@ -123,6 +122,13 @@
 		43E342A718F936A800463092 /* PangoCoreGraphics-render.h in Headers */ = {isa = PBXBuildFile; fileRef = 43E342A518F936A800463092 /* PangoCoreGraphics-render.h */; };
 		43E342A818F936A800463092 /* PangoCoreGraphics-render.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E342A618F936A800463092 /* PangoCoreGraphics-render.m */; };
 		43E342A918F936AA00463092 /* OPPangoFontDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E342A218F9368F00463092 /* OPPangoFontDescriptor.m */; };
+		43EDF1A1195AC61300B3DD0D /* PangoCoreGraphics-render.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E342A618F936A800463092 /* PangoCoreGraphics-render.m */; };
+		43EDF1A2195AC61400B3DD0D /* PangoCoreGraphics-render.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E342A618F936A800463092 /* PangoCoreGraphics-render.m */; };
+		43EDF1A3195AC61700B3DD0D /* NSAttributedString+Pango.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B6B6451913985E005D09ED /* NSAttributedString+Pango.m */; };
+		43EDF1A4195AC61A00B3DD0D /* NSAttributedString+Pango.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B6B6451913985E005D09ED /* NSAttributedString+Pango.m */; };
+		43EDF1A5195AC61D00B3DD0D /* OPPangoFontDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E342A218F9368F00463092 /* OPPangoFontDescriptor.m */; };
+		43EDF1A6195AC61E00B3DD0D /* OPPangoFontDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E342A218F9368F00463092 /* OPPangoFontDescriptor.m */; };
+		43EDF1B7195ACDE800B3DD0D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43EDF1B6195ACDE800B3DD0D /* CoreGraphics.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -145,8 +151,6 @@
 		439C86F01862E1840089F3DA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		439C86F21862E1FC0089F3DA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		43B164091862CE38006B6CE1 /* libCoreText-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libCoreText-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		43B164171862CE39006B6CE1 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		43B1641A1862CE39006B6CE1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		43B6B6441913985E005D09ED /* NSAttributedString+Pango.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+Pango.h"; sourceTree = "<group>"; };
 		43B6B6451913985E005D09ED /* NSAttributedString+Pango.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+Pango.m"; sourceTree = "<group>"; };
 		43BA6CC1185DDED200526D8E /* TNCoreText.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TNCoreText.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -206,6 +210,7 @@
 		43E342A218F9368F00463092 /* OPPangoFontDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPPangoFontDescriptor.m; sourceTree = "<group>"; };
 		43E342A518F936A800463092 /* PangoCoreGraphics-render.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PangoCoreGraphics-render.h"; sourceTree = "<group>"; };
 		43E342A618F936A800463092 /* PangoCoreGraphics-render.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PangoCoreGraphics-render.m"; sourceTree = "<group>"; };
+		43EDF1B6195ACDE800B3DD0D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,7 +225,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				439C86F11862E1840089F3DA /* CoreGraphics.framework in Frameworks */,
+				43EDF1B7195ACDE800B3DD0D /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,10 +263,8 @@
 		43BA6CC3185DDED200526D8E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				439C86F21862E1FC0089F3DA /* Foundation.framework */,
-				439C86F01862E1840089F3DA /* CoreGraphics.framework */,
-				43B164171862CE39006B6CE1 /* XCTest.framework */,
-				43B1641A1862CE39006B6CE1 /* UIKit.framework */,
+				43EDF1B9195ACDF700B3DD0D /* Android */,
+				43EDF1B8195ACDEF00B3DD0D /* OSX */,
 				43BA6CC6185DDED200526D8E /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -405,6 +408,23 @@
 				43B6B6451913985E005D09ED /* NSAttributedString+Pango.m */,
 			);
 			path = Pango;
+			sourceTree = "<group>";
+		};
+		43EDF1B8195ACDEF00B3DD0D /* OSX */ = {
+			isa = PBXGroup;
+			children = (
+				43EDF1B6195ACDE800B3DD0D /* CoreGraphics.framework */,
+			);
+			name = OSX;
+			sourceTree = "<group>";
+		};
+		43EDF1B9195ACDF700B3DD0D /* Android */ = {
+			isa = PBXGroup;
+			children = (
+				439C86F01862E1840089F3DA /* CoreGraphics.framework */,
+				439C86F21862E1FC0089F3DA /* Foundation.framework */,
+			);
+			name = Android;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -595,15 +615,18 @@
 				43B164471862CF71006B6CE1 /* CTLine.m in Sources */,
 				43B1644D1862CF79006B6CE1 /* OPFont.m in Sources */,
 				43B1644B1862CF71006B6CE1 /* CTTextTab.m in Sources */,
+				43EDF1A4195AC61A00B3DD0D /* NSAttributedString+Pango.m in Sources */,
 				43B164481862CF71006B6CE1 /* CTParagraphStyle.m in Sources */,
 				43B164451862CF71006B6CE1 /* CTFrame.m in Sources */,
 				43B1644C1862CF71006B6CE1 /* CTTypesetter.m in Sources */,
 				43B1644E1862CF79006B6CE1 /* OPFontDescriptor.m in Sources */,
+				43EDF1A2195AC61400B3DD0D /* PangoCoreGraphics-render.m in Sources */,
 				43B164461862CF71006B6CE1 /* CTGlyphInfo.m in Sources */,
 				43B164441862CF71006B6CE1 /* CTFontTraits.m in Sources */,
 				43B164431862CF71006B6CE1 /* CTFontDescriptor.m in Sources */,
 				43B1644F1862CF79006B6CE1 /* OPSimpleLayoutEngine.m in Sources */,
 				43B164421862CF71006B6CE1 /* CTFontCollection.m in Sources */,
+				43EDF1A6195AC61E00B3DD0D /* OPPangoFontDescriptor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -616,6 +639,7 @@
 				43E111CA185DF1CA00E771B4 /* CTFont.m in Sources */,
 				43E111CC185DF1CA00E771B4 /* CTFontDescriptor.m in Sources */,
 				43E111D7185DF1CA00E771B4 /* CTStringAttributes.m in Sources */,
+				43EDF1A1195AC61300B3DD0D /* PangoCoreGraphics-render.m in Sources */,
 				43E111D3185DF1CA00E771B4 /* CTLine.m in Sources */,
 				43E111D8185DF1CA00E771B4 /* CTTextTab.m in Sources */,
 				43E111E5185DF1CA00E771B4 /* OPFontDescriptor.m in Sources */,
@@ -623,8 +647,10 @@
 				43E111E3185DF1CA00E771B4 /* OPFont.m in Sources */,
 				43E111CD185DF1CA00E771B4 /* CTFontTraits.m in Sources */,
 				43E111E8185DF1CA00E771B4 /* OPSimpleLayoutEngine.m in Sources */,
+				43EDF1A3195AC61700B3DD0D /* NSAttributedString+Pango.m in Sources */,
 				43E111D9185DF1CA00E771B4 /* CTTypesetter.m in Sources */,
 				43E111D1185DF1CA00E771B4 /* CTGlyphInfo.m in Sources */,
+				43EDF1A5195AC61D00B3DD0D /* OPPangoFontDescriptor.m in Sources */,
 				43E111D0185DF1CA00E771B4 /* CTFramesetter.m in Sources */,
 				43E111CF185DF1CA00E771B4 /* CTFrame.m in Sources */,
 				43E111CB185DF1CA00E771B4 /* CTFontCollection.m in Sources */,
