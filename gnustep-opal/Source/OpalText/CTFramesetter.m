@@ -338,8 +338,8 @@ static void glib_log_handler_NSLog(const gchar *log_domain, GLogLevelFlags log_l
     PangoContext *pangoctx = pango_font_map_create_context(fontmap);
     PangoLayout *layout = pango_layout_new(pangoctx);
 
-    pango_layout_set_width(layout, constraints.width);
-    pango_layout_set_height(layout, constraints.height);
+    pango_layout_set_width(layout, PANGO_SCALE * constraints.width);
+    pango_layout_set_height(layout, PANGO_SCALE *constraints.height);
     
     NSString *frameString = nil;
     if (stringRange.length == 0) {
