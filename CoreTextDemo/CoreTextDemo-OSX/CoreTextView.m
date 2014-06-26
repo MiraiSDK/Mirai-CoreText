@@ -18,21 +18,25 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        _string = @"Hello Miku";
-        _attributedString = [[NSAttributedString alloc] initWithString:_string attributes:[self attributes]];
-
+        [self setup];
     }
     return self;
 }
 
-- (void)awakeFromNib
+- (void)setup
 {
+    
     _string = @"Hello Miku";
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:_string attributes:[self attributes]];
     
     CGColorRef blue = CGColorCreateGenericRGB(0, 0, 1, 1);
     [attr setAttributes:@{(__bridge NSString *)kCTForegroundColorAttributeName:(id)CFBridgingRelease(blue),} range:NSMakeRange(5, 4)];
     _attributedString = attr;
+}
+
+- (void)awakeFromNib
+{
+    [self setup];
 }
 
 - (NSDictionary *)attributes
