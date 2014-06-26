@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include "PangoCoreGraphics-render.h"
 
+#define DEBUG_GLYPHS_BOUNDS 0
 
 //Font Map
 
@@ -177,6 +178,22 @@ pango_coregraphics_renderer_show_text_glyphs (PangoRenderer        *renderer,
         
         CGContextTranslateCTM(ctx, p.x, p.y);
         CGContextScaleCTM(ctx, 1, -1);
+        
+#if DEBUG_GLYPHS_BOUNDS
+        CGContextSaveGState(ctx);
+        const CGFloat debugColor[] = {1.0,0.0,0.0,1.0};
+        CGColorSpaceRef cs = CGColorSpaceCreateDeviceRGB();
+        CGColorRef deColor = CGColorCreate(cs, debugColor);
+        
+        CGContextSetStrokeColorWithColor(ctx, deColor);
+        CGContextStrokeRect(ctx, CGRectMake(0, 0, width, height));
+        
+        CGColorSpaceRelease(cs);
+        CGColorRelease(deColor);
+
+        CGContextRestoreGState(ctx);
+#endif
+        
         if (glyphInfo->glyph & PANGO_GLYPH_UNKNOWN_FLAG) {
             NSLog(@"idx: %d/%d unknown glyph: %d",i,glyphs->num_glyphs,glyphInfo->glyph);
             CGContextStrokeRect(ctx, CGRectMake(p.x, p.y, width, width));
