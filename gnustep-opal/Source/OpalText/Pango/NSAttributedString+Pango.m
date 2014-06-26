@@ -49,17 +49,17 @@
         CFStringRef f = CTFontCopyFamilyName(obj);
         family = [f UTF8String];
     } else {
-        NSLog(@"unknow font value:%@",obj);
+        NSLog(@"[PangoAttribute]unknow font value:%@",obj);
     }
     
     
     if (family == NULL) {
-        NSLog(@"[Warning]Create font with NULL family name, set to 12 Droid Sans Fallback");
+        NSLog(@"[PangoAttribute][Warning]Create font with NULL family name, set to 12 Droid Sans Fallback");
         family = "Droid Sans Fallback";
     }
     
     if (size == 0) {
-        NSLog(@"[Warning]Create font attribute with 0 font size, set to 12");
+        NSLog(@"[PangoAttribute][Warning]Create font attribute with 0 font size, set to 12");
         size = 12;
     }
     //    CFStringRef f = CGFontCopyPostScriptName(obj);
@@ -149,7 +149,7 @@
             if (patt != NULL) {
                 patt->start_index = range.location;
                 patt->end_index = NSMaxRange(range);
-                NSLog(@"insert attribute: %@, range:%@",key,NSStringFromRange(range));
+                NSLog(@"[PangoAttribute]insert attribute: %@, range:%@",key,NSStringFromRange(range));
                 pango_attr_list_insert(list, patt);
                 g_object_unref(patt);
             }
