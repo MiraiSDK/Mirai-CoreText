@@ -196,7 +196,7 @@ pango_coregraphics_renderer_show_text_glyphs (PangoRenderer        *renderer,
         
         if (glyphInfo->glyph & PANGO_GLYPH_UNKNOWN_FLAG) {
             NSLog(@"idx: %d/%d unknown glyph: %d",i,glyphs->num_glyphs,glyphInfo->glyph);
-            CGContextStrokeRect(ctx, CGRectMake(p.x, p.y, width, width));
+            CGContextStrokeRect(ctx, CGRectMake(0, 0, width, height));
         } else {
             CGGlyph glyph = glyphInfo->glyph;
             CGContextShowGlyphsAtPoint(ctx, 0, 0, &glyph, 1);
