@@ -151,7 +151,6 @@
                 patt->end_index = NSMaxRange(range);
                 NSLog(@"[PangoAttribute]insert attribute: %@, range:%@",key,NSStringFromRange(range));
                 pango_attr_list_insert(list, patt);
-                g_object_unref(patt);
             }
         }];
     }];
