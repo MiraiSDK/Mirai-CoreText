@@ -32,6 +32,7 @@
 
 #import "CTFoundationExtended.h"
 #import "CTFont.h"
+#import "NSAttributedString+Pango.h"
 
 /* Classes */
 
@@ -95,134 +96,6 @@ static void glib_log_handler_NSLog(const gchar *log_domain, GLogLevelFlags log_l
   [super dealloc];
 }
 
-- (PangoAttribute *)createPangoFontAttributeFromNSAttributedValue:(id)obj
-{
-    const char *family = "Droid Sans Fallback";
-    int size = 12;
-    
-    if ([obj isKindOfClass:NSClassFromString(@"NSFont")]) {
-        
-    } else if ([obj isKindOfClass:NSClassFromString(@"UIFont")]) {
-        CTFontRef font = [obj _CTFont];
-        size = CTFontGetSize(font);
-        CFStringRef f = CTFontCopyFamilyName(obj);
-        family = [f UTF8String];
-    } else if ([obj isKindOfClass:NSClassFromString(@"OPFont")]){
-        size = CTFontGetSize(obj);
-        CFStringRef f = CTFontCopyFamilyName(obj);
-        family = [f UTF8String];
-    } else {
-        NSLog(@"unknow font value:%@",obj);
-    }
-    
-    
-    if (family == NULL) {
-        NSLog(@"[Warning]Create font with NULL family name, set to 12 Droid Sans Fallback");
-        family = "Droid Sans Fallback";
-    }
-    
-    if (size == 0) {
-        NSLog(@"[Warning]Create font attribute with 0 font size, set to 12");
-        size = 12;
-    }
-//    CFStringRef f = CGFontCopyPostScriptName(obj);
-    PangoFontDescription *desc = pango_font_description_new();
-    pango_font_description_set_family(desc, family);
-//    pango_font_description_set_size(desc, 12);
-    pango_font_description_set_absolute_size(desc, size*PANGO_SCALE);
-    pango_font_description_set_style(desc, PANGO_STYLE_NORMAL);
-    PangoAttribute *attr =pango_attr_font_desc_new(desc);
-    return attr;
-}
-
-- (PangoAttribute *)createPangoForegroundColorAttributeFromNSAttributedValue:(id)obj
-{
-    CGColorRef color;
-    Class uiColorClass = NSClassFromString(@"UIColor");
-    if ([obj isKindOfClass:uiColorClass]) {
-        color = (CGColorRef)[obj CGColor];
-    } else {
-        color = obj;
-    }
-    const CGFloat *rgba = CGColorGetComponents(color);
-    PangoAttribute *attr = pango_attr_foreground_new(rgba[0] * 65535.,
-                                                     rgba[1] * 65535.,
-                                                     rgba[2] * 65535.);
-    return attr;
-}
-
-- (PangoAttrList *)createAttrListFromAttributedString:(NSAttributedString *)attrStr
-{
-    PangoAttrList *list = pango_attr_list_new();
-    [attrStr enumerateAttributesInRange:NSMakeRange(0, attrStr.length) options:0 usingBlock:^(NSDictionary *attrs, NSRange range, BOOL *stop) {
-        [attrs enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop) {
-            PangoAttribute *patt = NULL;
-            if ([key isEqualToString:(NSString *)kCTFontAttributeName]) {
-                patt = [self createPangoFontAttributeFromNSAttributedValue:obj];
-            } else if ([key isEqualToString:(NSString *)kCTForegroundColorFromContextAttributeName]) {
-            } else if ([key isEqualToString:(NSString *)kCTKernAttributeName]) {
-                patt = pango_attr_letter_spacing_new([obj intValue]);
-            } else if ([key isEqualToString:(NSString *)kCTLigatureAttributeName]) {
-            } else if ([key isEqualToString:(NSString *)kCTForegroundColorAttributeName]) {
-                patt = [self createPangoForegroundColorAttributeFromNSAttributedValue:obj];
-            } else if ([key isEqualToString:(NSString *)kCTParagraphStyleAttributeName]) {
-            } else if ([key isEqualToString:(NSString *)kCTStrokeWidthAttributeName]) {
-            } else if ([key isEqualToString:(NSString *)kCTStrokeColorAttributeName]) {
-            } else if ([key isEqualToString:(NSString *)kCTUnderlineStyleAttributeName]) {
-                CTUnderlineStyle style = [obj intValue];
-                PangoUnderline underline = PANGO_UNDERLINE_NONE;
-                switch (style) {
-                    case kCTUnderlineStyleNone: underline = PANGO_UNDERLINE_NONE; break;
-                    case kCTUnderlineStyleSingle: underline = PANGO_UNDERLINE_SINGLE; break;
-                    case kCTUnderlineStyleThick: underline = PANGO_UNDERLINE_ERROR; break; // FIXME: RIGHT?
-                    case kCTUnderlineStyleDouble:  underline = PANGO_UNDERLINE_DOUBLE;break;
-                }
-                patt = pango_attr_underline_new(underline);
-            } else if ([key isEqualToString:(NSString *)kCTSuperscriptAttributeName]) {
-            } else if ([key isEqualToString:(NSString *)kCTUnderlineColorAttributeName]) {
-                const CGFloat *rgba = CGColorGetComponents(obj);
-                patt = pango_attr_underline_color_new(rgba[0] * 65535.,
-                                                      rgba[1] * 65535.,
-                                                      rgba[2] * 65535.);
-            } else if ([key isEqualToString:(NSString *)kCTVerticalFormsAttributeName]) {
-            } else if ([key isEqualToString:(NSString *)kCTGlyphInfoAttributeName]) {
-            } else if ([key isEqualToString:(NSString *)kCTCharacterShapeAttributeName]) {
-            } else if ([key isEqualToString:(NSString *)kCTLanguageAttributeName]) {
-                const char * l = [obj UTF8String];
-                PangoLanguage *language = pango_language_from_string(l);
-                patt = pango_attr_language_new(language);
-            } else if ([key isEqualToString:(NSString *)kCTRunDelegateAttributeName]) {
-                // shape
-                CTRunDelegateRef delegate = obj;
-                // need access delegate's callbacks
-                
-                PangoRectangle logical_rect;
-                logical_rect.width = 20;
-                logical_rect.height = 20;
-                logical_rect.x = 0;
-                logical_rect.y = 0;
-                PangoRectangle ink_rect = logical_rect;
-                
-                patt = pango_attr_shape_new(&ink_rect, &logical_rect);
-            } else if ([key isEqualToString:(NSString *)kCTBaselineClassAttributeName]) {
-            } else if ([key isEqualToString:(NSString *)kCTBaselineInfoAttributeName]) {
-            } else if ([key isEqualToString:(NSString *)kCTBaselineReferenceInfoAttributeName]) {
-            } else if ([key isEqualToString:(NSString *)kCTWritingDirectionAttributeName]) {
-            }
-            
-            if (patt != NULL) {
-                patt->start_index = range.location;
-                patt->end_index = NSMaxRange(range);
-                NSLog(@"insert attribute: %@, range:%@",key,NSStringFromRange(range));
-                pango_attr_list_insert(list, patt);
-                g_object_unref(patt);
-            }
-        }];
-    }];
-    
-    return list;
-}
-
 - (CTFrameRef)createFrameWithRange: (CFRange)range
                               path: (CGPathRef)path
                         attributes: (NSDictionary*)attributes
@@ -252,39 +125,11 @@ static void glib_log_handler_NSLog(const gchar *log_domain, GLogLevelFlags log_l
     PangoContext *pangoctx = pango_font_map_create_context(fontmap);
     PangoLayout *layout = pango_layout_new(pangoctx);
     
-    NSString *frameString = [[_string string] substringWithRange:r];
-    uint16_t length = frameString.length;
-    pango_layout_set_text(layout, [frameString UTF8String], frameString.length);
-    PangoAttrList *list = [self createAttrListFromAttributedString:_string];
-    pango_layout_set_attributes(layout,list);
+    pango_layout_set_attributedString_with_options(layout, _string, nil);
+    
 //    pango_layout_set_width(layout, frameRect.size.width);
 //    pango_layout_set_height(layout, frameRect.size.height);
-    PangoFontDescription *desc = pango_font_description_from_string("Droid Sans Fallback Regular 12");
-    pango_layout_set_font_description(layout,desc);
 
-
-    pango_attr_list_unref(list);
-    
-    PangoLayoutIter *iter = pango_layout_get_iter(layout);
-    NSInteger pos = 0;
-    NSString *s = [_string string];
-    NSInteger l = [s length];
-    
-    while (pos < l) {
-        bool success = pango_layout_iter_next_line(iter);
-        int idx = 0;
-        if (!success) {
-            //last line
-            idx = l;
-        } else {
-            idx =pango_layout_iter_get_index(iter);
-        }
-        
-        NSString *line = [s substringWithRange:NSMakeRange(pos, idx-pos)];
-        NSLog(@"break at %d, str:%@",idx,line);
-        
-        pos += (idx - pos);
-    }
     
     [frame setPangoLayout:layout];
     
@@ -341,19 +186,12 @@ static void glib_log_handler_NSLog(const gchar *log_domain, GLogLevelFlags log_l
     pango_layout_set_width(layout, PANGO_SCALE * constraints.width);
     pango_layout_set_height(layout, PANGO_SCALE *constraints.height);
     
-    NSString *frameString = nil;
-    if (stringRange.length == 0) {
-        frameString = [_string string];
-    } else {
+    NSAttributedString *as = _string;
+    if (stringRange.length > 0) {
         NSRange makeRange = NSMakeRange(stringRange.location, stringRange.length);
-        frameString = [[_string string] substringWithRange:makeRange];
+        as = [_string attributedSubstringFromRange:makeRange];
     }
-    pango_layout_set_text(layout, [frameString UTF8String], frameString.length);
-    PangoAttrList *list = [self createAttrListFromAttributedString:_string];
-    pango_layout_set_attributes(layout,list);
-    PangoFontDescription *desc = pango_font_description_from_string("Droid Sans Fallback Regular 12");
-    pango_layout_set_font_description(layout,desc);
-    
+    pango_layout_set_attributedString_with_options(layout, as, nil);
     
     int width,height;
     pango_layout_get_pixel_size(layout, &width, &height);
