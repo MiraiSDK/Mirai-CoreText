@@ -127,8 +127,8 @@ static void glib_log_handler_NSLog(const gchar *log_domain, GLogLevelFlags log_l
     
     pango_layout_set_attributedString_with_options(layout, _string, nil);
     
-//    pango_layout_set_width(layout, frameRect.size.width);
-//    pango_layout_set_height(layout, frameRect.size.height);
+    pango_layout_set_width(layout, PANGO_SCALE * frameRect.size.width);
+    pango_layout_set_height(layout, PANGO_SCALE * frameRect.size.height);
 
     
     [frame setPangoLayout:layout];

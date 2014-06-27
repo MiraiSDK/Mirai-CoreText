@@ -24,23 +24,53 @@
 
 #include <CoreText/CTParagraphStyle.h>
 
+@interface CTParagraphStyle : NSObject
+@property (nonatomic, strong) NSDictionary *dict;
+@end
+
+@implementation CTParagraphStyle
+- (instancetype)initWithSettings:(const CTParagraphStyleSetting *)settings settingCount:(CFIndex)settingCount
+{
+    self = [super init];
+    if (self) {
+        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+        
+        for (CFIndex i = 0; i < settingCount; i++) {
+            CTParagraphStyleSetting set = settings[i];
+            NSUInteger length = (NSUInteger)set.valueSize;
+            NSData *data = [NSData dataWithBytes:set.value length:length];
+            dict[@(set.spec)] = data;
+        }
+        
+        _dict = dict;
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+    [super dealloc];
+}
+
+@end
+
 /* Functions */
 
 CFTypeID CTParagraphStyleGetTypeID()
 {
-  return (CFTypeID)nil;
+  return (CFTypeID)[CTParagraphStyle class];
 }
 
 CTParagraphStyleRef CTParagraphStyleCreate(
 	const CTParagraphStyleSetting* settings,
 	CFIndex settingCount)
 {
-  return nil;
+  return [[CTParagraphStyle alloc] initWithSettings:settings settingCount:settingCount];
 }
 
 CTParagraphStyleRef CTParagraphStyleCreateCopy(CTParagraphStyleRef paragraphStyle)
 {
-  return nil;
+  return [paragraphStyle copy];
 }
 
 bool CTParagraphStyleGetValueForSpecifier(
@@ -49,6 +79,11 @@ bool CTParagraphStyleGetValueForSpecifier(
 	size_t valueBufferSize,
 	void* valueBuffer)
 {
+    NSData  *value = paragraphStyle.dict[@(spec)];
+    if (value) {
+        [value getBytes:valueBuffer];
+        return true;
+    }
   return false;
 }
 

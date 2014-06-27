@@ -31,9 +31,16 @@
 - (NSDictionary *)attributes
 {
     CGColorRef redColor = CGColorCreateGenericRGB(1, 0, 0, 1);
+    CTTextAlignment textAlign = kCTTextAlignmentCenter;
+    CTParagraphStyleSetting settings[] = {
+        { kCTParagraphStyleSpecifierAlignment,sizeof(CTTextAlignment), &textAlign },
+    };
+    CTParagraphStyleRef paragraphStryle = CTParagraphStyleCreate(settings, 1);
+    
     return @{
              (__bridge NSString *)kCTForegroundColorAttributeName:(id)CFBridgingRelease(redColor),
-             (__bridge NSString *)kCTFontAttributeName:[NSFont systemFontOfSize:16]
+             (__bridge NSString *)kCTFontAttributeName:[NSFont systemFontOfSize:16],
+             (__bridge NSString *)kCTParagraphStyleAttributeName:(__bridge id)paragraphStryle,
              };
 }
 

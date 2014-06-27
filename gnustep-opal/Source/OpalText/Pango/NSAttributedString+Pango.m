@@ -9,6 +9,7 @@
 #import "NSAttributedString+Pango.h"
 
 #include <CoreText/CTRunDelegate.h>
+#include <CoreText/CTParagraphStyle.h>
 
 #import "CTStringAttributes.h"
 #import "CTFont.h"
@@ -23,6 +24,23 @@
     pango_layout_set_text(layout, self.string.UTF8String, self.string.length);
 
     // setting attributes
+    CTParagraphStyleRef paragraphStyle = [self attribute:kCTParagraphStyleAttributeName atIndex:0 effectiveRange:NULL];
+    CTTextAlignment alignment;
+    CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierAlignment, sizeof(CTTextAlignment), &alignment);
+    if (alignment == kCTTextAlignmentJustified) {
+        pango_layout_set_justify(layout, true);
+    } else {
+        PangoAlignment pangoAlignment = PANGO_ALIGN_LEFT;
+        switch (alignment) {
+            case kCTTextAlignmentLeft: pangoAlignment = PANGO_ALIGN_LEFT; break;
+            case kCTTextAlignmentCenter: pangoAlignment = PANGO_ALIGN_CENTER; break;
+            case kCTTextAlignmentRight: pangoAlignment = PANGO_ALIGN_RIGHT; break;
+                
+            default:break;
+        }
+        pango_layout_set_alignment(layout, pangoAlignment);
+    }
+
     PangoAttrList *attrList = pango_attr_list_new();;
     [self fillAttributeList:attrList withAttributedString:self];
     pango_layout_set_attributes(layout, attrList);
