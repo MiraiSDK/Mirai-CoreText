@@ -143,23 +143,34 @@ const CFStringRef kCTTypesetterOptionForcedEmbeddingLevel = @"kCTTypesetterOptio
                              width: (double)width
 {
     NSLog(@"%s unimplemented: idx:%d,%.2f",__PRETTY_FUNCTION__,start,width);
-    pango_layout_set_width(_layout, width*PANGO_SCALE);
     
-    PangoLayoutIter *iter = pango_layout_get_iter(_layout);
-    int lineIdx = 0;
-    while (lineIdx <= start) {
-        bool su = pango_layout_iter_next_line(iter);
-        lineIdx = pango_layout_iter_get_index(iter);
-        
-        if (!su) {
-            lineIdx = _as.string.length;
-            break;
-        }
-    }
+    PangoFontMap *fontmap = pango_cairo_font_map_get_default();
+    PangoContext *pangoctx = pango_font_map_create_context(fontmap);
+    PangoLayout *layout = pango_layout_new(pangoctx);
     
-    pango_layout_iter_free(iter);
-    NSLog(@"suggest at idx: %d",lineIdx);
-    CFIndex textCount = lineIdx - start;
+    NSAttributedString *as = [_as attributedSubstringFromRange:NSMakeRange(start, _as.length-start)];
+    pango_layout_set_attributedString_with_options(layout, as, nil);
+    pango_layout_set_width(layout, width*PANGO_SCALE);
+    
+    PangoLayoutLine *firstLine = pango_layout_get_line_readonly(layout, 0);
+    gint bytesLength = firstLine->length;
+    
+    // conver bytes length to char length
+    const char *origin = pango_layout_get_text(layout);
+    
+    char *buffer = malloc(bytesLength+1);
+    memcpy(buffer, origin, bytesLength);
+    buffer[bytesLength] = '\0';
+    
+    NSString *lineString = [[NSString alloc] initWithUTF8String:buffer];
+    CFIndex textCount = [lineString length];
+    
+    free(buffer);
+
+    g_object_unref(layout);
+    g_object_unref(pangoctx);
+    g_object_unref(fontmap);
+    
     NSLog(@"suggest textcount:%d",textCount);
 
     return textCount;
