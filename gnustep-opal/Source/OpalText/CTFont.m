@@ -229,7 +229,8 @@ CTFontRef CTFontCreateCopyWithAttributes(
   const CGAffineTransform *matrixPtr,
   CTFontDescriptorRef descriptor)
 {
-  return nil; //FIXME: set up a new descriptor...
+    NSLog(@"%s unimplememted, return same font",__PRETTY_FUNCTION__);
+  return font; //FIXME: set up a new descriptor...
 }
 
 CTFontRef CTFontCreateCopyWithSymbolicTraits(
@@ -239,7 +240,8 @@ CTFontRef CTFontCreateCopyWithSymbolicTraits(
   CTFontSymbolicTraits value,
   CTFontSymbolicTraits mask)
 {
-  return nil; //FIXME: set up a new descriptor...
+    NSLog(@"%s unimplememted, return same font",__PRETTY_FUNCTION__);
+  return font; //FIXME: set up a new descriptor...
 }
 
 CTFontRef CTFontCreateCopyWithFamily(
