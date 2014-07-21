@@ -54,7 +54,7 @@
         
         NSLog(@"str:%@ length:%d",self.attributedString.string,self.attributedString.length);
         NSLog(@"lineRange:{%d,%d}",self.range.location,self.range.length);
-        NSAttributedString *lineAS = [self.attributedString attributedSubstringWithRange:NSMakeRange(self.range.location, self.range.length)];
+        NSAttributedString *lineAS = [self.attributedString attributedSubstringFromRange:NSMakeRange(self.range.location, self.range.length)];
 
         // prepare pango 
         PangoFontMap *fm = pango_cairo_font_map_new();
