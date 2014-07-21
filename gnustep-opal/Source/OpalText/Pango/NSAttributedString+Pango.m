@@ -83,7 +83,6 @@
     //    CFStringRef f = CGFontCopyPostScriptName(obj);
     PangoFontDescription *desc = pango_font_description_new();
     pango_font_description_set_family(desc, family);
-    //    pango_font_description_set_size(desc, 12);
     pango_font_description_set_absolute_size(desc, size*PANGO_SCALE);
     pango_font_description_set_style(desc, PANGO_STYLE_NORMAL);
     PangoAttribute *attr =pango_attr_font_desc_new(desc);
