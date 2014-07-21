@@ -7,7 +7,11 @@
 //
 
 #import "OPFontDescriptor.h"
+#import <pango/pango.h>
 
-@interface OPPangoFontDescriptor : OPFontDescriptor
+@interface OPPangoFontDescriptor : OPFontDescriptor {
+    PangoFontDescription *_desc;
+}
 
+- (PangoFontDescription *)pangoDesc;
 @end

@@ -50,7 +50,7 @@ NSString *OPFontSizeAttribute = @"kCTFontSizeAttribute";
 
 + (Class) fontDescriptorClass
 {
-  return NSClassFromString(@"OPFontconfigFontDescriptor");
+  return NSClassFromString(@"OPPangoFontDescriptor");
 }
 
 + (id) fontDescriptorWithFontAttributes: (NSDictionary *)attributes

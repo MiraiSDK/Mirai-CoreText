@@ -51,6 +51,11 @@ const CGFloat *OPFontIdentityMatrix;
   OPFontIdentityMatrix = identity;
 }
 
++ (Class)fontClass
+{
+    return NSClassFromString(@"OPPangoFont");
+}
+
 //
 // Querying the Font
 //
@@ -197,7 +202,7 @@ const CGFloat *OPFontIdentityMatrix;
                        options: (CTFontOptions)options
 {
   // FIXME: placeholder code.
-  return [[[OPFont alloc] _initWithDescriptor: descriptor
+  return [[[[self fontClass] alloc] _initWithDescriptor: descriptor
                                       options: options] autorelease];
 }
 
