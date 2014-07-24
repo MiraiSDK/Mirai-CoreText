@@ -16,12 +16,50 @@
 #import "CTFoundationExtended.h"
 
 
+@interface NSString (TNIndexConvert)
+- (NSUInteger)UTF8IndexForIndex:(NSUInteger)index;
+@end
+@implementation NSString (TNIndexConvert)
+
+- (NSUInteger)UTF8IndexForIndex:(NSUInteger)index
+{
+    NSParameterAssert(index <= self.length);
+    
+    const char *utf8String = self.UTF8String;
+    NSUInteger utf16Len = self.length;
+    NSUInteger bufferLen = (NSUInteger)strlen(utf8String);
+
+    NSUInteger utf8Index = 0;
+    
+    if (index == 0) {
+        return 0;
+    }
+    
+    if (index == utf16Len) {
+        return bufferLen;
+    }
+    
+    char *buffer = malloc(bufferLen);
+    
+    [self getCString:buffer maxLength:bufferLen range:NSMakeRange(0, index) remainingRange:NULL];
+    
+    utf8Index = (NSUInteger)strlen(buffer);
+
+    free(buffer);
+    
+    return utf8Index;
+}
+@end
+
 @implementation NSAttributedString (Pango)
 
 - (void)configurePangoLayout:(PangoLayout *)layout options:(NSDictionary *)options
 {
     // set text
-    pango_layout_set_text(layout, self.string.UTF8String, self.string.length);
+    char *utf8String = self.string.UTF8String;
+    unsigned long utf8Length = strlen(utf8String);
+    
+    pango_layout_set_text(layout, utf8String, utf8Length);
 
     // setting attributes
     CTParagraphStyleRef paragraphStyle = [self attribute:kCTParagraphStyleAttributeName atIndex:0 effectiveRange:NULL];
@@ -107,7 +145,16 @@
 
 - (void)fillAttributeList:(PangoAttrList *)list withAttributedString:(NSAttributedString *)attributedString
 {
+    NSString *str = [attributedString string];
+    
     [attributedString enumerateAttributesInRange:NSMakeRange(0, attributedString.length) options:0 usingBlock:^(NSDictionary *attrs, NSRange range, BOOL *stop) {
+        
+        NSUInteger startIdx = range.location;
+        NSUInteger endIdx = NSMaxRange(range);
+        
+        unsigned long bytesStartIndex = [str UTF8IndexForIndex:startIdx];
+        unsigned long bytesEndIndex = [str UTF8IndexForIndex:endIdx];
+        
         [attrs enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop) {
             PangoAttribute *patt = NULL;
             if ([key isEqualToString:(NSString *)kCTFontAttributeName]) {
@@ -164,8 +211,8 @@
             }
             
             if (patt != NULL) {
-                patt->start_index = range.location;
-                patt->end_index = NSMaxRange(range);
+                patt->start_index = bytesStartIndex;
+                patt->end_index = bytesEndIndex;
                 NSLog(@"[PangoAttribute]insert attribute: %@, range:%@",key,NSStringFromRange(range));
                 pango_attr_list_insert(list, patt);
             }
