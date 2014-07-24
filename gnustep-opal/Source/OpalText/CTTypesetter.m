@@ -152,28 +152,45 @@ const CFStringRef kCTTypesetterOptionForcedEmbeddingLevel = @"kCTTypesetterOptio
     pango_layout_set_attributedString_with_options(layout, as, nil);
     pango_layout_set_width(layout, width*PANGO_SCALE);
     
+    //
+    // Algorithm:
+    //  find the first line of pango layout, and count number of glyphs contains
+    //
+    // note:
+    //  We don't use length of line, becuse it's UTF8 bytes length, convert it to UTF16 is a bit panic
+    //
+    
     PangoLayoutLine *firstLine = pango_layout_get_line_readonly(layout, 0);
     gint bytesLength = firstLine->length;
     
-    // conver bytes length to char length
-    const char *origin = pango_layout_get_text(layout);
+    // FIXME: Why sometimes first line is 0 length?
+    // find first none-zero length line, let it as first line
+    if (bytesLength == 0) {
+        int lineCount = pango_layout_get_line_count(layout);
+        for (int lineIdx = 1; lineIdx<lineCount; lineIdx++) {
+            firstLine = pango_layout_get_line_readonly(layout, lineIdx);
+            bytesLength = firstLine->length;
+            
+            if (bytesLength > 0) {
+                break;
+            }
+        }
+    }
     
-    char *buffer = malloc(bytesLength+1);
-    memcpy(buffer, origin, bytesLength);
-    buffer[bytesLength] = '\0';
+    // count number of glyphs in every run in line
+    GList *l;
+    gint glyphsCount = 0;
+    for (l = firstLine->runs; l; l=l->next) {
+        PangoLayoutRun *run = l->data;
+        PangoGlyphString *glyphs = run->glyphs;
+        glyphsCount += glyphs->num_glyphs;
+    }
     
-    NSString *lineString = [[NSString alloc] initWithUTF8String:buffer];
-    CFIndex textCount = [lineString length];
-    
-    free(buffer);
-
     g_object_unref(layout);
     g_object_unref(pangoctx);
-    g_object_unref(fontmap);
-    
-    NSLog(@"suggest textcount:%d",textCount);
 
-    return textCount;
+    NSLog(@"suggest text count:%d ",glyphsCount);
+    return glyphsCount;
 }
 
 @end
