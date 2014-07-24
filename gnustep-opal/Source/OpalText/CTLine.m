@@ -57,7 +57,7 @@
         NSAttributedString *lineAS = [self.attributedString attributedSubstringFromRange:NSMakeRange(self.range.location, self.range.length)];
 
         // prepare pango 
-        PangoFontMap *fm = pango_cairo_font_map_new();
+        PangoFontMap *fm = pango_cairo_font_map_get_default();
         PangoContext *pangoCtx = pango_font_map_create_context(fm);
         PangoLayout *layout = pango_layout_new(pangoCtx);
         pango_layout_set_attributedString(layout, lineAS);
@@ -74,6 +74,7 @@
         pango_coregraphics_show_layout_in_rect(ctx, layout, rect);
         
         g_object_unref(layout);
+        g_object_unref(pangoCtx);
         
         CGContextRestoreGState(ctx);
     } else {
