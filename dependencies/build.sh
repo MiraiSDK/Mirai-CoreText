@@ -1,7 +1,6 @@
 #!/bin/sh
 
-#ARMSYSROOT="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/FakeMacOSX10.9.sdk"
-ARMSYSROOT="/Users/chyhfj/Development/MiraSDK/Products/android/android-toolchain-arm/sysroot"
+ARMSYSROOT=$MIRAI_SDK_PATH
 FLAGS="--sysroot $ARMSYSROOT"
 PREFIX="$ARMSYSROOT/usr"
 
@@ -19,53 +18,42 @@ buildHarfbuzz()
 	if [ ! -d harfbuzz-0.9.25 ]; then
 		if [ ! -f harfbuzz-0.9.25.tar.bz2 ]; then
 			echo "Downloading harfbuzz-0.9.25.tar.bz2..."
-			
+			curl http://www.freedesktop.org/software/harfbuzz/release/harfbuzz-0.9.25.tar.bz2 -o harfbuzz-0.9.25.tar.bz2
 		fi
 		
 		tar -xvf harfbuzz-0.9.25.tar.bz2
+		
+		pushd harfbuzz-0.9.25
+		#patch makefile.am, disable tests..
+		patch -p0 -i ../harfbuzz_disable_test.patch
+		autoreconf -ivf
+		popd
 	fi
 	
 	pushd harfbuzz-0.9.25
 	
 	
-	CC=arm-linux-androideabi-clang CXX=arm-linux-androideabi-clang++ AR=arm-linux-androideabi-ar CPPFLAGS="$FLAGS" CFLAGS="$FLAGS" ./configure --host=arm-linux-androideabi --prefix=$ARMSYSROOT/usr --enable-static
+	CC=arm-linux-androideabi-clang CXX=arm-linux-androideabi-clang++ AR=arm-linux-androideabi-ar CPPFLAGS="$FLAGS" CFLAGS="$FLAGS" \
+	./configure --host=arm-linux-androideabi --prefix=$PREFIX --enable-static=yes
 	checkError $? "configure harfbuzz failed"
 	
-	#patch makefile
-	#patch libtool
-	#make
+	
+	# crtbegin_so.o multiple used
+	# patch libtool
+	sed -i "" -E "s/(predep_objects *= *\").*/\1\"/" libtool
+	sed -i "" -E "s/(postdep_objects *= *\").*/\1\"/" libtool
+	
+	make -j4
 	
 	checkError $? "Make harfbuzz failed"
 	
-	popd
-}
-
-buildLibiconv()
-{
-	
-	if [ ! -d libiconv-1.14 ]; then
-		if [ ! -f libiconv-1.14.tar.gz ]; then
-			echo "Downloading libiconv-1.14.tar.gz..."
-			curl http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.14.tar.gz -o libiconv-1.14.tar.gz
-		fi
-		tar -xvf libiconv-1.14.tar.gz
-	fi
-	pushd libiconv-1.14
-	
-	#patch config
-	cp /tmp/config.sub build-aux/config.sub
-	cp /tmp/config.sub libcharset/build-aux/config.sub
-	cp /tmp/config.guess build-aux/config.guess
-	cp /tmp/config.guess libcharset/build-aux/config.guess
-	
-	gl_cv_header_working_stdint_h=yes CC=arm-linux-androideabi-clang CXX=arm-linux-androideabi-clang++ AR=arm-linux-androideabi-ar CPPFLAGS="$FLAGS" CFLAGS="$FLAGS" ./configure --host=arm-linux-androideabi --prefix="$PREFIX" --enable-static	
-	checkError $? "configure libiconv failed"
-	
-	make -j4
 	make install
 	
 	popd
-
+	
+	#clean up
+	rm -rf harfbuzz-0.9.25
+	rm harfbuzz-0.9.25.tar.bz2
 }
 
 buildLibgettext()
@@ -83,37 +71,28 @@ buildLibgettext()
 	fi
 	pushd  gettext-0.18.2
 		
-	gl_cv_header_working_stdint_h=yes CC=arm-linux-androideabi-clang CXX=arm-linux-androideabi-clang++ AR=arm-linux-androideabi-ar CPPFLAGS="$FLAGS" CFLAGS="$FLAGS" ./configure --host=arm-linux-androideabi --prefix=$PREFIX --enable-static --disable-java --disable-native-java
+	gl_cv_header_working_stdint_h=yes CC=arm-linux-androideabi-clang CXX=arm-linux-androideabi-clang++ \
+	AR=arm-linux-androideabi-ar CPPFLAGS="$FLAGS" CFLAGS="$FLAGS" \
+	./configure --host=arm-linux-androideabi --prefix=$PREFIX --enable-static=yes --disable-java --disable-native-java
 	checkError $? "configure libgettext failed"
 	
 	make -j4
 	make install
 	
 	popd
-
+	
+	#clean up
+	rm -r gettext-0.18.2
+	rm gettext-0.18.2.tar.gz
 }
 
 buildGlib()
-{
-	# need iconv
-	if [ ! -f $PREFIX/lib/libiconv.a ]; then
-		buildLibiconv
-		checkError $? "Make libiconv failed"
-	fi
-	
+{	
 	if [ ! -f $PREFIX/lib/libgettextlib.so ]; then
 		buildLibgettext
 		checkError $? "Make libgettext failed"
 	fi
-	
-	if [ ! -d glib-2.39.2 ]; then
-		if [ ! -f glib-2.39.2.tar.xz ]; then
-			echo "Downloading glib-2.39.2.tar.xz..."
-			curl http://ftp.gnome.org/pub/GNOME/sources/glib/2.39/glib-2.39.2.tar.xz -o glib-2.39.2.tar.xz
-		fi
-		tar -xvf glib-2.39.2.tar.xz
-	fi
-	
+		
 	if [ ! -d glib-2.34.3 ]; then
 		if [ ! -f glib-2.34.3.tar.xz ]; then
 			echo "Downloading glib-2.34.3.tar.xz..."
@@ -123,21 +102,26 @@ buildGlib()
 		
 		pushd glib-2.34.3
 			patch -p1 -i ../glib-android.patch
+			patch -p0 -i ../glib_lpthread.patch
+			autoconf
 		popd
 	fi
-	
-	#pushd glib-2.39.2
 	pushd glib-2.34.3
 
 	cp ../glib_android.cache android.cache
 	
-	PATH=$PREFIX/bin:$PATH ./configure --host=arm-linux-androideabi --prefix="$PREFIX"  --with-sysroot="$ARMSYSROOT/usr"  CPPFLAGS="$FLAGS" CFLAGS="$FLAGS" --enable-static --cache-file=android.cache --disable-modular-tests
+	PATH=$PREFIX/bin:$PATH ./configure --host=arm-linux-androideabi --prefix="$PREFIX"  --with-sysroot="$ARMSYSROOT/usr" \
+	CPPFLAGS="$FLAGS" CFLAGS="$FLAGS" --enable-static --cache-file=android.cache --disable-modular-tests
 	
-	# needs patch dependency_libs in $ARMSYSROOT/usr/lib/libintl.la
-	# needs patch: G_THREAD_LIBS_FOR_GTHREAD = -lpthread
-	make
+	make -j4
+	checkError $? "Make glib failed"
+	
+	make install
 	popd
-
+	
+	#clean up
+	rm -r glib-2.34.3
+	rm glib-2.34.3.tar.xz
 }
 
 buildPango()
@@ -158,27 +142,39 @@ buildPango()
 	
 	pushd pango-1.36.1
 	
-	CC=arm-linux-androideabi-clang CXX=arm-linux-androideabi-clang++ AR=arm-linux-androideabi-ar CPPFLAGS="-DANDROID=1 -g $FLAGS" CFLAGS="-DANDROID=1 -g $FLAGS" ./configure --host=arm-linux-androideabi --prefix="$PREFIX" --enable-static --with-included-modules=yes --with-dynamic-modules=no
+	# clang failed on compile pangofc-font.c
+	# use gcc instead
+	CC=arm-linux-androideabi-gcc CXX=arm-linux-androideabi-g++ AR=arm-linux-androideabi-ar \
+	CPPFLAGS="-DANDROID=1 -g $FLAGS" CFLAGS="-DANDROID=1 -g $FLAGS" LDFLAGS="-lpng" \ #freetype missing lib dependicy, force link png
+	./configure --host=arm-linux-androideabi --prefix="$PREFIX" --enable-static --with-included-modules=yes --with-dynamic-modules=no
 	checkError $? "configure pango failed"
 	
-	#patch compile pangofc-font.o
 	
+	make -j4
+	checkError $? "make pango failed"
+	
+	make install
 	
 	popd
+	
+	#clean up
+	rm -r pango-1.36.1
+	rm pango-1.36.1.tar.xz
 }
 
-export PKG_CONFIG_LIBDIR=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/FakeMacOSX10.9.sdk/usr/lib/pkgconfig
+export PKG_CONFIG_LIBDIR=$MIRAI_SDK_PREFIX/lib/pkgconfig
 export PKG_CONFIG_PATH=$PKG_CONFIG_LIBDIR
+
+if [ ! -f $PREFIX/lib/libglib-2.0.a ]; then
+	buildGlib
+fi
 
 if [ ! -f $ARMSYSROOT/usr/lib/libharfbuzz.la ]; then
 	buildHarfbuzz
 fi
 
-if [ ! -f /tmp/config.sub ]; then
-	curl -o /tmp/config.sub "git.savannah.gnu.org/gitweb/?p=config.git;a=blob_plain;f=config.sub;hb=HEAD"
-	curl -o /tmp/config.guess "git.savannah.gnu.org/gitweb/?p=config.git;a=blob_plain;f=config.guess;hb=HEAD"
+if [ ! -f $ARMSYSROOT/usr/lib/libpango-1.0.a ]; then
+	buildPango
 fi
 
-#buildGlib
-#buildHarfbuzz
-buildPango
+
