@@ -66,10 +66,29 @@ static void glib_NSLog_print_handler(const gchar *string)
     NSLog(@"%s",string);
 }
 
+NSString *descriptionForGLogLevel(GLogLevelFlags log_level)
+{
+    GLogLevelFlags level = log_level & G_LOG_LEVEL_MASK;
+    NSString *levelStr = nil;
+    switch (level) {
+        case G_LOG_LEVEL_ERROR:levelStr = @"ERROR";break;
+        case G_LOG_LEVEL_CRITICAL:levelStr = @"CRITICAL";break;
+        case G_LOG_LEVEL_WARNING:levelStr = @"WARNING";break;
+        case G_LOG_LEVEL_MESSAGE:levelStr = @"MESSAGE";break;
+        case G_LOG_LEVEL_INFO:levelStr = @"INFO";break;
+        case G_LOG_LEVEL_DEBUG:levelStr = @"DEBUG";break;
+
+        default:levelStr = @"UNKNOW";break;
+    }
+    
+    return levelStr;
+}
+
 static void glib_log_handler_NSLog(const gchar *log_domain, GLogLevelFlags log_level, const gchar *message, gpointer unused_data)
 {
-    NSLog(@"[%s]%s",log_domain, message);
+    NSLog(@"[%s][%@]%s",log_domain,descriptionForGLogLevel(log_level), message);
 }
+
 +(void)load
 {
     g_log_set_default_handler(&glib_log_handler_NSLog, NULL);
