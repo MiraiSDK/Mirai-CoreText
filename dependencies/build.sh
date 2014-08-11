@@ -4,6 +4,7 @@ ARMSYSROOT=$MIRAI_SDK_PATH
 FLAGS="--sysroot $ARMSYSROOT"
 PREFIX="$ARMSYSROOT/usr"
 
+
 checkError()
 {
     if [ "${1}" -ne "0" ]; then
@@ -77,6 +78,8 @@ buildLibgettext()
 	checkError $? "configure libgettext failed"
 	
 	make -j4
+	checkError $? "make libgettext failed"
+	
 	make install
 	
 	popd
@@ -112,6 +115,7 @@ buildGlib()
 	
 	PATH=$PREFIX/bin:$PATH ./configure --host=arm-linux-androideabi --prefix="$PREFIX"  --with-sysroot="$ARMSYSROOT/usr" \
 	CPPFLAGS="$FLAGS" CFLAGS="$FLAGS" --enable-static --cache-file=android.cache --disable-modular-tests
+	checkError $? "configure glib failed"
 	
 	make -j4
 	checkError $? "Make glib failed"
@@ -142,13 +146,11 @@ buildPango()
 	
 	pushd pango-1.36.1
 	
-	# clang failed on compile pangofc-font.c
-	# use gcc instead
-	CC=arm-linux-androideabi-gcc CXX=arm-linux-androideabi-g++ AR=arm-linux-androideabi-ar \
-	CPPFLAGS="-DANDROID=1 -g $FLAGS" CFLAGS="-DANDROID=1 -g $FLAGS" LDFLAGS="-lpng" \ #freetype missing lib dependicy, force link png
-	./configure --host=arm-linux-androideabi --prefix="$PREFIX" --enable-static --with-included-modules=yes --with-dynamic-modules=no
+	# without -mthumb, clang failed on compile pangofc-font.c
+	CC=arm-linux-androideabi-clang CXX=arm-linux-androideabi-clang++ AR=arm-linux-androideabi-ar \
+	CPPFLAGS="-DANDROID=1 -mthumb $FLAGS" CFLAGS="-DANDROID=1 -mthumb $FLAGS" \
+	./configure --host=arm-linux-androideabi --prefix="$PREFIX" --enable-static=yes --enable-shared=no --with-included-modules=yes --with-dynamic-modules=no
 	checkError $? "configure pango failed"
-	
 	
 	make -j4
 	checkError $? "make pango failed"

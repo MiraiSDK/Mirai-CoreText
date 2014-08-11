@@ -1,25 +1,11 @@
---- configure.ac	2012-11-27 01:10:04.000000000 +0800
-+++ configure.ac	2014-08-10 21:11:03.000000000 +0800
-@@ -2071,6 +2071,12 @@
-   esac
- ])
- 
-+case $host in
-+	*-*-linux-android*)
-+	   G_THREAD_CFLAGS=""
-+	   ;;
-+esac
-+
- # if we are not finding the localtime_r function, then we probably are
- # not using the proper multithread flag
- 
-@@ -2167,6 +2173,9 @@
-     G_THREAD_LIBS="-lbe -lroot -lglib-2.0 "
-     G_THREAD_LIBS_EXTRA="-L\$(top_builddir_full)/.libs"
+--- configure.ac	2014-08-11 19:31:54.000000000 +0800
++++ configure.ac	2014-08-11 19:32:35.000000000 +0800
+@@ -2307,7 +2307,7 @@
+ #
+ case $host in
+   *-*-freebsd*|*-*-linux*)
+-    G_THREAD_LIBS_FOR_GTHREAD="`echo $G_THREAD_LIBS | sed s/-pthread/-lpthread/`"
++    #G_THREAD_LIBS_FOR_GTHREAD="`echo $G_THREAD_LIBS | sed s/-pthread/-lpthread/`"
      ;;
-+  *-*-freebsd*|*-*-linux*)
-+    G_THREAD_LIBS=""
-+    ;;
-   *)
-     ;;
- esac
+   *-*-openbsd*)
+     LDFLAGS="$LDFLAGS -pthread"
