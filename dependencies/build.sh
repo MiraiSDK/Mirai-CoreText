@@ -145,6 +145,12 @@ buildPango()
 	fi
 	
 	pushd pango-1.36.1
+	## ld patch
+	if [ ! -f ld.bak ]; then
+		cp $STANDALONE_TOOLCHAIN_PATH/arm-linux-androideabi/bin/ld ld.bak
+	fi
+	
+	cp ../pango_pthread_ld $STANDALONE_TOOLCHAIN_PATH/arm-linux-androideabi/bin/ld
 	
 	# without -mthumb, clang failed on compile pangofc-font.c
 	CC=arm-linux-androideabi-clang CXX=arm-linux-androideabi-clang++ AR=arm-linux-androideabi-ar \
@@ -157,11 +163,14 @@ buildPango()
 	
 	make install
 	
+	#restore ld
+	cp ld.bak $STANDALONE_TOOLCHAIN_PATH/arm-linux-androideabi/bin/ld
 	popd
 	
 	#clean up
 	rm -r pango-1.36.1
 	rm pango-1.36.1.tar.xz
+	
 }
 
 export PKG_CONFIG_LIBDIR=$MIRAI_SDK_PREFIX/lib/pkgconfig

@@ -1,0 +1,45 @@
+#!/bin/bash
+
+foundFileList="no"
+fileListPath=""
+finalCommand=""
+
+for arg in "$@"
+do
+	newArg=$arg
+	
+    if [[ "$foundFileList" == "yes" && "$fileListPath" == "" ]]; then
+        fileListPath="$arg"
+		fileList=`sed ':a;N;$!ba;s/\n/ /g' "$fileListPath"`
+		newArg="$fileList"
+    fi
+    if [ "$arg" == "-filelist" ]; then
+        foundFileList="yes"
+		continue;
+    fi
+	finalCommand="$finalCommand $newArg"
+done
+
+finalCommand=${finalCommand//" -dynamiclib "/" -shared "}
+
+finalCommand=${finalCommand//" -framework UIKit "/" -lUIKit "}
+finalCommand=${finalCommand//" -framework CoreGraphics "/" -lCoreGraphics "}
+finalCommand=${finalCommand//" -framework Foundation "/" -lgnustep-base "}
+finalCommand=${finalCommand//" -framework QuartzCore "/" -lQuartzCore "}
+finalCommand=${finalCommand//" -framework CoreFoundation "/" -lgnustep-corebase "}
+finalCommand=${finalCommand//" -framework CoreText "/" -lCoreText "}
+finalCommand=${finalCommand//" -framework OpenGLES "/" -lOpenGLES "}
+finalCommand=${finalCommand//" -framework MediaPlayer "/" -lMediaPlayer "}
+
+# clang will convert -pthread to -lphread
+# android support pthread but it's part of libc, there is no exist a file libpthread.so
+# we just replace it with -lc
+# remove this hack if a newer version of clang fixed this bug.
+finalCommand=${finalCommand//" -lpthread "/" -lc "}
+
+echo "final command: $finalCommand"
+`dirname $0`/realld $finalCommand
+
+
+
+
