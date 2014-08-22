@@ -38,6 +38,7 @@
 - (id)initWithRuns: (NSArray*)runs;
 
 @property (nonatomic, assign) CFRange range;
+@property (nonatomic, assign) CGFloat offset;
 @property (nonatomic, strong) NSAttributedString * attributedString;
 
 

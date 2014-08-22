@@ -93,11 +93,12 @@ const CFStringRef kCTTypesetterOptionForcedEmbeddingLevel = @"kCTTypesetterOptio
   [super dealloc];
 }
 
-- (CTLineRef)createLineWithRange: (CFRange)range
+- (CTLineRef)createLineWithRange: (CFRange)range offset:(CGFloat)offset
 {
     
     CTLine *l = [[CTLine alloc] init];
     l.range = range;
+    l.offset = offset;
     l.attributedString = _as;
     return l;
 
@@ -215,7 +216,7 @@ CTTypesetterRef CTTypesetterCreateWithAttributedStringAndOptions(
 
 CTLineRef CTTypesetterCreateLine(CTTypesetterRef ts, CFRange range)
 {
-  return [ts createLineWithRange: range];
+  return [ts createLineWithRange: range offset:0];
 }
 
 CTLineRef CTTypesetterCreateLineWithOffset(
@@ -223,8 +224,7 @@ CTLineRef CTTypesetterCreateLineWithOffset(
                                            CFRange stringRange,
                                            double offset )
 {
-    NSLog(@"%s unimplemented",__PRETTY_FUNCTION__);
-    return CTTypesetterCreateLine(typesetter, stringRange);
+    return [typesetter createLineWithRange:stringRange offset:offset];
 }
 
 CFIndex CTTypesetterSuggestClusterBreak(
@@ -249,8 +249,8 @@ CFIndex CTTypesetterSuggestLineBreakWithOffset(
                                                double width,
                                                double offset )
 {
-    NSLog(@"%s unimplemented",__PRETTY_FUNCTION__);
-    return CTTypesetterSuggestLineBreak(typesetter, startIndex, width);
+    double w = width - offset;
+    return CTTypesetterSuggestLineBreak(typesetter, startIndex, w);
 }
 
 CFIndex CTTypesetterSuggestClusterBreakWithOffset(

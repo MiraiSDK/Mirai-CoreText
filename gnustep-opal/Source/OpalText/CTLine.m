@@ -67,7 +67,7 @@
         CGPoint textPosition = CGContextGetTextPosition(ctx);
         int width,height;
         pango_layout_get_pixel_size(layout, &width, &height);
-        CGRect rect = CGRectMake(textPosition.x, textPosition.y - height, width, height);
+        CGRect rect = CGRectMake(textPosition.x + self.offset, textPosition.y - height, width, height);
         
         NSLog(@"draw line at rect:{{%.2f,%.2f},{%.2f,%.2f}} str:%@",rect.origin.x,rect.origin.y,rect.size.width,rect.size.height,lineAS.string);
         
@@ -114,6 +114,25 @@
 - (double)penOffset
 {
   return 0;
+}
+
+- (CGFloat)width
+{
+    NSAttributedString *lineAS = [self.attributedString attributedSubstringFromRange:NSMakeRange(self.range.location, self.range.length)];
+
+    PangoFontMap *fm = pango_cairo_font_map_get_default();
+    PangoContext *pangoCtx = pango_font_map_create_context(fm);
+    PangoLayout *layout = pango_layout_new(pangoCtx);
+    pango_layout_set_attributedString(layout, lineAS);
+    pango_layout_set_single_paragraph_mode(layout, true);
+
+    int width,height;
+    pango_layout_get_pixel_size(layout, &width, &height);
+
+    g_object_unref(layout);
+    g_object_unref(pangoCtx);
+ 
+    return width;
 }
 
 - (CFRange)stringRange
@@ -172,7 +191,12 @@ double CTLineGetPenOffsetForFlush(
 	CGFloat flushFactor,
 	double flushWidth)
 {
-  return [line penOffset];
+    CGFloat lineWidth = [line width];
+    CGFloat gap = flushWidth - lineWidth;
+    CGFloat offset = gap * flushFactor;
+    return offset;
+    
+    //return [line penOffset];
 }
 void CTLineDraw(CTLineRef line, CGContextRef context)
 {
