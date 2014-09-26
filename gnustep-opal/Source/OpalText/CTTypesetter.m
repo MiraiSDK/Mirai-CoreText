@@ -72,7 +72,7 @@ const CFStringRef kCTTypesetterOptionForcedEmbeddingLevel = @"kCTTypesetterOptio
 {
   if ((self = [super init]))
   {
-      NSLog(@"Create typesetter with attributed string:%@, length:%d",string,string.length);
+//      NSLog(@"Create typesetter with attributed string:%@, length:%d",string,string.length);
       PangoFontMap *fontmap = pango_cairo_font_map_new();
       PangoContext *pangoctx = pango_font_map_create_context(fontmap);
       _layout = pango_layout_new(pangoctx);

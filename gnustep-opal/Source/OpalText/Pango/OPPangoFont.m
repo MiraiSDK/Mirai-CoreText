@@ -34,36 +34,36 @@
         _context = pangoctx;
 
         OPPangoFontDescriptor *desc = aDescriptor;
-        NSLog(@"[OPPangoFont] create with desc:%@",desc);
-        NSLog(@"[OPPangoFont] font family name:%@",[desc objectForKey:kCTFontFamilyNameKey]);
+//        NSLog(@"[OPPangoFont] create with desc:%@",desc);
+//        NSLog(@"[OPPangoFont] font family name:%@",[desc objectForKey:kCTFontFamilyNameKey]);
         _font = pango_font_map_load_font(fontMap, pangoctx, desc.pangoDesc);
         _desc = pango_font_describe(_font);
         
         const char *familyName = pango_font_description_get_family(_desc);
-        NSLog(@"[OPPangoFont] loaded font:%s",familyName);
+//        NSLog(@"[OPPangoFont] loaded font:%s",familyName);
 
         static BOOL oneTimeDebug = NO;
         if (!oneTimeDebug) {
             oneTimeDebug = YES;
-            NSLog(@"=======> DEBUG <======");
-            
-            int i;
-            PangoFontFamily ** families;
-            int n_families;
-            PangoFontMap * fontmap;
-            
-            fontmap = pango_cairo_font_map_get_default();
-            pango_font_map_list_families (fontmap, & families, & n_families);
-            NSLog(@"There are %d families\n", n_families);
-            for (i = 0; i < n_families; i++) {
-                PangoFontFamily * family = families[i];
-                const char * family_name;
-                
-                family_name = pango_font_family_get_name (family);
-                NSLog(@"Family %d: %s\n", i, family_name);
-            }
-            g_free (families);
-            NSLog(@"=======> DEBUG END <======");
+//            NSLog(@"=======> DEBUG <======");
+//            
+//            int i;
+//            PangoFontFamily ** families;
+//            int n_families;
+//            PangoFontMap * fontmap;
+//            
+//            fontmap = pango_cairo_font_map_get_default();
+//            pango_font_map_list_families (fontmap, & families, & n_families);
+//            NSLog(@"There are %d families\n", n_families);
+//            for (i = 0; i < n_families; i++) {
+//                PangoFontFamily * family = families[i];
+//                const char * family_name;
+//                
+//                family_name = pango_font_family_get_name (family);
+//                NSLog(@"Family %d: %s\n", i, family_name);
+//            }
+//            g_free (families);
+//            NSLog(@"=======> DEBUG END <======");
         }
 
         
@@ -86,7 +86,7 @@
 
 - (NSString*) nameForKey: (NSString*)nameKey
 {
-    NSLog(@"%s %@",__PRETTY_FUNCTION__, nameKey);
+//    NSLog(@"%s %@",__PRETTY_FUNCTION__, nameKey);
     if ([nameKey isEqualToString:(NSString *)kCTFontFamilyNameKey]) {
         const char *familyName = pango_font_description_get_family(_desc);
         NSString *str = [[NSString alloc] initWithCString:familyName encoding:NSUTF8StringEncoding];

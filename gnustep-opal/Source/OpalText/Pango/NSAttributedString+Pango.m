@@ -213,7 +213,7 @@
             if (patt != NULL) {
                 patt->start_index = bytesStartIndex;
                 patt->end_index = bytesEndIndex;
-                NSLog(@"[PangoAttribute]insert attribute: %@, range:%@",key,NSStringFromRange(range));
+//                NSLog(@"[PangoAttribute]insert attribute: %@, range:%@",key,NSStringFromRange(range));
                 pango_attr_list_insert(list, patt);
             }
         }];

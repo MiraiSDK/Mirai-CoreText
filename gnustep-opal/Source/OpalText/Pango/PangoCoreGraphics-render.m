@@ -109,15 +109,15 @@ pango_coregraphics_renderer_show_text_glyphs (PangoRenderer        *renderer,
     double base_x = PANGO_PIXELS(x);
     double base_y = PANGO_PIXELS(y);
     
-    NSLog(@"pango unit point:{%d,%d}",x,y);
-    NSLog(@"origin point:{%.2f,%.2f}",base_x,base_y);
+//    NSLog(@"pango unit point:{%d,%d}",x,y);
+//    NSLog(@"origin point:{%.2f,%.2f}",base_x,base_y);
     
-    NSLog(@"will rendering: %d glyphs",glyphs->num_glyphs);
+//    NSLog(@"will rendering: %d glyphs",glyphs->num_glyphs);
     CGFloat height = crenderer->rect.size.height;
     
     PangoRectangle lineRect;
     pango_glyph_string_extents(glyphs, font, NULL, &lineRect);
-    NSLog(@"lineHeight:%d",PANGO_PIXELS(lineRect.height));
+//    NSLog(@"lineHeight:%d",PANGO_PIXELS(lineRect.height));
     
     CGContextSaveGState(ctx);
     
@@ -131,10 +131,10 @@ pango_coregraphics_renderer_show_text_glyphs (PangoRenderer        *renderer,
     const char * fontFamily = pango_font_description_get_family(fontDescription);
     
     if (fontFamily == NULL) {
-        NSLog(@"[Warning] can't get font family from font description, fallback to Droid Sans Fallback");
+//        NSLog(@"[Warning] can't get font family from font description, fallback to Droid Sans Fallback");
         fontFamily = "Droid Sans Fallback";
     } else {
-        NSLog(@"use font family: %s",fontFamily);
+//        NSLog(@"use font family: %s",fontFamily);
     }
     
     CFStringRef familyRef = CFStringCreateWithCString(kCFAllocatorDefault, fontFamily, kCFStringEncodingUTF8);
@@ -171,7 +171,7 @@ pango_coregraphics_renderer_show_text_glyphs (PangoRenderer        *renderer,
         
         cg_positions[i] = p;
         if (!logGLyphsY) {
-            NSLog(@"glyph start Position:{%.2f,%.2f}",p.x,p.y);
+//            NSLog(@"glyph start Position:{%.2f,%.2f}",p.x,p.y);
             logGLyphsY = YES;
         }
         gx += width;
@@ -218,7 +218,7 @@ pango_coregraphics_renderer_draw_glyphs (PangoRenderer       *renderer,
                                          int                 x,
                                          int                 y)
 {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
+//    NSLog(@"%s",__PRETTY_FUNCTION__);
     
 //    gint num_glyphs = glyphs.num_glyphs;
 //    PangoGlyphInfo gi = glyphs.glyphs[0];
@@ -239,7 +239,7 @@ pango_coregraphics_renderer_draw_glyphs_item (PangoRenderer     *renderer,
                                               int               x,
                                               int               y)
 {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
+//    NSLog(@"%s",__PRETTY_FUNCTION__);
 
 }
 
@@ -251,7 +251,7 @@ pango_coregraphics_renderer_draw_rectangle (PangoRenderer     *renderer,
                                             int                width,
                                             int                height)
 {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
+//    NSLog(@"%s",__PRETTY_FUNCTION__);
 }
 
 static void
@@ -264,14 +264,14 @@ pango_coregraphics_renderer_draw_trapezoid (PangoRenderer     *renderer,
                                             double             x12,
                                             double             x22)
 {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
+//    NSLog(@"%s",__PRETTY_FUNCTION__);
 
 }
 // instance init
 static void
 pango_coregraphics_renderer_init (PangoCoreGraphicsRenderer *renderer G_GNUC_UNUSED)
 {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
+//    NSLog(@"%s",__PRETTY_FUNCTION__);
 
 }
 
@@ -282,7 +282,7 @@ pango_coregraphics_renderer_draw_error_underline (PangoRenderer *renderer,
                                            int            width,
                                            int            height)
 {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
+//    NSLog(@"%s",__PRETTY_FUNCTION__);
 
 }
 
@@ -292,7 +292,7 @@ pango_coregraphics_renderer_draw_shape (PangoRenderer  *renderer,
                                  int             x,
                                  int             y)
 {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
+//    NSLog(@"%s",__PRETTY_FUNCTION__);
 
 }
 
@@ -364,14 +364,14 @@ _pango_coregraphics_do_layout (CGContextRef     ctx,
                                CGRect rect,
                                gboolean     do_path)
 {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
+//    NSLog(@"%s",__PRETTY_FUNCTION__);
 
     PangoCoreGraphicsRenderer *crenderer = acquire_renderer();
     PangoRenderer *renderer = (PangoRenderer *) crenderer;
     crenderer->ctx = ctx;
     crenderer->rect = rect;
     const char * text = pango_layout_get_text(layout);
-    NSLog(@"layout text: %s",text);
+//    NSLog(@"layout text: %s",text);
 
     pango_renderer_draw_layout(renderer, layout, 0, 0);
     
