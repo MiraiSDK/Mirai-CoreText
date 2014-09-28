@@ -164,6 +164,8 @@ const CFStringRef kCTTypesetterOptionForcedEmbeddingLevel = @"kCTTypesetterOptio
     PangoLayoutLine *firstLine = pango_layout_get_line_readonly(layout, 0);
     gint bytesLength = firstLine->length;
     
+    gint glyphsCount = 0;
+
     // FIXME: Why sometimes first line is 0 length?
     // find first none-zero length line, let it as first line
     if (bytesLength == 0) {
@@ -171,6 +173,13 @@ const CFStringRef kCTTypesetterOptionForcedEmbeddingLevel = @"kCTTypesetterOptio
         for (int lineIdx = 1; lineIdx<lineCount; lineIdx++) {
             firstLine = pango_layout_get_line_readonly(layout, lineIdx);
             bytesLength = firstLine->length;
+            
+            //HACK
+            // second line begin with a empty-attribute white-space,
+            // pango layout it as a 0 length line
+            // we cout it as one glyphs
+            //FIXME: when start > 0, is the 'empty-attribute white-space' in the beginning of subattributedstring expected?
+            glyphsCount ++;
             
             if (bytesLength > 0) {
                 break;
@@ -180,7 +189,6 @@ const CFStringRef kCTTypesetterOptionForcedEmbeddingLevel = @"kCTTypesetterOptio
     
     // count number of glyphs in every run in line
     GList *l;
-    gint glyphsCount = 0;
     for (l = firstLine->runs; l; l=l->next) {
         PangoLayoutRun *run = l->data;
         PangoGlyphString *glyphs = run->glyphs;
@@ -194,6 +202,20 @@ const CFStringRef kCTTypesetterOptionForcedEmbeddingLevel = @"kCTTypesetterOptio
     return glyphsCount;
 }
 
+- (void)logLineAtIndex:(int)idx layout:(PangoLayout *)layout
+{
+    PangoLayoutLine *line = pango_layout_get_line(layout, idx);
+    GList *l;
+    gint glyphsCount = 0;
+    for (l = line->runs; l; l=l->next) {
+        PangoLayoutRun *run = l->data;
+        PangoGlyphString *glyphs = run->glyphs;
+        glyphsCount += glyphs->num_glyphs;
+    }
+
+    NSLog(@"lineIdx:%d length:%d glyphsCount:%d",idx,line->length,glyphsCount);
+    
+}
 @end
 
 
