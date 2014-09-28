@@ -945,6 +945,7 @@
 					"$(SDK_ROOT)/usr/include/glib-2.0",
 					"$(SDK_ROOT)/usr/lib/glib-2.0/include/",
 					"$(SDK_ROOT)/usr/include/cairo/",
+					"$(SOURCE_ROOT)/gnustep-opal/Headers/CoreText",
 				);
 				INFOPLIST_FILE = "CoreText/CoreText-Info.plist";
 				LD_DEPENDENCY_INFO_FILE = "";
@@ -978,6 +979,7 @@
 					"$(SDK_ROOT)/usr/include/glib-2.0",
 					"$(SDK_ROOT)/usr/lib/glib-2.0/include/",
 					"$(SDK_ROOT)/usr/include/cairo/",
+					"$(SOURCE_ROOT)/gnustep-opal/Headers/CoreText",
 				);
 				INFOPLIST_FILE = "CoreText/CoreText-Info.plist";
 				LD_DEPENDENCY_INFO_FILE = "";
