@@ -10,6 +10,7 @@
 #include "PangoCoreGraphics-render.h"
 
 #define DEBUG_GLYPHS_BOUNDS 0
+#define DEBUG_STROKE_UNKNOW_GLYPH 0
 
 //Font Map
 
@@ -195,8 +196,10 @@ pango_coregraphics_renderer_show_text_glyphs (PangoRenderer        *renderer,
 #endif
         
         if (glyphInfo->glyph & PANGO_GLYPH_UNKNOWN_FLAG) {
+#if DEBUG_STROKE_UNKNOW_GLYPH
             NSLog(@"idx: %d/%d unknown glyph: %d",i,glyphs->num_glyphs,glyphInfo->glyph);
             CGContextStrokeRect(ctx, CGRectMake(0, 0, width, height));
+#endif
         } else {
             CGGlyph glyph = glyphInfo->glyph;
             CGContextShowGlyphsAtPoint(ctx, 0, 0, &glyph, 1);
