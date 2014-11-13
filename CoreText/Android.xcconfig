@@ -13,9 +13,13 @@ DEPLOYMENT_LOCATION = YES
 DSTROOT = /
 INSTALL_PATH = $(SDK_ROOT)/System/Library/Frameworks/
 HEADER_SEARCH_PATHS=$(inherited) $(SDK_ROOT)/usr/include/freetype2/  $(SOURCE_ROOT)/gnustep-opal/Source/OpalText
-OTHER_LDFLAGS= $(inherited) -shared -Wl,-z,defs $(SDK_LIB_PATH)/libpangocairo-1.0.a $(SDK_LIB_PATH)/libpangoft2-1.0.a $(SDK_LIB_PATH)/libpango-1.0.a $(SDK_LIB_PATH)/libgthread-2.0.a $(SDK_LIB_PATH)/libgmodule-2.0.a $(SDK_LIB_PATH)/libgobject-2.0.a $(SDK_LIB_PATH)/libglib-2.0.a $(SDK_LIB_PATH)/libharfbuzz.a $(SDK_LIB_PATH)/libintl.a $(SDK_LIB_PATH)/libiconv.a -lCoreGraphics -lgnustep-corebase -lobjc -lgnustl_shared -lm
 
-OTHER_CFLAGS= $(inherited) -DANDROID=1 -fblocks
+ARCHFLAGS=-march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16
+ARCHLDFLAGS=-march=armv7-a -Wl,--fix-cortex-a8
+
+OTHER_LDFLAGS= $(inherited) $(ARCHLDFLAGS) -shared -Wl,-z,defs $(SDK_LIB_PATH)/libpangocairo-1.0.a $(SDK_LIB_PATH)/libpangoft2-1.0.a $(SDK_LIB_PATH)/libpango-1.0.a $(SDK_LIB_PATH)/libgthread-2.0.a $(SDK_LIB_PATH)/libgmodule-2.0.a $(SDK_LIB_PATH)/libgobject-2.0.a $(SDK_LIB_PATH)/libglib-2.0.a $(SDK_LIB_PATH)/libharfbuzz.a $(SDK_LIB_PATH)/libintl.a $(SDK_LIB_PATH)/libiconv.a -lCoreGraphics -lgnustep-corebase -lobjc -lgnustl_shared -lm
+
+OTHER_CFLAGS= $(inherited) $(ARCHFLAGS) -DANDROID=1 -fblocks
 
 //-lpangocairo-1.0 -lpango-1.0 -lgobject-2.0 -lglib-2.0 -lintl
 
