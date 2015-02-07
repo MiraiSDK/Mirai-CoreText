@@ -13,7 +13,6 @@
 		432C7A3D195AD460003AFC04 /* TNCoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 432C7A3C195AD460003AFC04 /* TNCoreText.framework */; };
 		4390B89F1A860E960082B0F1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4390B89E1A860E960082B0F1 /* UIKit.framework */; };
 		4390B8A41A860E960082B0F1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4390B8A31A860E960082B0F1 /* main.m */; };
-		4390B8A71A860E960082B0F1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4390B8A61A860E960082B0F1 /* AppDelegate.m */; };
 		4390B8A91A860E960082B0F1 /* TNAndroidLauncher.h in Resources */ = {isa = PBXBuildFile; fileRef = 4390B8A81A860E960082B0F1 /* TNAndroidLauncher.h */; };
 		4390B8AB1A860E960082B0F1 /* TNAndroidLauncher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4390B8AA1A860E960082B0F1 /* TNAndroidLauncher.m */; };
 		4390B8B61A860F1D0082B0F1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B163DC1862CD93006B6CE1 /* ViewController.m */; };
@@ -24,6 +23,7 @@
 		4390B8C21A8615B60082B0F1 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4390B8C01A8615B60082B0F1 /* Icon@2x.png */; };
 		4390B8C61A86160F0082B0F1 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4390B8C01A8615B60082B0F1 /* Icon@2x.png */; };
 		4390B8C71A8616110082B0F1 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4390B8BF1A8615B60082B0F1 /* Icon.png */; };
+		4390B8C81A86196C0082B0F1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B163D61862CD93006B6CE1 /* AppDelegate.m */; };
 		439C87051862E41B0089F3DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 439C87031862E41B0089F3DA /* InfoPlist.strings */; };
 		439C87071862E41B0089F3DA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 439C87061862E41B0089F3DA /* main.m */; };
 		439C870B1862E41B0089F3DA /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 439C87091862E41B0089F3DA /* Credits.rtf */; };
@@ -36,7 +36,6 @@
 		43B163D11862CD93006B6CE1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43B163CF1862CD93006B6CE1 /* InfoPlist.strings */; };
 		43B163D31862CD93006B6CE1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B163D21862CD93006B6CE1 /* main.m */; };
 		43B163D71862CD93006B6CE1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B163D61862CD93006B6CE1 /* AppDelegate.m */; };
-		43B163DA1862CD93006B6CE1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43B163D81862CD93006B6CE1 /* Main.storyboard */; };
 		43B163DD1862CD93006B6CE1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B163DC1862CD93006B6CE1 /* ViewController.m */; };
 		43B163DF1862CD93006B6CE1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43B163DE1862CD93006B6CE1 /* Images.xcassets */; };
 		43B164541862CFAB006B6CE1 /* CoreTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B164531862CFAB006B6CE1 /* CoreTextView.m */; };
@@ -54,8 +53,6 @@
 		4390B89E1A860E960082B0F1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		4390B8A21A860E960082B0F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4390B8A31A860E960082B0F1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		4390B8A51A860E960082B0F1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		4390B8A61A860E960082B0F1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		4390B8A81A860E960082B0F1 /* TNAndroidLauncher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TNAndroidLauncher.h; sourceTree = "<group>"; };
 		4390B8AA1A860E960082B0F1 /* TNAndroidLauncher.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TNAndroidLauncher.m; sourceTree = "<group>"; };
 		4390B8AC1A860E960082B0F1 /* Android.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Android.xcconfig; sourceTree = "<group>"; };
@@ -88,7 +85,6 @@
 		43B163D41862CD93006B6CE1 /* CoreTextDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoreTextDemo-Prefix.pch"; sourceTree = "<group>"; };
 		43B163D51862CD93006B6CE1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		43B163D61862CD93006B6CE1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		43B163D91862CD93006B6CE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		43B163DB1862CD93006B6CE1 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		43B163DC1862CD93006B6CE1 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		43B163DE1862CD93006B6CE1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -145,8 +141,6 @@
 		4390B8A01A860E960082B0F1 /* CoreTextDemo-Android */ = {
 			isa = PBXGroup;
 			children = (
-				4390B8A51A860E960082B0F1 /* AppDelegate.h */,
-				4390B8A61A860E960082B0F1 /* AppDelegate.m */,
 				4390B8A11A860E960082B0F1 /* Supporting Files */,
 			);
 			path = "CoreTextDemo-Android";
@@ -238,7 +232,6 @@
 			children = (
 				43B163D51862CD93006B6CE1 /* AppDelegate.h */,
 				43B163D61862CD93006B6CE1 /* AppDelegate.m */,
-				43B163D81862CD93006B6CE1 /* Main.storyboard */,
 				43B163DB1862CD93006B6CE1 /* ViewController.h */,
 				43B163DC1862CD93006B6CE1 /* ViewController.m */,
 				43B164521862CFAB006B6CE1 /* CoreTextView.h */,
@@ -383,7 +376,6 @@
 				4390B8C11A8615B60082B0F1 /* Icon.png in Resources */,
 				43B163DF1862CD93006B6CE1 /* Images.xcassets in Resources */,
 				43B163D11862CD93006B6CE1 /* InfoPlist.strings in Resources */,
-				43B163DA1862CD93006B6CE1 /* Main.storyboard in Resources */,
 				4390B8C21A8615B60082B0F1 /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -412,10 +404,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4390B8B71A860F290082B0F1 /* CoreTextView.m in Sources */,
-				4390B8A71A860E960082B0F1 /* AppDelegate.m in Sources */,
 				4390B8AB1A860E960082B0F1 /* TNAndroidLauncher.m in Sources */,
 				4390B8A41A860E960082B0F1 /* main.m in Sources */,
 				4390B8B61A860F1D0082B0F1 /* ViewController.m in Sources */,
+				4390B8C81A86196C0082B0F1 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -476,14 +468,6 @@
 				43B163D01862CD93006B6CE1 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		43B163D81862CD93006B6CE1 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				43B163D91862CD93006B6CE1 /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
