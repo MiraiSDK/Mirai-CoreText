@@ -19,6 +19,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    self.view.backgroundColor = [UIColor whiteColor];
     CoreTextView *ctv = [[CoreTextView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:ctv];
 }

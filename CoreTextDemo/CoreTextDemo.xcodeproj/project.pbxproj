@@ -11,6 +11,15 @@
 		432C7A37195AD079003AFC04 /* TestCaseWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 432C7A35195AD079003AFC04 /* TestCaseWindowController.xib */; };
 		432C7A3B195AD287003AFC04 /* DrawRectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 432C7A3A195AD287003AFC04 /* DrawRectView.m */; };
 		432C7A3D195AD460003AFC04 /* TNCoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 432C7A3C195AD460003AFC04 /* TNCoreText.framework */; };
+		4390B89F1A860E960082B0F1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4390B89E1A860E960082B0F1 /* UIKit.framework */; };
+		4390B8A41A860E960082B0F1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4390B8A31A860E960082B0F1 /* main.m */; };
+		4390B8A71A860E960082B0F1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4390B8A61A860E960082B0F1 /* AppDelegate.m */; };
+		4390B8A91A860E960082B0F1 /* TNAndroidLauncher.h in Resources */ = {isa = PBXBuildFile; fileRef = 4390B8A81A860E960082B0F1 /* TNAndroidLauncher.h */; };
+		4390B8AB1A860E960082B0F1 /* TNAndroidLauncher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4390B8AA1A860E960082B0F1 /* TNAndroidLauncher.m */; };
+		4390B8B61A860F1D0082B0F1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B163DC1862CD93006B6CE1 /* ViewController.m */; };
+		4390B8B71A860F290082B0F1 /* CoreTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B164531862CFAB006B6CE1 /* CoreTextView.m */; };
+		4390B8B91A860F4F0082B0F1 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4390B8B81A860F4F0082B0F1 /* CoreText.framework */; };
+		4390B8BB1A860F5C0082B0F1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4390B8BA1A860F5C0082B0F1 /* CoreGraphics.framework */; };
 		439C87051862E41B0089F3DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 439C87031862E41B0089F3DA /* InfoPlist.strings */; };
 		439C87071862E41B0089F3DA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 439C87061862E41B0089F3DA /* main.m */; };
 		439C870B1862E41B0089F3DA /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 439C87091862E41B0089F3DA /* Credits.rtf */; };
@@ -37,6 +46,20 @@
 		432C7A39195AD287003AFC04 /* DrawRectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawRectView.h; sourceTree = "<group>"; };
 		432C7A3A195AD287003AFC04 /* DrawRectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawRectView.m; sourceTree = "<group>"; };
 		432C7A3C195AD460003AFC04 /* TNCoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TNCoreText.framework; path = "../../../Library/Developer/Xcode/DerivedData/CoreTextDemo-Mac-eaexamrcjosloaebweigtxmptaoi/Build/Products/Debug/TNCoreText.framework"; sourceTree = "<group>"; };
+		4390B89D1A860E960082B0F1 /* CoreTextDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreTextDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4390B89E1A860E960082B0F1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		4390B8A21A860E960082B0F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4390B8A31A860E960082B0F1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		4390B8A51A860E960082B0F1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		4390B8A61A860E960082B0F1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		4390B8A81A860E960082B0F1 /* TNAndroidLauncher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TNAndroidLauncher.h; sourceTree = "<group>"; };
+		4390B8AA1A860E960082B0F1 /* TNAndroidLauncher.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TNAndroidLauncher.m; sourceTree = "<group>"; };
+		4390B8AC1A860E960082B0F1 /* Android.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Android.xcconfig; sourceTree = "<group>"; };
+		4390B8AD1A860E960082B0F1 /* Android.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = Android.mk; sourceTree = "<group>"; };
+		4390B8AE1A860E960082B0F1 /* MainActivity.java */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.java; path = MainActivity.java; sourceTree = "<group>"; };
+		4390B8AF1A860E960082B0F1 /* AndroidManifest.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = AndroidManifest.xml; sourceTree = "<group>"; };
+		4390B8B81A860F4F0082B0F1 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/MacOSX.platform/Developer/SDKs/Android18.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
+		4390B8BA1A860F5C0082B0F1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/MacOSX.platform/Developer/SDKs/Android18.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		439C86F91862E41B0089F3DA /* CoreTextDemo-OSX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoreTextDemo-OSX.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		439C87021862E41B0089F3DA /* CoreTextDemo-OSX-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CoreTextDemo-OSX-Info.plist"; sourceTree = "<group>"; };
 		439C87041862E41B0089F3DA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -71,6 +94,16 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		4390B8991A860E960082B0F1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4390B8BB1A860F5C0082B0F1 /* CoreGraphics.framework in Frameworks */,
+				4390B8B91A860F4F0082B0F1 /* CoreText.framework in Frameworks */,
+				4390B89F1A860E960082B0F1 /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		439C86F61862E41B0089F3DA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -100,6 +133,31 @@
 				432C7A3A195AD287003AFC04 /* DrawRectView.m */,
 			);
 			name = Casees;
+			sourceTree = "<group>";
+		};
+		4390B8A01A860E960082B0F1 /* CoreTextDemo-Android */ = {
+			isa = PBXGroup;
+			children = (
+				4390B8A51A860E960082B0F1 /* AppDelegate.h */,
+				4390B8A61A860E960082B0F1 /* AppDelegate.m */,
+				4390B8A11A860E960082B0F1 /* Supporting Files */,
+			);
+			path = "CoreTextDemo-Android";
+			sourceTree = "<group>";
+		};
+		4390B8A11A860E960082B0F1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4390B8A21A860E960082B0F1 /* Info.plist */,
+				4390B8A31A860E960082B0F1 /* main.m */,
+				4390B8A81A860E960082B0F1 /* TNAndroidLauncher.h */,
+				4390B8AA1A860E960082B0F1 /* TNAndroidLauncher.m */,
+				4390B8AC1A860E960082B0F1 /* Android.xcconfig */,
+				4390B8AD1A860E960082B0F1 /* Android.mk */,
+				4390B8AE1A860E960082B0F1 /* MainActivity.java */,
+				4390B8AF1A860E960082B0F1 /* AndroidManifest.xml */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		439C87001862E41B0089F3DA /* CoreTextDemo-OSX */ = {
@@ -137,6 +195,7 @@
 			children = (
 				43B163CC1862CD93006B6CE1 /* CoreTextDemo-iOS */,
 				439C87001862E41B0089F3DA /* CoreTextDemo-OSX */,
+				4390B8A01A860E960082B0F1 /* CoreTextDemo-Android */,
 				43B163C51862CD93006B6CE1 /* Frameworks */,
 				43B163C41862CD93006B6CE1 /* Products */,
 			);
@@ -147,6 +206,7 @@
 			children = (
 				43B163C31862CD93006B6CE1 /* CoreTextDemo.app */,
 				439C86F91862E41B0089F3DA /* CoreTextDemo-OSX.app */,
+				4390B89D1A860E960082B0F1 /* CoreTextDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -154,11 +214,14 @@
 		43B163C51862CD93006B6CE1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4390B8BA1A860F5C0082B0F1 /* CoreGraphics.framework */,
+				4390B8B81A860F4F0082B0F1 /* CoreText.framework */,
 				432C7A3C195AD460003AFC04 /* TNCoreText.framework */,
 				43EDF1B3195ACCE500B3DD0D /* Cocoa.framework */,
 				43B164551862D191006B6CE1 /* CoreText.framework */,
 				43B163C61862CD93006B6CE1 /* Foundation.framework */,
 				43B163C81862CD93006B6CE1 /* CoreGraphics.framework */,
+				4390B89E1A860E960082B0F1 /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -194,6 +257,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		4390B89C1A860E960082B0F1 /* CoreTextDemo-Android */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4390B8B31A860E960082B0F1 /* Build configuration list for PBXNativeTarget "CoreTextDemo-Android" */;
+			buildPhases = (
+				4390B8981A860E960082B0F1 /* Sources */,
+				4390B8991A860E960082B0F1 /* Frameworks */,
+				4390B89A1A860E960082B0F1 /* Resources */,
+				4390B89B1A860E960082B0F1 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "CoreTextDemo-Android";
+			productName = "CoreTextDemo-Android";
+			productReference = 4390B89D1A860E960082B0F1 /* CoreTextDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
 		439C86F81862E41B0089F3DA /* CoreTextDemo-OSX */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 439C872C1862E41C0089F3DA /* Build configuration list for PBXNativeTarget "CoreTextDemo-OSX" */;
@@ -236,6 +317,11 @@
 			attributes = {
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Shanghai TinyNetwork Inc.";
+				TargetAttributes = {
+					4390B89C1A860E960082B0F1 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+				};
 			};
 			buildConfigurationList = 43B163BE1862CD93006B6CE1 /* Build configuration list for PBXProject "CoreTextDemo" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -252,11 +338,20 @@
 			targets = (
 				43B163C21862CD93006B6CE1 /* CoreTextDemo */,
 				439C86F81862E41B0089F3DA /* CoreTextDemo-OSX */,
+				4390B89C1A860E960082B0F1 /* CoreTextDemo-Android */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		4390B89A1A860E960082B0F1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4390B8A91A860E960082B0F1 /* TNAndroidLauncher.h in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		439C86F71862E41B0089F3DA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -281,7 +376,35 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4390B89B1A860E960082B0F1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\nrelpath()\n{\n    s=$(cd ${1%%/};pwd); d=$(cd $2;pwd); while [ \"${d#$s/}\" == \"${d}\" ]\n    do s=$(dirname $s);b=\"../${b}\"; done; echo ${b}${d#$s/}\n    }\n    \n    #setting PATH\n    PATH=$(bash -l -c 'echo $PATH')\n    \n    echo \"current direct\"\n    pwd\n    \n    TN_EXEC_PATH=\"$TARGET_BUILD_DIR/$EXECUTABLE_PATH\"\n    echo $TN_EXEC_PATH\n    \n    #Temp Android Project Path\n    TN_ANDROID_PROJECT_PATH=\"$TARGET_BUILD_DIR/android\"\n    \n    PRODUCT_IDENTIFIER=`/usr/libexec/PlistBuddy -c \"Print :CFBundleIdentifier\" $TARGET_BUILD_DIR/$INFOPLIST_PATH`\n    echo $ROOT_PRODUCT_IDENTIFIER_PLIST\n    \n    if [[ ! -d $TN_ANDROID_PROJECT_PATH ]]; then\n    mkdir -p $TN_ANDROID_PROJECT_PATH\n    fi\n    \n    pushd $TN_ANDROID_PROJECT_PATH\n    \n    ## create project if needs\n    if [[ ! -f AndroidManifest.xml ]]; then\n    android create project --target 1 --name $PRODUCT_NAME --path ./ --activity MainActivity --package $PRODUCT_IDENTIFIER\n    mkdir -p jni\n    \n    \n    # patch AndroidManifest.xml\n    echo \"patching AndroidManifest.xml..\"\n    cp \"$SRCROOT/$TARGET_NAME/AndroidManifest.xml\" ./\n    \n    # patch MainActivity.java\n    java_dest=`find . -name MainActivity.java`\n    cp \"$SRCROOT/$TARGET_NAME/MainActivity.java\" \"$java_dest\"\n    \n    # include CocoaActivity lib\n    TN_CURRENT=`pwd`\n    Relative_Library_Path=`relpath $TN_CURRENT /Users/chyhfj/Development/MiraiSDK/toolchain/android/Android18.sdk/System/Library/Frameworks/CocoaActivity`\n    \n    android update project --target 1 --path . --library $Relative_Library_Path\n    \n    #update app name\n    sed -i .bak -e \"s/>MainActivity</>$PRODUCT_NAME</\" res/values/strings.xml\n    rm res/values/strings.xml.bak\n    \n    fi\n    \n    #copy jni files\n    cp \"$TN_EXEC_PATH\" \"jni/$EXECUTABLE_NAME.so\"\n    cp \"$SRCROOT/$TARGET_NAME/Android.mk\" jni/\n    \n    #build ndk\n    ndk-build\n    \n    # run if needs\n    \n    popd";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		4390B8981A860E960082B0F1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4390B8B71A860F290082B0F1 /* CoreTextView.m in Sources */,
+				4390B8A71A860E960082B0F1 /* AppDelegate.m in Sources */,
+				4390B8AB1A860E960082B0F1 /* TNAndroidLauncher.m in Sources */,
+				4390B8A41A860E960082B0F1 /* main.m in Sources */,
+				4390B8B61A860F1D0082B0F1 /* ViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		439C86F51862E41B0089F3DA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -352,6 +475,50 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		4390B8B41A860E960082B0F1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4390B8AC1A860E960082B0F1 /* Android.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "CoreTextDemo-Android/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = CoreTextDemo;
+			};
+			name = Debug;
+		};
+		4390B8B51A860E960082B0F1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4390B8AC1A860E960082B0F1 /* Android.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "CoreTextDemo-Android/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = CoreTextDemo;
+			};
+			name = Release;
+		};
 		439C87251862E41C0089F3DA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -518,6 +685,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		4390B8B31A860E960082B0F1 /* Build configuration list for PBXNativeTarget "CoreTextDemo-Android" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4390B8B41A860E960082B0F1 /* Debug */,
+				4390B8B51A860E960082B0F1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		439C872C1862E41C0089F3DA /* Build configuration list for PBXNativeTarget "CoreTextDemo-OSX" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
