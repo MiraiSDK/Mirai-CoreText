@@ -7,9 +7,11 @@
 //
 
 #import "ViewController.h"
-#import "CoreTextView.h"
+#import "TNTestViewController.h"
 
-@interface ViewController ()
+@interface ViewController () <UITableViewDataSource,UITableViewDelegate>
+@property (nonatomic, strong) NSArray *tests;
+@property (nonatomic, strong) UITableView *tableView;
 
 @end
 
@@ -18,16 +20,58 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    self.navigationItem.title = @"Tests";
     self.view.backgroundColor = [UIColor whiteColor];
-    CoreTextView *ctv = [[CoreTextView alloc] initWithFrame:self.view.bounds];
-    [self.view addSubview:ctv];
+    
+    self.tests = [[TNTestViewController tests] sortedArrayUsingComparator:^NSComparisonResult(Class c1, Class c2) {
+        return [[c1 testName] compare:[c2 testName]];
+    }];
+    
+    UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
+    tableView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    tableView.delegate = self;
+    tableView.dataSource = self;
+    [self.view addSubview:tableView];
+    self.tableView = tableView;
+    
+#if __ANDROID__
+    tableView.rowHeight = 100;
+#endif
 }
 
-- (void)didReceiveMemoryWarning
+#pragma mark - Table view data source
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    return 1;
 }
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.tests.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    
+    Class class = self.tests[indexPath.row];
+    cell.textLabel.text = [class testName];
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    Class class = self.tests[indexPath.row];
+    UIViewController *vc = [[class alloc] init];
+    
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 
 @end

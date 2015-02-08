@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4327C5461A875C0B001429B9 /* TNCTTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4327C5431A875C0B001429B9 /* TNCTTestViewController.m */; };
+		4327C5471A875C0B001429B9 /* TNCTTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4327C5431A875C0B001429B9 /* TNCTTestViewController.m */; };
+		4327C5481A875C0B001429B9 /* TNCTView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4327C5451A875C0B001429B9 /* TNCTView.m */; };
+		4327C5491A875C0B001429B9 /* TNCTView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4327C5451A875C0B001429B9 /* TNCTView.m */; };
+		4327C54E1A875C20001429B9 /* TNTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 4327C54B1A875C20001429B9 /* TNTestCase.m */; };
+		4327C54F1A875C20001429B9 /* TNTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 4327C54B1A875C20001429B9 /* TNTestCase.m */; };
+		4327C5501A875C20001429B9 /* TNTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4327C54D1A875C20001429B9 /* TNTestViewController.m */; };
+		4327C5511A875C20001429B9 /* TNTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4327C54D1A875C20001429B9 /* TNTestViewController.m */; };
 		432C7A36195AD079003AFC04 /* TestCaseWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 432C7A34195AD079003AFC04 /* TestCaseWindowController.m */; };
 		432C7A37195AD079003AFC04 /* TestCaseWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 432C7A35195AD079003AFC04 /* TestCaseWindowController.xib */; };
 		432C7A3B195AD287003AFC04 /* DrawRectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 432C7A3A195AD287003AFC04 /* DrawRectView.m */; };
@@ -43,6 +51,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4327C5421A875C0B001429B9 /* TNCTTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TNCTTestViewController.h; sourceTree = "<group>"; };
+		4327C5431A875C0B001429B9 /* TNCTTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TNCTTestViewController.m; sourceTree = "<group>"; };
+		4327C5441A875C0B001429B9 /* TNCTView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TNCTView.h; sourceTree = "<group>"; };
+		4327C5451A875C0B001429B9 /* TNCTView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TNCTView.m; sourceTree = "<group>"; };
+		4327C54A1A875C20001429B9 /* TNTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TNTestCase.h; sourceTree = "<group>"; };
+		4327C54B1A875C20001429B9 /* TNTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TNTestCase.m; sourceTree = "<group>"; };
+		4327C54C1A875C20001429B9 /* TNTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TNTestViewController.h; sourceTree = "<group>"; };
+		4327C54D1A875C20001429B9 /* TNTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TNTestViewController.m; sourceTree = "<group>"; };
 		432C7A33195AD079003AFC04 /* TestCaseWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestCaseWindowController.h; sourceTree = "<group>"; };
 		432C7A34195AD079003AFC04 /* TestCaseWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestCaseWindowController.m; sourceTree = "<group>"; };
 		432C7A35195AD079003AFC04 /* TestCaseWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestCaseWindowController.xib; sourceTree = "<group>"; };
@@ -127,6 +143,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4327C5411A875BF5001429B9 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				43B164521862CFAB006B6CE1 /* CoreTextView.h */,
+				43B164531862CFAB006B6CE1 /* CoreTextView.m */,
+				4327C5421A875C0B001429B9 /* TNCTTestViewController.h */,
+				4327C5431A875C0B001429B9 /* TNCTTestViewController.m */,
+				4327C5441A875C0B001429B9 /* TNCTView.h */,
+				4327C5451A875C0B001429B9 /* TNCTView.m */,
+			);
+			name = Tests;
+			sourceTree = "<group>";
+		};
+		4327C5541A875C59001429B9 /* Basic classes */ = {
+			isa = PBXGroup;
+			children = (
+				4327C54A1A875C20001429B9 /* TNTestCase.h */,
+				4327C54B1A875C20001429B9 /* TNTestCase.m */,
+				4327C54C1A875C20001429B9 /* TNTestViewController.h */,
+				4327C54D1A875C20001429B9 /* TNTestViewController.m */,
+			);
+			name = "Basic classes";
+			sourceTree = "<group>";
+		};
 		432C7A38195AD25A003AFC04 /* Casees */ = {
 			isa = PBXGroup;
 			children = (
@@ -234,8 +274,8 @@
 				43B163D61862CD93006B6CE1 /* AppDelegate.m */,
 				43B163DB1862CD93006B6CE1 /* ViewController.h */,
 				43B163DC1862CD93006B6CE1 /* ViewController.m */,
-				43B164521862CFAB006B6CE1 /* CoreTextView.h */,
-				43B164531862CFAB006B6CE1 /* CoreTextView.m */,
+				4327C5541A875C59001429B9 /* Basic classes */,
+				4327C5411A875BF5001429B9 /* Tests */,
 				43B163DE1862CD93006B6CE1 /* Images.xcassets */,
 				43B163CD1862CD93006B6CE1 /* Supporting Files */,
 			);
@@ -405,9 +445,13 @@
 			files = (
 				4390B8B71A860F290082B0F1 /* CoreTextView.m in Sources */,
 				4390B8AB1A860E960082B0F1 /* TNAndroidLauncher.m in Sources */,
+				4327C5491A875C0B001429B9 /* TNCTView.m in Sources */,
 				4390B8A41A860E960082B0F1 /* main.m in Sources */,
 				4390B8B61A860F1D0082B0F1 /* ViewController.m in Sources */,
+				4327C54F1A875C20001429B9 /* TNTestCase.m in Sources */,
 				4390B8C81A86196C0082B0F1 /* AppDelegate.m in Sources */,
+				4327C5511A875C20001429B9 /* TNTestViewController.m in Sources */,
+				4327C5471A875C0B001429B9 /* TNCTTestViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,9 +473,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				43B163DD1862CD93006B6CE1 /* ViewController.m in Sources */,
+				4327C5461A875C0B001429B9 /* TNCTTestViewController.m in Sources */,
+				4327C5501A875C20001429B9 /* TNTestViewController.m in Sources */,
 				43B163D71862CD93006B6CE1 /* AppDelegate.m in Sources */,
 				43B164541862CFAB006B6CE1 /* CoreTextView.m in Sources */,
 				43B163D31862CD93006B6CE1 /* main.m in Sources */,
+				4327C5481A875C0B001429B9 /* TNCTView.m in Sources */,
+				4327C54E1A875C20001429B9 /* TNTestCase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
