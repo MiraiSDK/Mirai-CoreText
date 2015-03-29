@@ -35,6 +35,18 @@
     
     NSAttributedString *att = [self attributedStringWithFontSize:27];
 
+    NSAttributedString *lineBreakAtt = [self lineBreakAttributedStringWithFontSize:27];
+    
+    NSAttributedString *indentAtt = [self indentAttributedStringWithFontSize:27];
+    
+    NSAttributedString *tabStopsAtt = [self tabStopsAttributedStringWithFontSize:27];
+    
+    NSAttributedString *lineHeightAtt = [self lineHeightAttributedStringWithFontSize:14];
+    
+    NSAttributedString *paraSpacingAtt = [self paraSpacingAttributedStringWithFontSize:17];
+    
+    NSAttributedString *diretionAtt = [self writeDirectionAttributedStringWithFontSize:20];
+
     
     CGRect rect = CGRectInset(self.view.bounds, 0, 120);
 //    TNCTView *v = [[TNCTView alloc] initWithFrame:rect];
@@ -68,6 +80,36 @@
     [TNTestCase testCaseWithName:@"drawInRect" action:^{
         UIImage *image = [weakSelf imageForAttributedString:att size:rect.size];
         imageView.image = image;
+    }],
+    [TNTestCase testCaseWithName:@"CTLineBreakMode" action:^{
+        UIImage *image = [weakSelf imageCTFrameDrawForAttributedString:lineBreakAtt size:rect.size];
+        imageView.image = image;
+        
+    }],
+    [TNTestCase testCaseWithName:@"CTParaIndent" action:^{
+        UIImage *image = [weakSelf imageCTFrameDrawForAttributedString:indentAtt size:rect.size];
+        imageView.image = image;
+        
+    }],
+    [TNTestCase testCaseWithName:@"CTTextTabRef" action:^{
+        UIImage *image = [weakSelf imageCTFrameDrawForAttributedString:tabStopsAtt size:rect.size];
+        imageView.image = image;
+        
+    }],
+    [TNTestCase testCaseWithName:@"CTTextLineHeight" action:^{
+        UIImage *image = [weakSelf imageCTFrameDrawForAttributedString:lineHeightAtt size:rect.size];
+        imageView.image = image;
+        
+    }],
+    [TNTestCase testCaseWithName:@"CTTextParaSpacing" action:^{
+        UIImage *image = [weakSelf imageCTFrameDrawForAttributedString:paraSpacingAtt size:rect.size];
+        imageView.image = image;
+        
+    }],
+    [TNTestCase testCaseWithName:@"CTTextWriteDirection" action:^{
+        UIImage *image = [weakSelf imageCTFrameDrawForAttributedString:diretionAtt size:rect.size];
+        imageView.image = image;
+        
     }],
     ];
     
@@ -183,11 +225,16 @@
 - (NSAttributedString *)attributedStringWithFontSize:(CGFloat)size
 {
     CTFontDescriptorRef desc = CTFontDescriptorCreateWithAttributes((__bridge CFDictionaryRef)([self fontAttributes]));
-    CTTextAlignment alignment = kCTTextAlignmentCenter;
+    
+    CGFloat headIndent = 15.0;
+    
+    CTTextAlignment alignment = kCTTextAlignmentRight;
     CTParagraphStyleSetting settings[] = {
-        kCTParagraphStyleSpecifierAlignment,sizeof(CTTextAlignment),&alignment
+        {kCTParagraphStyleSpecifierHeadIndent,sizeof(CGFloat),&headIndent},
+        {kCTParagraphStyleSpecifierAlignment,sizeof(CTTextAlignment),&alignment},
+        
     };
-    CTParagraphStyleRef style = CTParagraphStyleCreate(settings, 1);
+    CTParagraphStyleRef style = CTParagraphStyleCreate(settings, 2);
     CTFontRef font = CTFontCreateWithFontDescriptor(desc, size, NULL);
     
     UIColor *color = [UIColor blueColor];
@@ -215,9 +262,346 @@
     [att appendAttributedString:att1];
     [att appendAttributedString:att2];
     
+    CTParagraphStyleRef paragraphStyle = (TN_ARC_BRIDGE CTParagraphStyleRef)([att attribute:(TN_ARC_BRIDGE NSString *)(kCTParagraphStyleAttributeName) atIndex:0 effectiveRange:NULL]);
+    
     return att;
     
 }
+
+- (NSAttributedString *)lineBreakAttributedStringWithFontSize:(CGFloat)size
+{
+    CTFontDescriptorRef desc = CTFontDescriptorCreateWithAttributes((__bridge CFDictionaryRef)([self fontAttributes]));
+    
+    CTLineBreakMode lineBreakWordWrap = kCTLineBreakByWordWrapping;
+    CTParagraphStyleSetting lineBreakWordWrapSettings[] = {
+        {kCTParagraphStyleSpecifierLineBreakMode, sizeof(CTLineBreakMode), &lineBreakWordWrap}
+    };
+    CTParagraphStyleRef lineBreakWordWrapStyle = CTParagraphStyleCreate(lineBreakWordWrapSettings, 1);
+
+    CTLineBreakMode lineBreakCharWrap = kCTLineBreakByCharWrapping;
+    CTParagraphStyleSetting lineBreakCharWrapSettings[] = {
+        {kCTParagraphStyleSpecifierLineBreakMode, sizeof(CTLineBreakMode), &lineBreakCharWrap}
+    };
+    CTParagraphStyleRef lineBreakCharWrapStyle = CTParagraphStyleCreate(lineBreakCharWrapSettings, 1);
+
+    CTLineBreakMode lineBreakByClipping = kCTLineBreakByClipping;
+    CTParagraphStyleSetting lineBreakByClippingSettings[] = {
+        {kCTParagraphStyleSpecifierLineBreakMode, sizeof(CTLineBreakMode), &lineBreakByClipping}
+    };
+    CTParagraphStyleRef lineBreakByClippingStyle = CTParagraphStyleCreate(lineBreakByClippingSettings, 1);
+    
+    CTLineBreakMode lineBreakByTruncatingHead = kCTLineBreakByTruncatingHead;
+    CTParagraphStyleSetting lineBreakByTruncatingHeadSettings[] = {
+        {kCTParagraphStyleSpecifierLineBreakMode, sizeof(CTLineBreakMode), &lineBreakByTruncatingHead}
+    };
+    CTParagraphStyleRef lineBreakByTruncatingHeadStyle = CTParagraphStyleCreate(lineBreakByTruncatingHeadSettings, 1);
+    
+    CTLineBreakMode lineBreakByTruncatingTail = kCTLineBreakByTruncatingTail;
+    CTParagraphStyleSetting lineBreakByTruncatingTailSettings[] = {
+        {kCTParagraphStyleSpecifierLineBreakMode, sizeof(CTLineBreakMode), &lineBreakByTruncatingTail}
+    };
+    CTParagraphStyleRef lineBreakByTruncatingTailStyle = CTParagraphStyleCreate(lineBreakByTruncatingTailSettings, 1);
+    
+    CTLineBreakMode lineBreakByTruncatingMiddle = kCTLineBreakByTruncatingMiddle;
+    CTParagraphStyleSetting lineBreakByTruncatingMiddleSettings[] = {
+        {kCTParagraphStyleSpecifierLineBreakMode, sizeof(CTLineBreakMode), &lineBreakByTruncatingMiddle}
+    };
+    CTParagraphStyleRef lineBreakByTruncatingMiddleStyle = CTParagraphStyleCreate(lineBreakByTruncatingMiddleSettings, 1);
+    
+    CTFontRef font = CTFontCreateWithFontDescriptor(desc, size, NULL);
+    
+    UIColor *textColor = [UIColor colorWithRed:125.0f/255.0f green:159.0f/255.0f blue:132.0f/255.0f alpha:1];
+    
+    NSMutableAttributedString *att= [[NSMutableAttributedString alloc] initWithString:@"This is line break with char wrapping This is line break with char wrapping \n" attributes:@{
+                                                                                                                                                            (NSString *)kCTFontAttributeName:TN_ARC_BRIDGE font,
+                                                                                                                                                            (NSString *)kCTKernAttributeName:@(-0.02),
+                                                                                                                                                            (NSString *)                                                                                                                                                                                                                                                                                                           kCTForegroundColorAttributeName:TN_ARC_BRIDGE textColor.CGColor,
+                                                                                                                                                            (NSString *)                                                                           kCTParagraphStyleAttributeName: TN_ARC_BRIDGE lineBreakCharWrapStyle
+                                                                                                                                                            }];
+    
+    
+    NSAttributedString *att1 = [[NSAttributedString alloc] initWithString:@"This is line break with word wrapping This is line break with word wrapping\n" attributes:@{
+                                                                                                                                                                                                                                        (NSString *)kCTFontAttributeName:TN_ARC_BRIDGE font,
+                                                                                                                                                                                                                                        (NSString *)kCTKernAttributeName:@(-0.02),
+                                                                                                                                                                                                                                        (NSString *)                                                                                                                                                                                                                                                                                                           kCTForegroundColorAttributeName:TN_ARC_BRIDGE [UIColor greenColor].CGColor,
+                                                                                                                                                                                                                                        (NSString *)                                                                           kCTParagraphStyleAttributeName: TN_ARC_BRIDGE lineBreakWordWrapStyle                                                                                                                         }];
+    NSAttributedString *att2 = [[NSAttributedString alloc] initWithString:@"This is line break with clipping wrapping This is line break with clipping wrapping\n"attributes:@{
+                                                                                                                                                                    (NSString *)kCTFontAttributeName:TN_ARC_BRIDGE font,
+                                                                                                                                                                    (NSString *)kCTKernAttributeName:@(-0.02),
+                                                                                                                                                                    (NSString *)                                                                                                                                                                                                                                                                                                           kCTForegroundColorAttributeName: TN_ARC_BRIDGE [UIColor blueColor].CGColor,
+                                                                                                                                                                    (NSString *)                                                                           kCTParagraphStyleAttributeName: TN_ARC_BRIDGE lineBreakByClippingStyle
+                                                                                                                                                                    }];
+    NSAttributedString *att3 = [[NSAttributedString alloc] initWithString:@"This is line break with Truncating head wrapping This is line break with Truncating head wrapping\n"attributes:@{
+                                                                                                                                                                               (NSString *)kCTFontAttributeName:TN_ARC_BRIDGE font,
+                                                                                                                                                                               (NSString *)kCTKernAttributeName:@(-0.02),
+                                                                                                                                                                               (NSString *)                                                                                                                                                                                                                                                                                                           kCTForegroundColorAttributeName: TN_ARC_BRIDGE [UIColor redColor].CGColor,
+                                                                                                                                                                               (NSString *)                                                                           kCTParagraphStyleAttributeName: TN_ARC_BRIDGE lineBreakByTruncatingHeadStyle
+                                                                                                                                                                               }];
+    NSAttributedString *att4 = [[NSAttributedString alloc] initWithString:@"This is line break with Truncating tail wrapping This is line break with Truncating tail wrapping\n"attributes:@{
+                                                                                                                                                                               (NSString *)kCTFontAttributeName:TN_ARC_BRIDGE font,
+                                                                                                                                                                               (NSString *)kCTKernAttributeName:@(-0.02),
+                                                                                                                                                                               (NSString *)                                                                                                                                                                                                                                                                                                           kCTForegroundColorAttributeName: TN_ARC_BRIDGE [UIColor greenColor].CGColor,
+                                                                                                                                                                               (NSString *)                                                                           kCTParagraphStyleAttributeName: TN_ARC_BRIDGE lineBreakByTruncatingTailStyle
+                                                                                                                                                                               }];
+    NSAttributedString *att5 = [[NSAttributedString alloc] initWithString:@"This is line break with Truncating middle wrapping This is line break with Truncating middle wrapping\n"attributes:@{
+                                                                                                                                                                               (NSString *)kCTFontAttributeName:TN_ARC_BRIDGE font,
+                                                                                                                                                                               (NSString *)kCTKernAttributeName:@(-0.02),
+                                                                                                                                                                               (NSString *)                                                                                                                                                                                                                                                                                                           kCTForegroundColorAttributeName: TN_ARC_BRIDGE [UIColor blueColor].CGColor,
+                                                                                                                                                                               (NSString *)                                                                           kCTParagraphStyleAttributeName: TN_ARC_BRIDGE lineBreakByTruncatingMiddleStyle
+                                                                                                                                                                               }];
+    [att appendAttributedString:att1];
+    [att appendAttributedString:att2];
+    [att appendAttributedString:att3];
+    [att appendAttributedString:att4];
+    [att appendAttributedString:att5];
+    
+    return att;
+    
+}
+
+- (NSAttributedString *)indentAttributedStringWithFontSize:(CGFloat)size
+{
+    CTFontDescriptorRef desc = CTFontDescriptorCreateWithAttributes((__bridge CFDictionaryRef)([self fontAttributes]));
+    CGFloat firstLineIndent = 15.0;
+    CTParagraphStyleSetting firstLineIndentSettings[] = {
+        kCTParagraphStyleSpecifierFirstLineHeadIndent,sizeof(CGFloat),&firstLineIndent
+    };
+    CTParagraphStyleRef firstLineIndentStyle = CTParagraphStyleCreate(firstLineIndentSettings, 1);
+    CTFontRef font = CTFontCreateWithFontDescriptor(desc, size, NULL);
+    
+    UIColor *textColor = [UIColor colorWithRed:125.0f/255.0f green:159.0f/255.0f blue:132.0f/255.0f alpha:1];
+    
+    NSMutableAttributedString *att= [[NSMutableAttributedString alloc] initWithString:@"This is for first line indent with 15.0 point, This is for first line indent with 15.0 point \n" attributes:@{
+                                                                                                                                                            (NSString *)kCTFontAttributeName:TN_ARC_BRIDGE font,
+                                                                                                                                                            (NSString *)kCTKernAttributeName:@(-0.02),
+                                                                                                                                                            (NSString *)                                                                                                                                                                                                                                                                                                           kCTForegroundColorAttributeName:TN_ARC_BRIDGE textColor.CGColor,
+                                                                                                                                                            (NSString *)                                                                           kCTParagraphStyleAttributeName: TN_ARC_BRIDGE firstLineIndentStyle
+                                                                                                                                                            }];
+    
+    CGFloat headIndent = 15.0;
+    CTParagraphStyleSetting headIndentSettings[] = {
+        kCTParagraphStyleSpecifierHeadIndent,sizeof(CGFloat),&headIndent
+    };
+    CTParagraphStyleRef headIndentStyle = CTParagraphStyleCreate(headIndentSettings, 1);
+    NSAttributedString *att1 = [[NSAttributedString alloc] initWithString:@"This paragraph has 15.0 point head indent, This paragraph has 15.0 point head indent\n" attributes:@{
+                                                                                                                                                                                                                                        (NSString *)kCTFontAttributeName:TN_ARC_BRIDGE font,
+                                                                                                                                                                                                                                        (NSString *)kCTKernAttributeName:@(-0.02),
+                                                                                                                                                                                                                                        (NSString *)                                                                                                                                                                                                                                                                                                           kCTForegroundColorAttributeName:TN_ARC_BRIDGE [UIColor greenColor].CGColor,
+                                                                                                                                                                                                                                        (NSString *)                                                                           kCTParagraphStyleAttributeName: TN_ARC_BRIDGE headIndentStyle
+                                                                                                                                                                                                                                        }];
+    
+    CGFloat tailIndent = 150.0;
+    CTParagraphStyleSetting tailIndentSettings[] = {
+        kCTParagraphStyleSpecifierTailIndent,sizeof(CGFloat),&tailIndent
+    };
+    CTParagraphStyleRef tailIndentStyle = CTParagraphStyleCreate(tailIndentSettings, 1);
+    NSAttributedString *att2 = [[NSAttributedString alloc] initWithString:@"This paragraph has 15.0 point tail indent, This paragraph has 15.0 point tail indent" attributes:@{
+                                                                                                                                                                    (NSString *)kCTFontAttributeName:TN_ARC_BRIDGE font,
+                                                                                                                                                                    (NSString *)kCTKernAttributeName:@(-0.02),
+                                                                                                                                                                    (NSString *)                                                                                                                                                                                                                                                                                                           kCTForegroundColorAttributeName: TN_ARC_BRIDGE [UIColor blueColor].CGColor,
+                                                                                                                                                                    (NSString *)                                                                           kCTParagraphStyleAttributeName: TN_ARC_BRIDGE tailIndentStyle
+                                                                                                                                                                    }];
+    [att appendAttributedString:att1];
+    [att appendAttributedString:att2];
+    
+    return att;
+    
+}
+
+- (NSAttributedString *)tabStopsAttributedStringWithFontSize:(CGFloat)size
+{
+    CTFontDescriptorRef desc = CTFontDescriptorCreateWithAttributes((__bridge CFDictionaryRef)([self fontAttributes]));
+//    
+//    CFIndex i = 0;
+//    CTTextTabRef tabArray[1];
+//    CTTextAlignment align = 0;
+//    CGFloat location = 80;
+//    for (;i < 1; i++ ) {
+//        tabArray[i] = CTTextTabCreate( align, location, NULL );
+//    }
+//    CFArrayRef tabStops = CFArrayCreate( kCFAllocatorDefault, (const void**) tabArray, 1, &kCFTypeArrayCallBacks );
+//    for (;i < 1; i++ ) { CFRelease( tabArray[i] ); }
+//    
+//    CTParagraphStyleSetting tabSettings[] =
+//    {
+//        { kCTParagraphStyleSpecifierTabStops, sizeof(CFArrayRef), &tabStops },
+//    };
+//
+//    CTParagraphStyleRef tabStopsStyle = CTParagraphStyleCreate(tabSettings, 1);
+//    CGFloat tabInterval = 2.0;
+//    CTParagraphStyleSetting tabSettings2[] =
+//    {
+//        { kCTParagraphStyleSpecifierDefaultTabInterval, sizeof(CGFloat), &tabInterval }
+//    };
+//    CTParagraphStyleRef tabStopsStyle2 = CTParagraphStyleCreate(tabSettings2, 1);
+//    
+    CTFontRef font = CTFontCreateWithFontDescriptor(desc, size, NULL);
+    
+    UIColor *textColor = [UIColor colorWithRed:125.0f/255.0f green:159.0f/255.0f blue:132.0f/255.0f alpha:1];
+//    
+//    NSMutableAttributedString *att= [[NSMutableAttributedString alloc] initWithString:@"This \tis for text tab stop style with 80, \n\tThis is for text tab stop style with 80\n" attributes:@{
+//                                                                                                                                                                                                      (NSString *)kCTFontAttributeName:TN_ARC_BRIDGE font,
+//                                                                                                                                                                                                      (NSString *)kCTKernAttributeName:@(-0.02),
+//                                                                                                                                                                                                      (NSString *)                                                                                                                                                                                                                                                                                                           kCTForegroundColorAttributeName:TN_ARC_BRIDGE textColor.CGColor,
+//                                                                                                                                                                                                      (NSString *)                                                                           kCTParagraphStyleAttributeName: TN_ARC_BRIDGE tabStopsStyle
+//                                                                                                                                                                                                      }];
+//    
+//    NSMutableAttributedString *att1= [[NSMutableAttributedString alloc] initWithString:@"\tThis is for text tab stop style with 80 and default tab interval 2.0, \n\tThis is for text tab stop style with 80 and default tab interval 2.0\n" attributes:@{
+//                                                                                                                                                                                                                                        (NSString *)kCTFontAttributeName:TN_ARC_BRIDGE font,
+//                                                                                                                                                                                                                                        (NSString *)kCTKernAttributeName:@(-0.02),
+//                                                                                                                                                                                                                                        (NSString *)                                                                                                                                                                                                                                                                                                           kCTForegroundColorAttributeName:TN_ARC_BRIDGE textColor.CGColor,
+//                                                                                                                                                                                                                                        (NSString *)                                                                           kCTParagraphStyleAttributeName: TN_ARC_BRIDGE tabStopsStyle2
+//                                                                                                                                                                                                                                        }];
+    
+    NSMutableAttributedString *att2= [[NSMutableAttributedString alloc] initWithString:@"\tThis is for text tab stop style with default value, \n\tThis is for text tab stop style with default value\n" attributes:@{
+                                                                                                                                                                                                      (NSString *)kCTFontAttributeName:TN_ARC_BRIDGE font,
+                                                                                                                                                                                                      (NSString *)kCTKernAttributeName:@(-0.02),
+                                                                                                                                                                                                      (NSString *)                                                                                                                                                                                                                                                                                                           kCTForegroundColorAttributeName:TN_ARC_BRIDGE [UIColor greenColor].CGColor                                                                                  }];
+    
+//    [att appendAttributedString:att1];
+//    [att appendAttributedString:att2];
+    
+    return att2;
+    
+}
+
+
+- (NSAttributedString *)lineHeightAttributedStringWithFontSize:(CGFloat)size
+{
+    CTFontDescriptorRef desc = CTFontDescriptorCreateWithAttributes((__bridge CFDictionaryRef)([self fontAttributes]));
+    
+    CGFloat lineHeightMultiple = 3.0;
+    CTParagraphStyleSetting lineHeightSettings1[] =
+    {
+        { kCTParagraphStyleSpecifierLineHeightMultiple, sizeof(CGFloat), &lineHeightMultiple }
+    };
+    CTParagraphStyleRef lineHeightStyle1 = CTParagraphStyleCreate(lineHeightSettings1, 1);
+    
+    CGFloat maxLineHeight = 20;
+    CTParagraphStyleSetting lineHeightSettings2[] =
+    {
+        { kCTParagraphStyleSpecifierLineHeightMultiple, sizeof(CGFloat), &lineHeightMultiple },
+        { kCTParagraphStyleSpecifierMaximumLineHeight, sizeof(CGFloat), &maxLineHeight },
+    };
+    CTParagraphStyleRef lineHeightStyle2 = CTParagraphStyleCreate(lineHeightSettings2, 2);
+    
+    CGFloat minLineHeight = 30;
+    CTParagraphStyleSetting lineHeightSettings3[] =
+    {
+        { kCTParagraphStyleSpecifierMinimumLineHeight, sizeof(CGFloat), &minLineHeight },
+    };
+    
+    CTParagraphStyleRef lineHeightStyle3 = CTParagraphStyleCreate(lineHeightSettings3, 1);
+    
+    CGFloat lineSpaceing = 20;
+    CTParagraphStyleSetting lineHeightSettings4[] =
+    {
+        { kCTParagraphStyleSpecifierLineSpacing, sizeof(CGFloat), &lineSpaceing },
+    };
+    
+    CTParagraphStyleRef lineHeightStyle4 = CTParagraphStyleCreate(lineHeightSettings4, 1);
+    
+    CTFontRef font = CTFontCreateWithFontDescriptor(desc, size, NULL);
+    
+    UIColor *textColor = [UIColor colorWithRed:125.0f/255.0f green:159.0f/255.0f blue:132.0f/255.0f alpha:1];
+    
+    NSMutableAttributedString *att= [[NSMutableAttributedString alloc] initWithString:@"This is default style, This is default style, This is default style\n" attributes:@{
+                                                                                                                                                                               (NSString *)kCTFontAttributeName:TN_ARC_BRIDGE font,
+                                                                                                                                                                               (NSString *)kCTKernAttributeName:@(-0.02),
+                                                                                                                                                                                        }];
+    
+    NSMutableAttributedString *att1= [[NSMutableAttributedString alloc] initWithString:@"This is for line height multiple is 3.0, This is for line height multiple is 3.0\n" attributes:@{
+                                                                                                                                                                                               (NSString *)kCTFontAttributeName:TN_ARC_BRIDGE font,
+                                                                                                                                                                                               (NSString *)kCTKernAttributeName:@(-0.02),
+                                                                                                                                                                                               (NSString *)                                                                                                                                                                                                                                                                                                           kCTForegroundColorAttributeName:TN_ARC_BRIDGE textColor.CGColor,
+                                                                                                                                                                                               (NSString *)                                                                           kCTParagraphStyleAttributeName: TN_ARC_BRIDGE lineHeightStyle1
+                                                                                                                                                                                               }];
+    
+    NSMutableAttributedString *att2= [[NSMutableAttributedString alloc] initWithString:@"This is for line height multiple is 3.0 and max line height is 20, This is for line height multiple is 3.0 and max line height is 20\n" attributes:@{
+                                                                                                                                                                                                                                                          (NSString *)kCTFontAttributeName:TN_ARC_BRIDGE font,
+                                                                                                                                                                                                                                                          (NSString *)kCTKernAttributeName:@(-0.02),
+                                                                                                                                                                                                                                                          (NSString *)                                                                                                                                                                                                                                                                                                           kCTForegroundColorAttributeName:TN_ARC_BRIDGE [UIColor blueColor].CGColor,
+                                                                                                                                                                                                                                                          (NSString *)                                                                           kCTParagraphStyleAttributeName: TN_ARC_BRIDGE lineHeightStyle2
+                                                                                                                                                                                                                                                          }];
+    
+    NSMutableAttributedString *att3= [[NSMutableAttributedString alloc] initWithString:@"This is for min line height is 30, This is for min line height is 30,\n" attributes:@{
+                                                                                                                                                                                                                      (NSString *)kCTFontAttributeName:TN_ARC_BRIDGE font,
+                                                                                                                                                                                                                      (NSString *)kCTKernAttributeName:@(-0.02),
+                                                                                                                                                                                                                      (NSString *)                                                                                                                                                                                                                                                                                                           kCTForegroundColorAttributeName:TN_ARC_BRIDGE [UIColor greenColor].CGColor,
+                                                                                                                                                                                                                      (NSString *)                                                                           kCTParagraphStyleAttributeName: TN_ARC_BRIDGE lineHeightStyle3                                                                                  }];
+    NSMutableAttributedString *att4= [[NSMutableAttributedString alloc] initWithString:@"This is for line spacing 20, This is for line spacing 20,\n" attributes:@{
+                                                                                                                                                                               (NSString *)kCTFontAttributeName:TN_ARC_BRIDGE font,
+                                                                                                                                                                               (NSString *)kCTKernAttributeName:@(-0.02),
+                                                                                                                                                                               (NSString *)                                                                                                                                                                                                                                                                                                           kCTForegroundColorAttributeName:TN_ARC_BRIDGE [UIColor blueColor].CGColor,
+                                                                                                                                                                               (NSString *)                                                                           kCTParagraphStyleAttributeName: TN_ARC_BRIDGE lineHeightStyle4                                                                                  }];
+    
+    [att appendAttributedString:att1];
+    [att appendAttributedString:att2];
+    [att appendAttributedString:att3];
+    [att appendAttributedString:att4];
+    
+    return att;
+    
+}
+
+- (NSAttributedString *)paraSpacingAttributedStringWithFontSize:(CGFloat)size
+{
+    CTFontDescriptorRef desc = CTFontDescriptorCreateWithAttributes((__bridge CFDictionaryRef)([self fontAttributes]));
+    CGFloat paraSpacing = 20;
+    CTParagraphStyleSetting paraSpacingSettings[] = {
+        kCTParagraphStyleSpecifierParagraphSpacing,sizeof(CGFloat),&paraSpacing
+    };
+    CTParagraphStyleRef paraSpacingStyle = CTParagraphStyleCreate(paraSpacingSettings, 1);
+    CTFontRef font = CTFontCreateWithFontDescriptor(desc, size, NULL);
+    
+    UIColor *textColor = [UIColor colorWithRed:125.0f/255.0f green:159.0f/255.0f blue:132.0f/255.0f alpha:1];
+    
+    NSMutableAttributedString *att= [[NSMutableAttributedString alloc] initWithString:@"This is for paragraph spacing with 20 point, \nThis is for paragraph spacing with 20 point\n" attributes:@{
+                                                                                                                                                                                                      (NSString *)kCTFontAttributeName:TN_ARC_BRIDGE font,
+                                                                                                                                                                                                      (NSString *)kCTKernAttributeName:@(-0.02),
+                                                                                                                                                                                                      (NSString *)                                                                                                                                                                                                                                                                                                           kCTForegroundColorAttributeName:TN_ARC_BRIDGE textColor.CGColor,
+                                                                                                                                                                                                      (NSString *)                                                                           kCTParagraphStyleAttributeName: TN_ARC_BRIDGE paraSpacingStyle
+                                                                                                                                                                                                      }];
+    
+    CGFloat paraSpacingBefore = 20.0;
+    CTParagraphStyleSetting paraSpacingBeforeSettings[] = {
+        kCTParagraphStyleSpecifierParagraphSpacingBefore,sizeof(CGFloat),&paraSpacingBefore
+    };
+    CTParagraphStyleRef paraSpacingBeforeStyle = CTParagraphStyleCreate(paraSpacingBeforeSettings, 1);
+    NSAttributedString *att1 = [[NSAttributedString alloc] initWithString:@"This is for paragraph spacing before with 20 point, \nThis is for paragraph spacing before with 20 point\n" attributes:@{
+                                                                                                                                                                                 (NSString *)kCTFontAttributeName:TN_ARC_BRIDGE font,
+                                                                                                                                                                                 (NSString *)kCTKernAttributeName:@(-0.02),
+                                                                                                                                                                                 (NSString *)                                                                                                                                                                                                                                                                                                           kCTForegroundColorAttributeName:TN_ARC_BRIDGE [UIColor greenColor].CGColor,
+                                                                                                                                                                                 (NSString *)                                                                           kCTParagraphStyleAttributeName: TN_ARC_BRIDGE paraSpacingBeforeStyle
+                                                                                                                                                                                 }];
+    
+    [att appendAttributedString:att1];
+    return att;
+    
+}
+
+- (NSAttributedString *)writeDirectionAttributedStringWithFontSize:(CGFloat)size
+{
+    CTFontDescriptorRef desc = CTFontDescriptorCreateWithAttributes((__bridge CFDictionaryRef)([self fontAttributes]));
+    CTWritingDirection direction = kCTWritingDirectionRightToLeft;
+    CTParagraphStyleSetting directionSettings[] = {
+        kCTParagraphStyleSpecifierBaseWritingDirection,sizeof(CTWritingDirection),&direction
+    };
+    CTParagraphStyleRef directionStyle = CTParagraphStyleCreate(directionSettings, 1);
+    CTFontRef font = CTFontCreateWithFontDescriptor(desc, size, NULL);
+    
+    UIColor *textColor = [UIColor colorWithRed:125.0f/255.0f green:159.0f/255.0f blue:132.0f/255.0f alpha:1];
+    
+    NSMutableAttributedString *att= [[NSMutableAttributedString alloc] initWithString:@"This is right to left text, This is right to left text, This is right to left text, This is right to left text,\n" attributes:@{
+                                                                                                                                                                                                   (NSString *)kCTFontAttributeName:TN_ARC_BRIDGE font,
+                                                                                                                                                                                                   (NSString *)kCTKernAttributeName:@(-0.02),
+                                                                                                                                                                                                   (NSString *)                                                                                                                                                                                                                                                                                                           kCTForegroundColorAttributeName:TN_ARC_BRIDGE textColor.CGColor,
+                                                                                                                                                                                                   (NSString *)                                                                           kCTParagraphStyleAttributeName: TN_ARC_BRIDGE directionStyle
+                                                                                                                                                                                                   }];
+    return att;
+    
+}
+
 
 - (NSDictionary *)fontAttributes
 {
