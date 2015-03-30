@@ -17,7 +17,9 @@ if [ ! -f $MIRAI_SDK_PREFIX/lib/libpango.a ]; then
 fi
 
 if [ ! -f $MIRAI_SDK_PREFIX/lib/libCoreText.so ]; then
-	xcodebuild -target CoreText-Android
+	xcodebuild -target CoreText-Android -xcconfig xcconfig/Android-$ABI.xcconfig clean
+	
+	xcodebuild -target CoreText-Android -xcconfig xcconfig/Android-$ABI.xcconfig
 	checkError $? "build CoreText failed"
 	
 fi

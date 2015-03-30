@@ -32,6 +32,7 @@ cleanUp()
 		rm pango-1.36.1.tar.xz
 	fi
 }
+
 buildHarfbuzz()
 {
 	if [ ! -d harfbuzz-0.9.25 ]; then
@@ -52,7 +53,6 @@ buildHarfbuzz()
 	
 	pushd harfbuzz-0.9.25
 	
-	
 	CC=$CROSS_CLANG CXX=$CROSS_CLANGPP AR=$CROSS_AR CPPFLAGS="$FLAGS" CFLAGS="$FLAGS" \
 	./configure --host=$HOSTEABI --prefix=$PREFIX --enable-static=yes
 	checkError $? "configure harfbuzz failed"
@@ -69,6 +69,9 @@ buildHarfbuzz()
 	
 	make install
 	checkError $? "Install harfbuzz failed"
+	
+	make clean
+	
 	popd	
 }
 
@@ -87,7 +90,7 @@ buildLibgettext()
 		popd
 	fi
 	pushd  gettext-0.18.2
-		
+	
 	gl_cv_header_working_stdint_h=yes CC=$CROSS_CLANG CXX=$CROSS_CLANGPP AR=$CROSS_AR CPPFLAGS="$FLAGS" CFLAGS="$FLAGS" \
 	./configure --host=$HOSTEABI --prefix=$PREFIX --enable-static=yes --disable-java --disable-native-java
 	checkError $? "configure libgettext failed"
@@ -97,6 +100,8 @@ buildLibgettext()
 	
 	make install
 	checkError $? "install libgettext failed"
+	
+	make clean
 	
 	popd
 }
@@ -135,6 +140,9 @@ buildGlib()
 	checkError $? "Make glib failed"
 	
 	make install
+	
+	make clean
+	
 	popd
 }
 
@@ -177,6 +185,9 @@ buildPango()
 	
 	#restore ld
 	cp ld.bak $STANDALONE_TOOLCHAIN_PATH/$HOSTEABI/bin/ld
+	
+	make clean
+	
 	popd	
 }
 
