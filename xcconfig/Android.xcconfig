@@ -6,11 +6,19 @@
 //  Copyright (c) 2013 Shanghai Tinynetwork Inc. All rights reserved.
 //
 
+SDK_ROOT=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/Android18.sdk
+SDK_LIB_PATH=$(SDK_ROOT)/usr/lib
+
 DEPLOYMENT_LOCATION = YES
 DSTROOT = /
-INSTALL_PATH = $(SOURCE_ROOT)/../../Products/android/android-toolchain-arm/sysroot/System/Library/Frameworks/
-HEADER_SEARCH_PATHS=$(inherited) $(SOURCE_ROOT)/../../Products/android/android-toolchain-arm/sysroot/usr/include/cairo/  $(SOURCE_ROOT)/gnustep-opal/Source/OpalGraphics
-OTHER_LDFLAGS= $(inherited) -shared -lcairo -lpixman-1  -lcpufeatures -lfontconfig -lfreetype -lexpat -lxml2 -lobjc -ljpeg -lpng -ltiff -llcms -lgnustl_shared -lobjc -lm -lz 
+INSTALL_PATH = $(SDK_ROOT)/System/Library/Frameworks/
+HEADER_SEARCH_PATHS=$(inherited) $(SDK_ROOT)/usr/include/freetype2/  $(SOURCE_ROOT)/gnustep-opal/Source/OpalText
+LD_DEPENDENCY_INFO_FILE=
 
-LD_DEPENDENCY_INFO_FILE= 
 
+//-lpangocairo-1.0 -lpango-1.0 -lgobject-2.0 -lglib-2.0 -lintl
+BASE_CFLAGS= -DANDROID=1 -fblocks
+BASE_LDFLAGS= -shared -Wl,-z,defs $(SDK_LIB_PATH)/libpangocairo-1.0.a $(SDK_LIB_PATH)/libpangoft2-1.0.a $(SDK_LIB_PATH)/libpango-1.0.a $(SDK_LIB_PATH)/libgthread-2.0.a $(SDK_LIB_PATH)/libgmodule-2.0.a $(SDK_LIB_PATH)/libgobject-2.0.a $(SDK_LIB_PATH)/libglib-2.0.a $(SDK_LIB_PATH)/libharfbuzz.a $(SDK_LIB_PATH)/libintl.a $(SDK_LIB_PATH)/libiconv.a -lCoreGraphics -lgnustep-corebase -lobjc -lgnustl_shared -lm
+
+OTHER_CFLAGS = $(inherited) $(BASE_CFLAGS)
+OTHER_LDFLAGS = $(inherited) $(BASE_LDFLAGS)
