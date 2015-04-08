@@ -151,6 +151,9 @@
 /* Begin PBXFileReference section */
 		43098C81197B63E5005A97A1 /* OPPangoFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPPangoFont.h; sourceTree = "<group>"; };
 		43098C82197B63E5005A97A1 /* OPPangoFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPPangoFont.m; sourceTree = "<group>"; };
+		436060EC1AC9363D00303792 /* Android-arm.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Android-arm.xcconfig"; sourceTree = "<group>"; };
+		436060ED1AC9363D00303792 /* Android-x86.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Android-x86.xcconfig"; sourceTree = "<group>"; };
+		436060EE1AC9363D00303792 /* Android.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Android.xcconfig; sourceTree = "<group>"; };
 		43840613187F2500000D092C /* CTRunDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTRunDelegate.h; sourceTree = "<group>"; };
 		43840617187F2527000D092C /* CTRunDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTRunDelegate.m; sourceTree = "<group>"; };
 		438462CE1883E4BC006DA1AA /* CTFoundationExtended.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTFoundationExtended.h; sourceTree = "<group>"; };
@@ -212,7 +215,6 @@
 		43E1121E185DF1E200E771B4 /* CTTextTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTTextTab.h; sourceTree = "<group>"; };
 		43E1121F185DF1E200E771B4 /* CTTypesetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTTypesetter.h; sourceTree = "<group>"; };
 		43E1128C185DF23100E771B4 /* CoreText.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreText.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		43E11290185DF55600E771B4 /* Android.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Android.xcconfig; path = CoreText/Android.xcconfig; sourceTree = "<group>"; };
 		43E342A118F9368F00463092 /* OPPangoFontDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPPangoFontDescriptor.h; sourceTree = "<group>"; };
 		43E342A218F9368F00463092 /* OPPangoFontDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPPangoFontDescriptor.m; sourceTree = "<group>"; };
 		43E342A518F936A800463092 /* PangoCoreGraphics-render.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PangoCoreGraphics-render.h"; sourceTree = "<group>"; };
@@ -247,13 +249,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		436060EB1AC9363D00303792 /* xcconfig */ = {
+			isa = PBXGroup;
+			children = (
+				436060EC1AC9363D00303792 /* Android-arm.xcconfig */,
+				436060ED1AC9363D00303792 /* Android-x86.xcconfig */,
+				436060EE1AC9363D00303792 /* Android.xcconfig */,
+			);
+			path = xcconfig;
+			sourceTree = "<group>";
+		};
 		43BA6CB7185DDED200526D8E = {
 			isa = PBXGroup;
 			children = (
+				436060EB1AC9363D00303792 /* xcconfig */,
 				43BA6CCA185DDED200526D8E /* CoreText */,
 				43BA6CC3185DDED200526D8E /* Frameworks */,
 				43BA6CC2185DDED200526D8E /* Products */,
-				43E11290185DF55600E771B4 /* Android.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -929,7 +941,7 @@
 		};
 		43E1128A185DF23100E771B4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 43E11290185DF55600E771B4 /* Android.xcconfig */;
+			baseConfigurationReference = 436060EE1AC9363D00303792 /* Android.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -963,7 +975,7 @@
 		};
 		43E1128B185DF23100E771B4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 43E11290185DF55600E771B4 /* Android.xcconfig */;
+			baseConfigurationReference = 436060EE1AC9363D00303792 /* Android.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
