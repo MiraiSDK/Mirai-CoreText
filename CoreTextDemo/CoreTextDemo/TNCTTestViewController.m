@@ -46,6 +46,8 @@
     NSAttributedString *paraSpacingAtt = [self paraSpacingAttributedStringWithFontSize:17];
     
     NSAttributedString *diretionAtt = [self writeDirectionAttributedStringWithFontSize:20];
+    
+    NSAttributedString *paraStyleAtt = [self paraStyleAttributedStringWithFontSize:20];
 
     
     CGRect rect = CGRectInset(self.view.bounds, 0, 120);
@@ -77,40 +79,45 @@
         imageView.image = image;
 
     }],
-    [TNTestCase testCaseWithName:@"drawInRect" action:^{
-        UIImage *image = [weakSelf imageForAttributedString:att size:rect.size];
-        imageView.image = image;
-    }],
-    [TNTestCase testCaseWithName:@"CTLineBreakMode" action:^{
-        UIImage *image = [weakSelf imageCTFrameDrawForAttributedString:lineBreakAtt size:rect.size];
+    [TNTestCase testCaseWithName:@"ParaStyle" action:^{
+        UIImage *image = [weakSelf imageCTFrameDrawForAttributedString:paraStyleAtt size:rect.size];
         imageView.image = image;
         
     }],
-    [TNTestCase testCaseWithName:@"CTParaIndent" action:^{
-        UIImage *image = [weakSelf imageCTFrameDrawForAttributedString:indentAtt size:rect.size];
-        imageView.image = image;
-        
-    }],
-    [TNTestCase testCaseWithName:@"CTTextTabRef" action:^{
-        UIImage *image = [weakSelf imageCTFrameDrawForAttributedString:tabStopsAtt size:rect.size];
-        imageView.image = image;
-        
-    }],
-    [TNTestCase testCaseWithName:@"CTTextLineHeight" action:^{
-        UIImage *image = [weakSelf imageCTFrameDrawForAttributedString:lineHeightAtt size:rect.size];
-        imageView.image = image;
-        
-    }],
-    [TNTestCase testCaseWithName:@"CTTextParaSpacing" action:^{
-        UIImage *image = [weakSelf imageCTFrameDrawForAttributedString:paraSpacingAtt size:rect.size];
-        imageView.image = image;
-        
-    }],
-    [TNTestCase testCaseWithName:@"CTTextWriteDirection" action:^{
-        UIImage *image = [weakSelf imageCTFrameDrawForAttributedString:diretionAtt size:rect.size];
-        imageView.image = image;
-        
-    }],
+//    [TNTestCase testCaseWithName:@"drawInRect" action:^{
+//        UIImage *image = [weakSelf imageForAttributedString:att size:rect.size];
+//        imageView.image = image;
+//    }],
+//    [TNTestCase testCaseWithName:@"CTLineBreakMode" action:^{
+//        UIImage *image = [weakSelf imageCTFrameDrawForAttributedString:lineBreakAtt size:rect.size];
+//        imageView.image = image;
+//        
+//    }],
+//    [TNTestCase testCaseWithName:@"CTParaIndent" action:^{
+//        UIImage *image = [weakSelf imageCTFrameDrawForAttributedString:indentAtt size:rect.size];
+//        imageView.image = image;
+//        
+//    }],
+//    [TNTestCase testCaseWithName:@"CTTextTabRef" action:^{
+//        UIImage *image = [weakSelf imageCTFrameDrawForAttributedString:tabStopsAtt size:rect.size];
+//        imageView.image = image;
+//        
+//    }],
+//    [TNTestCase testCaseWithName:@"CTTextLineHeight" action:^{
+//        UIImage *image = [weakSelf imageCTFrameDrawForAttributedString:lineHeightAtt size:rect.size];
+//        imageView.image = image;
+//        
+//    }],
+//    [TNTestCase testCaseWithName:@"CTTextParaSpacing" action:^{
+//        UIImage *image = [weakSelf imageCTFrameDrawForAttributedString:paraSpacingAtt size:rect.size];
+//        imageView.image = image;
+//        
+//    }],
+//    [TNTestCase testCaseWithName:@"CTTextWriteDirection" action:^{
+//        UIImage *image = [weakSelf imageCTFrameDrawForAttributedString:diretionAtt size:rect.size];
+//        imageView.image = image;
+//        
+//    }],
     ];
     
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(imageView.frame), rect.size.width, self.view.bounds.size.height - CGRectGetMaxY(imageView.frame))];
@@ -262,7 +269,7 @@
     [att appendAttributedString:att1];
     [att appendAttributedString:att2];
     
-    CTParagraphStyleRef paragraphStyle = (TN_ARC_BRIDGE CTParagraphStyleRef)([att attribute:(TN_ARC_BRIDGE NSString *)(kCTParagraphStyleAttributeName) atIndex:0 effectiveRange:NULL]);
+//    CTParagraphStyleRef paragraphStyle = (TN_ARC_BRIDGE CTParagraphStyleRef)([att attribute:(TN_ARC_BRIDGE NSString *)(kCTParagraphStyleAttributeName) atIndex:0 effectiveRange:NULL]);
     
     return att;
     
@@ -598,6 +605,49 @@
                                                                                                                                                                                                    (NSString *)                                                                                                                                                                                                                                                                                                           kCTForegroundColorAttributeName:TN_ARC_BRIDGE textColor.CGColor,
                                                                                                                                                                                                    (NSString *)                                                                           kCTParagraphStyleAttributeName: TN_ARC_BRIDGE directionStyle
                                                                                                                                                                                                    }];
+    return att;
+    
+}
+
+- (NSAttributedString *)paraStyleAttributedStringWithFontSize:(CGFloat)size
+{
+    CTFontDescriptorRef desc = CTFontDescriptorCreateWithAttributes((__bridge CFDictionaryRef)([self fontAttributes]));
+    
+    CGFloat paraSpacing = 20;
+    CGFloat lineHeightMultiple = 3.0;
+    CGFloat maxLineHeight = 20;
+    CGFloat minLineHeight = 30;
+    CGFloat lineSpaceing = 20;
+    CTTextAlignment alignment = kCTTextAlignmentLeft;
+    CTLineBreakMode lineBreakWordWrap = kCTLineBreakByWordWrapping;
+    CGFloat firstLineIndent = 15.0;
+    CGFloat headIndent = 15.0;
+    CGFloat tailIndent = 250.0;
+
+    
+    CTParagraphStyleSetting settings[] = {
+        {kCTParagraphStyleSpecifierAlignment,sizeof(CTTextAlignment),&alignment},
+        {kCTParagraphStyleSpecifierParagraphSpacing,sizeof(CGFloat),&paraSpacing},
+        { kCTParagraphStyleSpecifierLineHeightMultiple, sizeof(CGFloat), &lineHeightMultiple },
+        { kCTParagraphStyleSpecifierMaximumLineHeight, sizeof(CGFloat), &maxLineHeight },
+        { kCTParagraphStyleSpecifierMinimumLineHeight, sizeof(CGFloat), &minLineHeight },
+        { kCTParagraphStyleSpecifierLineSpacing, sizeof(CGFloat), &lineSpaceing },
+        {kCTParagraphStyleSpecifierLineBreakMode, sizeof(CTLineBreakMode), &lineBreakWordWrap},
+        {kCTParagraphStyleSpecifierFirstLineHeadIndent,sizeof(CGFloat),&firstLineIndent},
+        {kCTParagraphStyleSpecifierHeadIndent,sizeof(CGFloat),&headIndent},
+        {kCTParagraphStyleSpecifierTailIndent,sizeof(CGFloat),&tailIndent},
+    };
+    CTParagraphStyleRef paraStyle = CTParagraphStyleCreate(settings, 10);
+    CTFontRef font = CTFontCreateWithFontDescriptor(desc, size, NULL);
+    
+    UIColor *textColor = [UIColor colorWithRed:125.0f/255.0f green:159.0f/255.0f blue:132.0f/255.0f alpha:1];
+    
+    NSMutableAttributedString *att= [[NSMutableAttributedString alloc] initWithString:@"1. This is all para style test, This is all para style test,\n 2. This is all para style test, This is right to left text,\n" attributes:@{
+                                                                                                                                                                                                                        (NSString *)kCTFontAttributeName:TN_ARC_BRIDGE font,
+                                                                                                                                                                                                                        (NSString *)kCTKernAttributeName:@(-0.02),
+                                                                                                                                                                                                                        (NSString *)                                                                                                                                                                                                                                                                                                           kCTForegroundColorAttributeName:TN_ARC_BRIDGE textColor.CGColor,
+                                                                                                                                                                                                                        (NSString *)                                                                           kCTParagraphStyleAttributeName: TN_ARC_BRIDGE paraStyle
+                                                                                                                                                                                                                        }];
     return att;
     
 }
