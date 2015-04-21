@@ -48,6 +48,8 @@
     NSAttributedString *diretionAtt = [self writeDirectionAttributedStringWithFontSize:20];
     
     NSAttributedString *paraStyleAtt = [self paraStyleAttributedStringWithFontSize:20];
+    
+    NSAttributedString *shapeAtt = [self pangoShapeAttributedStringWithFontSize:20];
 
     
     CGRect rect = CGRectInset(self.view.bounds, 0, 120);
@@ -74,6 +76,11 @@
     __weak typeof(self) weakSelf = self;
     self.actions =
   @[
+    [TNTestCase testCaseWithName:@"PangoShape" action:^{
+        UIImage *image = [weakSelf imageCTFrameDrawForAttributedString:shapeAtt size:rect.size];
+        imageView.image = image;
+        
+    }],
     [TNTestCase testCaseWithName:@"CTFrameDraw" action:^{
         UIImage *image = [weakSelf imageCTFrameDrawForAttributedString:att size:rect.size];
         imageView.image = image;
@@ -648,6 +655,21 @@
                                                                                                                                                                                                                         (NSString *)                                                                                                                                                                                                                                                                                                           kCTForegroundColorAttributeName:TN_ARC_BRIDGE textColor.CGColor,
                                                                                                                                                                                                                         (NSString *)                                                                           kCTParagraphStyleAttributeName: TN_ARC_BRIDGE paraStyle
                                                                                                                                                                                                                         }];
+    return att;
+    
+}
+
+- (NSAttributedString *)pangoShapeAttributedStringWithFontSize:(CGFloat)size
+{
+    CTFontDescriptorRef desc = CTFontDescriptorCreateWithAttributes((__bridge CFDictionaryRef)([self fontAttributes]));
+    CTFontRef font = CTFontCreateWithFontDescriptor(desc, size, NULL);
+    
+    UIColor *textColor = [UIColor colorWithRed:125.0f/255.0f green:159.0f/255.0f blue:132.0f/255.0f alpha:1];
+    
+    NSMutableAttributedString *att= [[NSMutableAttributedString alloc] initWithString:@"1. This is pango shape test, This is pango shape test,\n 2. This is pango shape test, This is pango shape test,\n" attributes:@{
+                                                                                                                                                                                                                                   (NSString *)kCTFontAttributeName:TN_ARC_BRIDGE font,
+                                                                                                                                                                                                                                   (NSString *)kCTKernAttributeName:@(-0.02),
+                                                                                                                                                                                                                                   (NSString *)                                                                                                                                                                                                                                                                                                           kCTForegroundColorAttributeName:TN_ARC_BRIDGE textColor.CGColor}];
     return att;
     
 }

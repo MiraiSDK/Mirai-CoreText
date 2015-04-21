@@ -253,6 +253,18 @@
             }
         }];
     }];
+    
+    PangoRectangle logical_rect;
+    logical_rect.width = 20;
+    logical_rect.height = 20;
+    logical_rect.x = 0;
+    logical_rect.y = 0;
+    PangoRectangle ink_rect = logical_rect;
+    PangoAttribute *patt = pango_attr_shape_new(&ink_rect, &logical_rect);
+    
+    patt->start_index = 0;
+    patt->end_index = 1;
+    pango_attr_list_insert(list, patt);
 }
 
 @end
