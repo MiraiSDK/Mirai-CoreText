@@ -17,19 +17,19 @@ cleanUp()
 	if [ "$MIRAI_CLEAN_UP" == "yes" ]; then
 		#clean up
 		rm -rf harfbuzz-0.9.25
-		rm harfbuzz-0.9.25.tar.bz2
+		rm -f harfbuzz-0.9.25.tar.bz2
 		
 		#clean up
-		rm -r gettext-0.18.2
-		rm gettext-0.18.2.tar.gz
+		rm -rf gettext-0.18.2
+		rm -f gettext-0.18.2.tar.gz
 		
 		#clean up
-		rm -r glib-2.34.3
-		rm glib-2.34.3.tar.xz
+		rm -rf glib-2.34.3
+		rm -f glib-2.34.3.tar.xz
 		
 		#clean up
-		rm -r pango-1.36.1
-		rm pango-1.36.1.tar.xz
+		rm -rf pango-1.36.1
+		rm -f pango-1.36.1.tar.xz
 	fi
 }
 
