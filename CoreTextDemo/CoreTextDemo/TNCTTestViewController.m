@@ -659,6 +659,23 @@
     
 }
 
+static void deallocCallback(void * ref) {
+    // do nothing under ARC
+}
+
+static CGFloat ascentCallback( void *ref ){
+    return 40;
+    
+}
+
+static CGFloat descentCallback( void *ref ){
+    return 0;
+}
+
+static CGFloat widthCallback( void* ref ){
+    return 120;
+}
+
 - (NSAttributedString *)pangoShapeAttributedStringWithFontSize:(CGFloat)size
 {
     CTFontDescriptorRef desc = CTFontDescriptorCreateWithAttributes((__bridge CFDictionaryRef)([self fontAttributes]));
@@ -666,10 +683,49 @@
     
     UIColor *textColor = [UIColor colorWithRed:125.0f/255.0f green:159.0f/255.0f blue:132.0f/255.0f alpha:1];
     
-    NSMutableAttributedString *att= [[NSMutableAttributedString alloc] initWithString:@"1. This is pango shape test, This is pango shape test,\n 2. This is pango shape test, This is pango shape test,\n" attributes:@{
+    NSMutableAttributedString *att= [[NSMutableAttributedString alloc] initWithString:@"1. This is pango shape test, This is pango shape test," attributes:@{
                                                                                                                                                                                                                                    (NSString *)kCTFontAttributeName:TN_ARC_BRIDGE font,
                                                                                                                                                                                                                                    (NSString *)kCTKernAttributeName:@(-0.02),
                                                                                                                                                                                                                                    (NSString *)                                                                                                                                                                                                                                                                                                           kCTForegroundColorAttributeName:TN_ARC_BRIDGE textColor.CGColor}];
+    
+    CTRunDelegateCallbacks callbacks;
+    callbacks.version = kCTRunDelegateVersion1;
+    callbacks.getAscent = ascentCallback;
+    callbacks.getDescent = descentCallback;
+    callbacks.getWidth = widthCallback;
+    callbacks.dealloc = deallocCallback;
+    
+    CTRunDelegateRef delegate = CTRunDelegateCreate(&callbacks, (__bridge void *)(self));
+    
+    NSMutableAttributedString *att1= [[NSMutableAttributedString alloc] initWithString:@" " attributes:@{
+                                                                                                                                                                                                                       (NSString *)kCTFontAttributeName:TN_ARC_BRIDGE font,
+                                                                                                                                                                                                                       (NSString *)kCTKernAttributeName:@(-0.02),
+                                                                                                                                                                                                                       (NSString *)                                                                                                                                                                                                                                                                                                           kCTForegroundColorAttributeName:TN_ARC_BRIDGE textColor.CGColor,
+                                                                                                                                                                                                                       (NSString*)kCTRunDelegateAttributeName : TN_ARC_BRIDGE delegate}];
+    NSMutableAttributedString *att2= [[NSMutableAttributedString alloc] initWithString:@"2. This is pango shape test, This is pango shape test," attributes:@{
+                                                                                                                                                               (NSString *)kCTFontAttributeName:TN_ARC_BRIDGE font,
+                                                                                                                                                               (NSString *)kCTKernAttributeName:@(-0.02),
+                                                                                                                                                               (NSString *)                                                                                                                                                                                                                                                                                                           kCTForegroundColorAttributeName:TN_ARC_BRIDGE textColor.CGColor}];
+    
+    
+    
+//    NSDictionary *dict = @{
+//                           NBAttachmentAttributeName : self,
+//                           (__bridge NSString *)kCTRunDelegateAttributeName : CFBridgingRelease(delegate)
+//                           };
+//    
+//    return dict;
+    
+//    CTRunDelegateRef delegate = CTRunDelegateCreate(&callbacks, (__bridge void *)(self.object));
+//
+//    NSDictionary *dict = @{
+//                           NBAttachmentAttributeName : self,
+//                           (__bridge NSString *)kCTRunDelegateAttributeName : CFBridgingRelease(delegate)
+//                           };
+//    
+//    [[NSAttributedString alloc] initWithString:NBAttachmentCharacterStr attributes:[attachment attributes]]
+    [att appendAttributedString:att1];
+    [att appendAttributedString:att2];
     return att;
     
 }
