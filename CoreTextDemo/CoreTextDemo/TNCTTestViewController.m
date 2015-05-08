@@ -91,6 +91,11 @@
         imageView.image = image;
         
     }],
+    [TNTestCase testCaseWithName:@"PangoShapeWithCTLine" action:^{
+        UIImage *image = [weakSelf imageCTLineDrawForAttributedString:shapeAtt size:rect.size];
+        imageView.image = image;
+    }],
+    
 //    [TNTestCase testCaseWithName:@"drawInRect" action:^{
 //        UIImage *image = [weakSelf imageForAttributedString:att size:rect.size];
 //        imageView.image = image;
@@ -179,6 +184,32 @@
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return image;
+}
+
+- (UIImage *)imageCTLineDrawForAttributedString:(NSAttributedString *)attr size:(CGSize)size
+{
+    UIGraphicsBeginImageContextWithOptions(size, YES, 0);
+    
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    // Flip the coordinate system
+    CGContextSetTextMatrix(ctx, CGAffineTransformIdentity);
+    CGContextTranslateCTM(ctx, 0, size.height);
+    CGContextScaleCTM(ctx, 1.0, -1.0);
+    
+    
+    CGRect rect = {CGPointZero, size};
+    CTLineRef f = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef)attr);
+
+    CTLineDraw(f, ctx);
+    CGFloat secondaryOffset;
+    CGFloat offset = CTLineGetOffsetForStringIndex(f, 6, &secondaryOffset);
+    NSLog(@"CTLine offset: %f, secondaryOffset: %f", offset, secondaryOffset);
+    CGFloat offset1 = CTLineGetOffsetForStringIndex(f, 7, &secondaryOffset);
+    NSLog(@"CTLine offset: %f, secondaryOffset: %f", offset1, secondaryOffset);
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+    
 }
 
 - (UIImage *)imageForAttributedString:(NSAttributedString *)attr size:(CGSize)size
@@ -683,7 +714,7 @@ static CGFloat widthCallback( void* ref ){
     
     UIColor *textColor = [UIColor colorWithRed:125.0f/255.0f green:159.0f/255.0f blue:132.0f/255.0f alpha:1];
     
-    NSMutableAttributedString *att= [[NSMutableAttributedString alloc] initWithString:@"1. This is pango shape test, This is pango shape test," attributes:@{
+    NSMutableAttributedString *att= [[NSMutableAttributedString alloc] initWithString:@"012345" attributes:@{
                                                                                                                                                                                                                                    (NSString *)kCTFontAttributeName:TN_ARC_BRIDGE font,
                                                                                                                                                                                                                                    (NSString *)kCTKernAttributeName:@(-0.02),
                                                                                                                                                                                                                                    (NSString *)                                                                                                                                                                                                                                                                                                           kCTForegroundColorAttributeName:TN_ARC_BRIDGE textColor.CGColor}];

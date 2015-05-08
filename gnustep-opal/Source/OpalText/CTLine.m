@@ -135,6 +135,29 @@
     return width;
 }
 
+- (CGFloat) offsetForIndex:(CFIndex) charIndex
+           secondaryOffset:(CGFloat*) secondaryOffset
+{
+    NSAttributedString *lineAS = [self.attributedString attributedSubstringFromRange:NSMakeRange(self.range.location, self.range.length)];
+    
+    PangoFontMap *fm = pango_cairo_font_map_get_default();
+    PangoContext *pangoCtx = pango_font_map_create_context(fm);
+    PangoLayout *layout = pango_layout_new(pangoCtx);
+    pango_layout_set_attributedString(layout, lineAS);
+    pango_layout_set_single_paragraph_mode(layout, true);
+
+    PangoRectangle rect;
+    pango_layout_index_to_pos(layout, (int)charIndex, &rect);
+    
+    g_object_unref(layout);
+    g_object_unref(pangoCtx);
+    CGFloat offset = rect.x / PANGO_SCALE;
+    if (secondaryOffset) {
+        *secondaryOffset = offset;
+    }
+    return offset;
+}
+
 - (CFRange)stringRange
 {
   return CFRangeMake(0,0);
@@ -147,7 +170,7 @@
 CTLineRef CTLineCreateWithAttributedString(CFAttributedStringRef string)
 {
   CTTypesetterRef ts = CTTypesetterCreateWithAttributedString(string);
-  CTLineRef line = CTTypesetterCreateLine(ts, CFRangeMake(0, 0));
+  CTLineRef line = CTTypesetterCreateLine(ts, CFRangeMake(0, CFAttributedStringGetLength(string)));
   [ts release];
   return line;
 }
@@ -247,7 +270,7 @@ CGFloat CTLineGetOffsetForStringIndex(
 	CFIndex charIndex,
 	CGFloat* secondaryOffset)
 {
-  return 0;
+  return [line offsetForIndex:charIndex secondaryOffset:secondaryOffset];
 }
 
 CFTypeID CTLineGetTypeID()
