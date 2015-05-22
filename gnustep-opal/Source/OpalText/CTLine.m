@@ -147,7 +147,12 @@
     pango_layout_set_single_paragraph_mode(layout, true);
 
     PangoRectangle rect;
-    pango_layout_index_to_pos(layout, (int)charIndex, &rect);
+    
+    NSString * str = [lineAS string];
+    unsigned long charIndexInLine = charIndex - self.range.location;
+    charIndexInLine = [str UTF8IndexForIndex:charIndexInLine];
+    
+    pango_layout_index_to_pos(layout, (int)charIndexInLine, &rect);
     
     g_object_unref(layout);
     g_object_unref(pangoCtx);

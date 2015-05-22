@@ -16,9 +16,7 @@
 #import "CTFoundationExtended.h"
 
 
-@interface NSString (TNIndexConvert)
-- (NSUInteger)UTF8IndexForIndex:(NSUInteger)index;
-@end
+
 @implementation NSString (TNIndexConvert)
 
 - (NSUInteger)UTF8IndexForIndex:(NSUInteger)index
