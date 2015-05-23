@@ -100,7 +100,7 @@ const CFStringRef kCTTypesetterOptionForcedEmbeddingLevel = @"kCTTypesetterOptio
     l.range = range;
     l.offset = offset;
     l.attributedString = _as;
-    return l;
+    return (CTLineRef)l;
 
   // FIXME: This should do the core typesetting stuff:
   // - divide the attributed string into runs with the same attributes.

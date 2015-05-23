@@ -532,6 +532,6 @@ CFStringRef CTFontCopyFullName(CTFontRef font)
 
 CFTypeID CTFontGetTypeID()
 {
-  return (CFTypeID)[OPFont class];
+    return (CFTypeID)[OPFont class];
 }
 

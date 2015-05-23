@@ -17,7 +17,7 @@ CTRunDelegateRef CTRunDelegateCreate(
                                      const CTRunDelegateCallbacks* callbacks,
                                      void* refCon )
 {
-    CTRunDelegateRef ref = [[CTRunDelegate alloc] init];
+    CTRunDelegate *ref = [[CTRunDelegate alloc] init];
     ref.callbacks = callbacks;
     ref.refCon = refCon;
     RunSize s;
@@ -25,12 +25,17 @@ CTRunDelegateRef CTRunDelegateCreate(
     s.runDescent = callbacks->getDescent(refCon);
     s.runWidth = callbacks->getWidth(refCon);
     ref.runSize = s;
-    return ref;
+    return (CTRunDelegateRef)ref;
     
 }
 
 void* CTRunDelegateGetRefCon(
                              CTRunDelegateRef runDelegate )
 {
-    return runDelegate.refCon;
+    return ((CTRunDelegate *)runDelegate).refCon;
+}
+
+CFTypeID CTRunDelegateGetTypeID( void )
+{
+    return (CFTypeID)[CTRunDelegate class];
 }

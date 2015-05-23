@@ -31,7 +31,7 @@
 
 /* Data Types */
 
-#ifdef __OBJC__
+#ifdef __IMPLICIT_BRIDGE__
 @class CTGlyphInfo;
 typedef CTGlyphInfo* CTGlyphInfoRef;
 #else
