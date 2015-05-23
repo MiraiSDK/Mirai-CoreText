@@ -49,6 +49,7 @@
 
 - (void)dealloc
 {
+    [_dict release];
     [super dealloc];
 }
 

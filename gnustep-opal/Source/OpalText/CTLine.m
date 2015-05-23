@@ -199,7 +199,7 @@ CTLineRef CTLineCreateJustifiedLine(
 	CGFloat justificationFactor,
 	double justificationWidth)
 {
-  return line;
+  return [line retain];
 }
 
 CFIndex CTLineGetGlyphCount(CTLineRef line)

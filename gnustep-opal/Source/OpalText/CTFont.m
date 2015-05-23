@@ -230,7 +230,7 @@ CTFontRef CTFontCreateCopyWithAttributes(
   CTFontDescriptorRef descriptor)
 {
     NSLog(@"%s unimplememted, return same font",__PRETTY_FUNCTION__);
-  return font; //FIXME: set up a new descriptor...
+  return [font retain]; //FIXME: set up a new descriptor...
 }
 
 CTFontRef CTFontCreateCopyWithSymbolicTraits(
@@ -241,7 +241,7 @@ CTFontRef CTFontCreateCopyWithSymbolicTraits(
   CTFontSymbolicTraits mask)
 {
     NSLog(@"%s unimplememted, return same font",__PRETTY_FUNCTION__);
-  return font; //FIXME: set up a new descriptor...
+  return [font retain]; //FIXME: set up a new descriptor...
 }
 
 CTFontRef CTFontCreateCopyWithFamily(

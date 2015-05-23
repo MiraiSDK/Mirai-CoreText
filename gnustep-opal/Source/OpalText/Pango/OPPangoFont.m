@@ -78,7 +78,7 @@
     
     g_object_unref(_context);
     g_object_unref(_font);
-    g_object_unref(_desc);
+    pango_font_description_free(_desc);
     
     [super dealloc];
 }
@@ -96,6 +96,11 @@
     }
     
     return nil;
+}
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@ %p> desc:%@ familyName:%s",self.class,self,_creatFrom, pango_font_description_get_family(_desc)];
 }
 
 @end

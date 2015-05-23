@@ -233,6 +233,12 @@ const CGFloat *OPFontIdentityMatrix;
   return self;
 }
 
+- (void)dealloc
+{
+    [_descriptor release];
+    [super dealloc];
+}
+
 - (CGFloat) unitsPerEm
 {
 	return 0;
