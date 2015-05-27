@@ -16,9 +16,7 @@
 #import "CTFoundationExtended.h"
 
 
-@interface NSString (TNIndexConvert)
-- (NSUInteger)UTF8IndexForIndex:(NSUInteger)index;
-@end
+
 @implementation NSString (TNIndexConvert)
 
 - (NSUInteger)UTF8IndexForIndex:(NSUInteger)index
@@ -58,11 +56,11 @@
     // set text
     char *utf8String = self.string.UTF8String;
     unsigned long utf8Length = strlen(utf8String);
-    
     pango_layout_set_text(layout, utf8String, utf8Length);
 
     // setting attributes
     CTParagraphStyleRef paragraphStyle = [self attribute:kCTParagraphStyleAttributeName atIndex:0 effectiveRange:NULL];
+    
     CTTextAlignment alignment;
     CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierAlignment, sizeof(CTTextAlignment), &alignment);
     if (alignment == kCTTextAlignmentJustified) {
@@ -77,6 +75,41 @@
             default:break;
         }
         pango_layout_set_alignment(layout, pangoAlignment);
+    }
+    
+    CTLineBreakMode linebreak;
+    CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierLineBreakMode, sizeof(CTLineBreakMode), &linebreak);
+    
+    switch (linebreak) {
+        case kCTLineBreakByWordWrapping:
+            //NSLog(@"The line break mode is kCTLineBreakByWordWrapping");
+            
+            break;
+        case kCTLineBreakByCharWrapping:
+            NSLog(@"The line break mode is kCTLineBreakByCharWrapping");
+            //pango_layout_set_wrap(layout, PANGO_WRAP_CHAR);
+            pango_layout_set_height (layout, 0);
+            pango_layout_set_ellipsize(layout, PANGO_ELLIPSIZE_START);
+            //pango_layout_set_wrap(layout, PANGO_WRAP_CHAR);
+            break;
+        case kCTLineBreakByClipping:
+            NSLog(@"The line break mode is kCTLineBreakByClipping");
+            break;
+        case kCTLineBreakByTruncatingHead:
+            NSLog(@"The line break mode is kCTLineBreakByTruncatingHead");
+            pango_layout_set_ellipsize(layout, PANGO_ALIGN_LEFT);
+            break;
+        case kCTLineBreakByTruncatingTail:
+            NSLog(@"The line break mode is kCTLineBreakByTruncatingTail");
+            pango_layout_set_ellipsize(layout, PANGO_ALIGN_RIGHT);
+            break;
+        case kCTLineBreakByTruncatingMiddle:
+            NSLog(@"The line break mode is kCTLineBreakByTruncatingMiddle");
+            pango_layout_set_ellipsize(layout, PANGO_ALIGN_CENTER);
+            break;
+            
+        default:
+            break;
     }
 
     PangoAttrList *attrList = pango_attr_list_new();;
@@ -195,15 +228,20 @@
                 // shape
                 CTRunDelegateRef delegate = obj;
                 // need access delegate's callbacks
-                
+                CGFloat height = delegate.runSize.runAscent - delegate.runSize.runDescent;
+                CGFloat width = delegate.runSize.runWidth;
                 PangoRectangle logical_rect;
-                logical_rect.width = 20;
-                logical_rect.height = 20;
+                logical_rect.width = PANGO_SCALE * width;
+                logical_rect.height = PANGO_SCALE *height;
                 logical_rect.x = 0;
-                logical_rect.y = 0;
+                logical_rect.y = PANGO_SCALE * - height;
                 PangoRectangle ink_rect = logical_rect;
+
                 
                 patt = pango_attr_shape_new(&ink_rect, &logical_rect);
+                
+                //NSLog(@"&&&&&&&&&& Shape for [%d - %d] width: %d, height %d", bytesStartIndex, bytesEndIndex, logical_rect.width, logical_rect.height);
+                
             } else if ([key isEqualToString:(NSString *)kCTBaselineClassAttributeName]) {
             } else if ([key isEqualToString:(NSString *)kCTBaselineInfoAttributeName]) {
             } else if ([key isEqualToString:(NSString *)kCTBaselineReferenceInfoAttributeName]) {

@@ -8,7 +8,7 @@
 
 #import "CTRunDelegate.h"
 
-@interface CTRunDelegate : NSObject
+@interface CTRunDelegate()
 @property (nonatomic, assign) CTRunDelegateCallbacks *callbacks;
 @property (nonatomic, assign) void *refCon;
 
@@ -25,6 +25,11 @@ CTRunDelegateRef CTRunDelegateCreate(
     CTRunDelegateRef ref = [[CTRunDelegate alloc] init];
     ref.callbacks = callbacks;
     ref.refCon = refCon;
+    RunSize s;
+    s.runAscent = callbacks->getAscent(refCon);
+    s.runDescent = callbacks->getDescent(refCon);
+    s.runWidth = callbacks->getWidth(refCon);
+    ref.runSize = s;
     return ref;
     
 }

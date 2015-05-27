@@ -81,7 +81,7 @@ bool CTParagraphStyleGetValueForSpecifier(
 {
     NSData  *value = paragraphStyle.dict[@(spec)];
     if (value) {
-        [value getBytes:valueBuffer];
+        [value getBytes:valueBuffer length:valueBufferSize];
         return true;
     }
   return false;

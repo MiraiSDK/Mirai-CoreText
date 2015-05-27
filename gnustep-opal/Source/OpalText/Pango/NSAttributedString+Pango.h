@@ -9,6 +9,10 @@
 #import <Foundation/Foundation.h>
 #import <Pango/pango-layout.h>
 
+@interface NSString (TNIndexConvert)
+- (NSUInteger)UTF8IndexForIndex:(NSUInteger)index;
+@end
+
 @interface NSAttributedString (Pango)
 
 @end
