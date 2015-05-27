@@ -149,7 +149,10 @@
     PangoRectangle rect;
     
     NSString * str = [lineAS string];
-    unsigned long charIndexInLine = charIndex - self.range.location;
+    signed long charIndexInLine = charIndex - self.range.location;
+    if (charIndexInLine < 0) {
+        charIndexInLine = 0;
+    }
     charIndexInLine = [str UTF8IndexForIndex:charIndexInLine];
     
     pango_layout_index_to_pos(layout, (int)charIndexInLine, &rect);
