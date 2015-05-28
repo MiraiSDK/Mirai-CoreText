@@ -226,7 +226,7 @@
                 patt = pango_attr_language_new(language);
             } else if ([key isEqualToString:(NSString *)kCTRunDelegateAttributeName]) {
                 // shape
-                CTRunDelegateRef delegate = obj;
+                CTRunDelegate *delegate = obj;
                 // need access delegate's callbacks
                 CGFloat height = delegate.runSize.runAscent - delegate.runSize.runDescent;
                 CGFloat width = delegate.runSize.runWidth;

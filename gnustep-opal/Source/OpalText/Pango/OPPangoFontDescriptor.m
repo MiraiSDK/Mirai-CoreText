@@ -64,5 +64,9 @@
     return obj;
 }
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@ %p> attributes:%@",self.class,self,_attributes];
+}
 
 @end

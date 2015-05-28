@@ -30,7 +30,7 @@
 
 /* Data Types */
 
-#ifdef __OBJC__
+#ifdef __IMPLICIT_BRIDGE__
 @class CTTypesetter;
 typedef CTTypesetter* CTTypesetterRef;
 #else

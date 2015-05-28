@@ -52,6 +52,13 @@ const CFStringRef kCTFontCollectionRemoveDuplicatesOption = @"kCTFontCollectionR
 
 @implementation CTFontCollection
 
+- (void)dealloc
+{
+    [_descriptors release];
+    
+    [super dealloc];
+}
+
 - (id)initWithAvailableFontsWithOptions: (NSDictionary*)opts
 {
   // FIXME:

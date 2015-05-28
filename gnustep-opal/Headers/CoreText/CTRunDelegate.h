@@ -16,8 +16,12 @@
 extern "C" {
 #endif
 
-@class CTRunDelegate;
-typedef CTRunDelegate* CTRunDelegateRef;
+#ifdef __IMPLICIT_BRIDGE__
+    @class CTRunDelegate;
+    typedef CTRunDelegate* CTRunDelegateRef;
+#else
+    typedef struct CTRunDelegate* CTRunDelegateRef;
+#endif
 
 CFTypeID CTRunDelegateGetTypeID( void );
 

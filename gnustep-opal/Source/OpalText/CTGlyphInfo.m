@@ -92,7 +92,7 @@
   }
   CGFontRef graphicsFont = CTFontCopyGraphicsFont(font, NULL);
   _glpyhName = CGFontCopyGlyphNameForGlyph(graphicsFont, glyph);
-  [graphicsFont release];
+    CGFontRelease(graphicsFont);
 
   _characterCollection = kCTIdentityMappingCharacterCollection;
   _characterIdentifier = glyph;

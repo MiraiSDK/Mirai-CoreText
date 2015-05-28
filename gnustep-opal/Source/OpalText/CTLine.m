@@ -47,6 +47,13 @@
   return _runs;
 }
 
+- (void)dealloc
+{
+    [_runs release];
+    [_attributedString release];
+    [super dealloc];
+}
+
 - (void)drawOnContext: (CGContextRef)ctx
 {
     if (self.attributedString) {
@@ -199,7 +206,7 @@ CTLineRef CTLineCreateJustifiedLine(
 	CGFloat justificationFactor,
 	double justificationWidth)
 {
-  return line;
+  return [line retain];
 }
 
 CFIndex CTLineGetGlyphCount(CTLineRef line)

@@ -33,7 +33,7 @@
 
 /* Data Types */
 
-#ifdef __OBJC__
+#ifdef __IMPLICIT_BRIDGE__
 @class OPFont;
 typedef OPFont* CTFontRef;
 #else

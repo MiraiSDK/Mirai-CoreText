@@ -74,6 +74,7 @@ const CFStringRef kCTTypesetterOptionForcedEmbeddingLevel = @"kCTTypesetterOptio
   {
 //      NSLog(@"Create typesetter with attributed string:%@, length:%d",string,string.length);
       PangoFontMap *fontmap = pango_cairo_font_map_new();
+      
       PangoContext *pangoctx = pango_font_map_create_context(fontmap);
       _layout = pango_layout_new(pangoctx);
       
@@ -81,6 +82,9 @@ const CFStringRef kCTTypesetterOptionForcedEmbeddingLevel = @"kCTTypesetterOptio
       
     _as = [string retain];
     _options = [options retain];
+      
+      g_object_unref(fontmap);
+      g_object_unref(pangoctx);
   }
   return self;
 }
@@ -100,7 +104,7 @@ const CFStringRef kCTTypesetterOptionForcedEmbeddingLevel = @"kCTTypesetterOptio
     l.range = range;
     l.offset = offset;
     l.attributedString = _as;
-    return l;
+    return (CTLineRef)l;
 
   // FIXME: This should do the core typesetting stuff:
   // - divide the attributed string into runs with the same attributes.

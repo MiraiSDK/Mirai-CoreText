@@ -210,6 +210,7 @@ pango_coregraphics_renderer_show_text_glyphs (PangoRenderer        *renderer,
     
     free(cg_glyphs);
     free(cg_positions);
+    pango_font_description_free(fontDescription);
     CGContextRestoreGState(crenderer->ctx);
     
 }
