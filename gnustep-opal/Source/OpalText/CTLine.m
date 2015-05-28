@@ -200,6 +200,36 @@
     CFIndex UTF16Index = (CFIndex)[lineStr indexForUTF8Index:index];
     return self.range.location + UTF16Index;
 }
+
+- (double)getTypographicBoundsAscent:(CGFloat *)ascent descent:(CGFloat *)descent leading:(CGFloat *)leading
+{
+    NSAttributedString *lineAS = [self.attributedString attributedSubstringFromRange:NSMakeRange(self.range.location, self.range.length)];
+    
+    PangoFontMap *fm = pango_cairo_font_map_get_default();
+    PangoContext *pangoCtx = pango_font_map_create_context(fm);
+    PangoLayout *layout = pango_layout_new(pangoCtx);
+    pango_layout_set_attributedString(layout, lineAS);
+    pango_layout_set_single_paragraph_mode(layout, true);
+
+    int width,height;
+    pango_layout_get_pixel_size(layout,&width,&height);
+    
+    if (ascent) {
+        *ascent = height;
+    }
+    if (descent) {
+        *descent = 0;
+    }
+    
+    if (leading) {
+        *leading = 0;
+    }
+    
+    g_object_unref(layout);
+    g_object_unref(pangoCtx);
+
+    return width;
+}
 @end
 
 
@@ -277,18 +307,7 @@ double CTLineGetTypographicBounds(
 	CGFloat* descent,
 	CGFloat* leading)
 {
-    if (ascent) {
-        *ascent = 0;
-    }
-    
-    if (descent) {
-        *descent = 0;
-    }
-    
-    if (leading) {
-        *leading = 0;
-    }
-  return 0;
+    return [line getTypographicBoundsAscent:ascent descent:descent leading:leading];
 }
 
 double CTLineGetTrailingWhitespaceWidth(CTLineRef line)
