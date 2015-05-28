@@ -87,15 +87,15 @@
 - (NSString*) nameForKey: (NSString*)nameKey
 {
 //    NSLog(@"%s %@",__PRETTY_FUNCTION__, nameKey);
+    const char *familyName = pango_font_description_get_family(_desc);
+    NSString *str = [[[NSString alloc] initWithCString:familyName encoding:NSUTF8StringEncoding] autorelease];
     if ([nameKey isEqualToString:(NSString *)kCTFontFamilyNameKey]) {
-        const char *familyName = pango_font_description_get_family(_desc);
-        NSString *str = [[NSString alloc] initWithCString:familyName encoding:NSUTF8StringEncoding];
         return str;
     } else {
         NSLog(@"[CTFont]get value of key: %@ unimplemented",nameKey);
     }
     
-    return nil;
+    return str;
 }
 
 - (NSString *)description
