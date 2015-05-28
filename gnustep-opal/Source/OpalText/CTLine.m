@@ -47,6 +47,13 @@
   return _runs;
 }
 
+- (void)dealloc
+{
+    [_runs release];
+    [_attributedString release];
+    [super dealloc];
+}
+
 - (void)drawOnContext: (CGContextRef)ctx
 {
     if (self.attributedString) {
