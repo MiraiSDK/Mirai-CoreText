@@ -47,6 +47,33 @@
     
     return utf8Index;
 }
+
+- (NSUInteger)indexForUTF8Index:(NSUInteger)index
+{
+    NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
+    NSUInteger UTF16Index = 0;
+    if (index > 0) {
+        char *buffer = malloc(index);
+        
+        [data getBytes:buffer length:index];
+        NSString *sub = [[NSString alloc] initWithBytes:buffer length:index encoding:NSUTF8StringEncoding];
+        UTF16Index = [sub length];
+        
+        [sub release];
+        free(buffer);
+    }
+    return UTF16Index;
+}
+
+- (NSUInteger)pangoIndexForStringIndex:(NSUInteger)index
+{
+    return [self UTF8IndexForIndex:index];
+}
+
+- (NSUInteger)stringIndexForPangoIndex:(NSUInteger)index
+{
+    return [self indexForUTF8Index:index];
+}
 @end
 
 @implementation NSAttributedString (Pango)

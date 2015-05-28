@@ -177,6 +177,29 @@
 {
   return CFRangeMake(0,0);
 }
+
+- (CFIndex)stringIndexForPosition:(CGPoint)point
+{
+    NSAttributedString *lineAS = [self.attributedString attributedSubstringFromRange:NSMakeRange(self.range.location, self.range.length)];
+    NSString *lineStr = lineAS.string;
+    
+    PangoFontMap *fm = pango_cairo_font_map_get_default();
+    PangoContext *pangoCtx = pango_font_map_create_context(fm);
+    PangoLayout *layout = pango_layout_new(pangoCtx);
+    pango_layout_set_attributedString(layout, lineAS);
+    pango_layout_set_single_paragraph_mode(layout, true);
+
+    int x = point.x * PANGO_SCALE;
+    int y = point.y * PANGO_SCALE;
+    int index,trailing;
+    pango_layout_xy_to_index(layout,x,y,&index,&trailing);
+    
+    g_object_unref(layout);
+    g_object_unref(pangoCtx);
+    
+    CFIndex UTF16Index = (CFIndex)[lineStr indexForUTF8Index:index];
+    return self.range.location + UTF16Index;
+}
 @end
 
 
@@ -277,7 +300,7 @@ CFIndex CTLineGetStringIndexForPosition(
 	CTLineRef line,
 	CGPoint position)
 {
-  return 0;
+    return [(CTLine *)line stringIndexForPosition:position];
 }
 
 CGFloat CTLineGetOffsetForStringIndex(

@@ -9,8 +9,14 @@
 #import <Foundation/Foundation.h>
 #import <Pango/pango-layout.h>
 
+// NSString use UTF-16
+// Pango use UTF-8
 @interface NSString (TNIndexConvert)
 - (NSUInteger)UTF8IndexForIndex:(NSUInteger)index;
+- (NSUInteger)indexForUTF8Index:(NSUInteger)index;
+
+- (NSUInteger)pangoIndexForStringIndex:(NSUInteger)index;
+- (NSUInteger)stringIndexForPangoIndex:(NSUInteger)index;
 @end
 
 @interface NSAttributedString (Pango)
