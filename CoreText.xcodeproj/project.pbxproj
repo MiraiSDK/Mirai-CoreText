@@ -151,6 +151,7 @@
 /* Begin PBXFileReference section */
 		43098C81197B63E5005A97A1 /* OPPangoFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPPangoFont.h; sourceTree = "<group>"; };
 		43098C82197B63E5005A97A1 /* OPPangoFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPPangoFont.m; sourceTree = "<group>"; };
+		43152E691B1705260064BD90 /* CTRunDelegate-private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CTRunDelegate-private.h"; sourceTree = "<group>"; };
 		436060EC1AC9363D00303792 /* Android-arm.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Android-arm.xcconfig"; sourceTree = "<group>"; };
 		436060ED1AC9363D00303792 /* Android-x86.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Android-x86.xcconfig"; sourceTree = "<group>"; };
 		436060EE1AC9363D00303792 /* Android.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Android.xcconfig; sourceTree = "<group>"; };
@@ -321,6 +322,7 @@
 			children = (
 				43E111A8185DF1CA00E771B4 /* CTFont.m */,
 				43840617187F2527000D092C /* CTRunDelegate.m */,
+				43152E691B1705260064BD90 /* CTRunDelegate-private.h */,
 				43E111A9185DF1CA00E771B4 /* CTFontCollection.m */,
 				43E111AA185DF1CA00E771B4 /* CTFontDescriptor.m */,
 				43E111AB185DF1CA00E771B4 /* CTFontTraits.m */,

@@ -15,17 +15,8 @@
 #if defined(__cplusplus)
 extern "C" {
 #endif
-    
-typedef struct
-{
-    CGFloat runAscent;
-    CGFloat runDescent;
-    CGFloat runWidth;
-}RunSize;
 
-@interface CTRunDelegate : NSObject
-@property (nonatomic, assign) RunSize runSize;
-@end
+@class CTRunDelegate;
 typedef CTRunDelegate* CTRunDelegateRef;
 
 CFTypeID CTRunDelegateGetTypeID( void );
@@ -39,7 +30,6 @@ typedef CGFloat (*CTRunDelegateGetDescentCallback) (
                                                     void* refCon );
 typedef CGFloat (*CTRunDelegateGetWidthCallback) (
                                                   void* refCon );
-
 
 typedef struct
 {

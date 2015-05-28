@@ -7,12 +7,7 @@
 //
 
 #import "CTRunDelegate.h"
-
-@interface CTRunDelegate()
-@property (nonatomic, assign) CTRunDelegateCallbacks *callbacks;
-@property (nonatomic, assign) void *refCon;
-
-@end
+#import "CTRunDelegate-private.h"
 
 @implementation CTRunDelegate
 
