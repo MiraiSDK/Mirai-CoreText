@@ -16,7 +16,8 @@ if [ ! -f $MIRAI_SDK_PREFIX/lib/libpango.a ]; then
 	popd
 fi
 
-if [ ! -f $MIRAI_SDK_PREFIX/lib/libCoreText.so ]; then
+if [ ! -f $MIRAI_SDK_PREFIX/lib/libCoreText.so ] || 
+	[ "$OPTION_REBUILD_COCOA" == "yes" ]; then
 	xcodebuild -target CoreText-Android -xcconfig xcconfig/Android-$ABI.xcconfig clean
 	
 	xcodebuild -target CoreText-Android -xcconfig xcconfig/Android-$ABI.xcconfig
