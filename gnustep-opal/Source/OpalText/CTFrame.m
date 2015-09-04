@@ -25,33 +25,13 @@
 #include <CoreText/CTFrame.h>
 #import "CTFrame-private.h"
 
-#include <ft2build.h>
-#include FT_FREETYPE_H
-//#include <ftadvanc.h>
-//#include <ftsnames.h>
-//#include <tttables.h>
-
-#include <harfbuzz/hb.h>
-#include <harfbuzz/hb-ft.h>
-#if ANDROID
-#include <harfbuzz/hb-icu.h>
-#else
-#include <harfbuzz/hb-glib.h>
-#endif
-
-#include <pango/pangocairo.h>
-#include "PangoCoreGraphics-render.h"
-
-
 /* Constants */
 
 const CFStringRef kCTFrameProgressionAttributeName = @"kCTFrameProgressionAttributeName";
 
 /* Classes */
 
-@implementation CTFrame {
-    PangoLayout *_layout;
-}
+@implementation CTFrame
 
 - (id) initWithPath: (CGPathRef)aPath
         stringRange: (NSRange)aRange
@@ -68,19 +48,11 @@ const CFStringRef kCTFrameProgressionAttributeName = @"kCTFrameProgressionAttrib
   return self;
 }
 
-- (void)setPangoLayout:(PangoLayout *)layout
-{
-    _layout = layout;
-}
-
 - (void) dealloc
 {
   [_attributes release];
   [_path release];
   [_lines release];
-    if (_layout) {
-        g_object_unref(_layout);
-    }
 
   [super dealloc];
 }
@@ -122,21 +94,14 @@ const CFStringRef kCTFrameProgressionAttributeName = @"kCTFrameProgressionAttrib
 
 - (void)drawOnContext: (CGContextRef)ctx
 {
-    CGContextSaveGState(ctx);
-    
-    CGRect rect;
-    CGPathIsRect(_path, &rect);
-    pango_coregraphics_show_layout_in_rect(ctx, _layout,rect);
-    CGContextRestoreGState(ctx);
-
-//  // FIXME: see CTFrameProgression docs comment about rotating 90 degrees
-//  NSUInteger linesCount = [_lines count];
-//  for (NSUInteger i=0; i<linesCount; i++)
-//  {
-//    CTLineRef line = [_lines objectAtIndex: i];
-//    // FIXME: How does positioning work?
-//    CTLineDraw(line, ctx);
-//  }
+  // FIXME: see CTFrameProgression docs comment about rotating 90 degrees
+  NSUInteger linesCount = [_lines count];
+  for (NSUInteger i=0; i<linesCount; i++)
+  {
+    CTLineRef line = [_lines objectAtIndex: i];
+    // FIXME: How does positioning work?
+    CTLineDraw(line, ctx);
+  }
 }
 
 @end

@@ -25,7 +25,6 @@
 #include <CoreText/CTLine.h>
 #include <CoreText/CTTypesetter.h>
 
-#import <pango/pango.h>
 
 /**
  * Container of CTRun objects (glyph runs)
@@ -39,7 +38,6 @@
 
 @property (nonatomic, assign) CFRange range;
 @property (nonatomic, assign) CGFloat offset;
-@property (nonatomic, strong) NSAttributedString * attributedString;
 
 
 
