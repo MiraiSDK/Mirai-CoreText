@@ -23,18 +23,3 @@
     
 }
 @end
-
-@implementation NSDictionary (CTExtended)
-- (void)enumerateKeysAndObjectsUsingBlock:(void (^)(id key, id obj, BOOL *stop))block
-{
-    NSArray *allKeys = [self allKeys];
-    BOOL stop = NO;
-    for (id key in allKeys) {
-        id obj = [self objectForKey:key];
-        block(key,obj,&stop);
-        if (stop) {
-            break;
-        }
-    }
-}
-@end

@@ -19,9 +19,4 @@ typedef enum {
 
 @end
 
-@interface NSDictionary (CTExtended)
-- (void)enumerateKeysAndObjectsUsingBlock:(void (^)(id key, id obj, BOOL *stop))block;
-//- (void)enumerateKeysAndObjectsWithOptions:(NSEnumerationOptions)opts usingBlock:(void (^)(id key, id obj, BOOL *stop))block;
-
-@end
 #endif
