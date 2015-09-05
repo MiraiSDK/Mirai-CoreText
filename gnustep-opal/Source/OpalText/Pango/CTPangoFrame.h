@@ -7,10 +7,13 @@
 //
 
 #import "CTFrame-private.h"
-#include <pango/pangocairo.h>
+#include <pango/pango-layout.h>
 
 @interface CTPangoFrame : CTFrame
 {
     PangoLayout *_layout;
 }
+
+- (void)setPangoLayout:(PangoLayout *)layout;
+
 @end

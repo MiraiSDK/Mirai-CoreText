@@ -24,8 +24,6 @@
 
 #include <CoreText/CTFrame.h>
 
-#import <pango/pango.h>
-
 /**
  * Container of CTLine objects
  */
@@ -50,6 +48,5 @@
 - (NSDictionary*)attributes;
 - (void)drawOnContext: (CGContextRef)ctx;
 
-- (void)setPangoLayout:(PangoLayout *)layout;
 
 @end
