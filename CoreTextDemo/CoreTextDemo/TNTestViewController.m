@@ -76,7 +76,9 @@ static NSMutableArray *testClasses = nil;
         tableView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         tableView.delegate = self;
         tableView.dataSource = self;
+#if __ANDROID__
         tableView.rowHeight = 100.0f;
+#endif
         [self.view insertSubview:tableView atIndex:0];
     }
 }

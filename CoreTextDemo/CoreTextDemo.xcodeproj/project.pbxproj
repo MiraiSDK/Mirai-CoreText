@@ -48,6 +48,12 @@
 		43B163DF1862CD93006B6CE1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43B163DE1862CD93006B6CE1 /* Images.xcassets */; };
 		43B164541862CFAB006B6CE1 /* CoreTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B164531862CFAB006B6CE1 /* CoreTextView.m */; };
 		43BE33FB1B109BCC004B1C30 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BE33FA1B109BCC004B1C30 /* CoreFoundation.framework */; };
+		43D7CAF51B9F150A00F68E09 /* TNCTLineTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D7CAF41B9F150A00F68E09 /* TNCTLineTestViewController.m */; };
+		43D7CAF61B9F150A00F68E09 /* TNCTLineTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D7CAF41B9F150A00F68E09 /* TNCTLineTestViewController.m */; };
+		43D7CAF71B9F150A00F68E09 /* TNCTLineTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D7CAF41B9F150A00F68E09 /* TNCTLineTestViewController.m */; };
+		43D7CAFB1B9F159500F68E09 /* CTLineDrawTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D7CAFA1B9F159500F68E09 /* CTLineDrawTestViewController.m */; };
+		43D7CAFC1B9F159500F68E09 /* CTLineDrawTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D7CAFA1B9F159500F68E09 /* CTLineDrawTestViewController.m */; };
+		43D7CAFD1B9F159500F68E09 /* CTLineDrawTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D7CAFA1B9F159500F68E09 /* CTLineDrawTestViewController.m */; };
 		43EDF1B0195ACB9E00B3DD0D /* TestController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43EDF1AF195ACB9E00B3DD0D /* TestController.m */; };
 /* End PBXBuildFile section */
 
@@ -109,6 +115,10 @@
 		43B164531862CFAB006B6CE1 /* CoreTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreTextView.m; sourceTree = "<group>"; };
 		43B164551862D191006B6CE1 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		43BE33FA1B109BCC004B1C30 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/Android18.sdk/System/Library/Frameworks/CoreFoundation.framework; sourceTree = DEVELOPER_DIR; };
+		43D7CAF31B9F150A00F68E09 /* TNCTLineTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TNCTLineTestViewController.h; sourceTree = "<group>"; };
+		43D7CAF41B9F150A00F68E09 /* TNCTLineTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TNCTLineTestViewController.m; sourceTree = "<group>"; };
+		43D7CAF91B9F159500F68E09 /* CTLineDrawTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTLineDrawTestViewController.h; sourceTree = "<group>"; };
+		43D7CAFA1B9F159500F68E09 /* CTLineDrawTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTLineDrawTestViewController.m; sourceTree = "<group>"; };
 		43E4087C1AC9AC4100C3109D /* Android-arm.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Android-arm.xcconfig"; sourceTree = "<group>"; };
 		43E4087D1AC9AC4100C3109D /* Android-x86.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Android-x86.xcconfig"; sourceTree = "<group>"; };
 		43EDF1AE195ACB9E00B3DD0D /* TestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestController.h; sourceTree = "<group>"; };
@@ -157,6 +167,7 @@
 				4327C5431A875C0B001429B9 /* TNCTTestViewController.m */,
 				4327C5441A875C0B001429B9 /* TNCTView.h */,
 				4327C5451A875C0B001429B9 /* TNCTView.m */,
+				43D7CAF81B9F156500F68E09 /* CTLine */,
 			);
 			name = Tests;
 			sourceTree = "<group>";
@@ -303,6 +314,17 @@
 				43B163D41862CD93006B6CE1 /* CoreTextDemo-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		43D7CAF81B9F156500F68E09 /* CTLine */ = {
+			isa = PBXGroup;
+			children = (
+				43D7CAF31B9F150A00F68E09 /* TNCTLineTestViewController.h */,
+				43D7CAF41B9F150A00F68E09 /* TNCTLineTestViewController.m */,
+				43D7CAF91B9F159500F68E09 /* CTLineDrawTestViewController.h */,
+				43D7CAFA1B9F159500F68E09 /* CTLineDrawTestViewController.m */,
+			);
+			name = CTLine;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -454,10 +476,12 @@
 				4390B8B71A860F290082B0F1 /* CoreTextView.m in Sources */,
 				4390B8AB1A860E960082B0F1 /* TNAndroidLauncher.m in Sources */,
 				4327C5491A875C0B001429B9 /* TNCTView.m in Sources */,
+				43D7CAF71B9F150A00F68E09 /* TNCTLineTestViewController.m in Sources */,
 				4390B8A41A860E960082B0F1 /* main.m in Sources */,
 				4390B8B61A860F1D0082B0F1 /* ViewController.m in Sources */,
 				4327C54F1A875C20001429B9 /* TNTestCase.m in Sources */,
 				4390B8C81A86196C0082B0F1 /* AppDelegate.m in Sources */,
+				43D7CAFD1B9F159500F68E09 /* CTLineDrawTestViewController.m in Sources */,
 				4327C5511A875C20001429B9 /* TNTestViewController.m in Sources */,
 				4327C5471A875C0B001429B9 /* TNCTTestViewController.m in Sources */,
 			);
@@ -470,7 +494,9 @@
 				432C7A3B195AD287003AFC04 /* DrawRectView.m in Sources */,
 				439C870E1862E41B0089F3DA /* AppDelegate.m in Sources */,
 				439C87071862E41B0089F3DA /* main.m in Sources */,
+				43D7CAF61B9F150A00F68E09 /* TNCTLineTestViewController.m in Sources */,
 				439C87301862E49B0089F3DA /* CoreTextView.m in Sources */,
+				43D7CAFC1B9F159500F68E09 /* CTLineDrawTestViewController.m in Sources */,
 				43EDF1B0195ACB9E00B3DD0D /* TestController.m in Sources */,
 				432C7A36195AD079003AFC04 /* TestCaseWindowController.m in Sources */,
 			);
@@ -481,6 +507,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				43B163DD1862CD93006B6CE1 /* ViewController.m in Sources */,
+				43D7CAFB1B9F159500F68E09 /* CTLineDrawTestViewController.m in Sources */,
 				4327C5461A875C0B001429B9 /* TNCTTestViewController.m in Sources */,
 				4327C5501A875C20001429B9 /* TNTestViewController.m in Sources */,
 				43B163D71862CD93006B6CE1 /* AppDelegate.m in Sources */,
@@ -488,6 +515,7 @@
 				43B163D31862CD93006B6CE1 /* main.m in Sources */,
 				4327C5481A875C0B001429B9 /* TNCTView.m in Sources */,
 				4327C54E1A875C20001429B9 /* TNTestCase.m in Sources */,
+				43D7CAF51B9F150A00F68E09 /* TNCTLineTestViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
