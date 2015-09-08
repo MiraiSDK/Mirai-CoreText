@@ -80,7 +80,7 @@ const CFStringRef kCTTypesetterOptionForcedEmbeddingLevel = @"kCTTypesetterOptio
     return 0;
 }
 
-- (Class)typesetterClass
++ (Class)typesetterClass
 {
 #if __ANDROID__
     return NSClassFromString(@"CTPangoTypesetter");
@@ -95,7 +95,7 @@ const CFStringRef kCTTypesetterOptionForcedEmbeddingLevel = @"kCTTypesetterOptio
 
 CTTypesetterRef CTTypesetterCreateWithAttributedString(CFAttributedStringRef string)
 {
-  return [[CTTypesetter alloc] initWithAttributedString: string
+  return [[[CTTypesetter typesetterClass] alloc] initWithAttributedString: string
                                                 options: nil];
 }
 
@@ -103,7 +103,7 @@ CTTypesetterRef CTTypesetterCreateWithAttributedStringAndOptions(
 	CFAttributedStringRef string,
 	CFDictionaryRef opts)
 {
-  return [[CTTypesetter alloc] initWithAttributedString: string
+  return [[[CTTypesetter typesetterClass] alloc] initWithAttributedString: string
                                                 options: opts];
 }
 
@@ -159,6 +159,6 @@ CFIndex CTTypesetterSuggestClusterBreakWithOffset(
 
 CFTypeID CTTypesetterGetTypeID()
 {
-  return (CFTypeID)[CTTypesetter class];
+  return (CFTypeID)[CTTypesetter typesetterClass];
 }
 
