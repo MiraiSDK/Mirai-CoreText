@@ -9,6 +9,7 @@
 #import "TNCTLineTestViewController.h"
 
 #import "CTLineDrawTestViewController.h"
+#import "CTRunDrawTestViewController.h"
 
 @implementation TNCTLineTestViewController
 + (void)load
@@ -23,6 +24,6 @@
 
 + (NSArray *)subTests
 {
-    return @[[CTLineDrawTestViewController class]];
+    return @[[CTLineDrawTestViewController class],[CTRunDrawTestViewController class]];
 }
 @end

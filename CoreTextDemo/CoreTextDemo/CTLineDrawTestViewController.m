@@ -10,8 +10,6 @@
 #import <CoreText/CoreText.h>
 
 @interface CTLineDrawTestViewController ()
-@property (nonatomic, assign) BOOL flip;
-@property (nonatomic, strong) UIImageView *imageView;
 @end
 
 @implementation CTLineDrawTestViewController
@@ -21,50 +19,6 @@
     return @"CTLineDraw()";
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    CGFloat side = MIN(self.view.bounds.size.width, self.view.bounds.size.height);
-    CGRect rect = CGRectMake(0, 0, side, side);
-    rect = CGRectInset(rect, 20, 20);
-    UIImageView *iv = [[UIImageView alloc] initWithFrame:rect];
-    iv.center = CGPointMake(self.view.bounds.size.width/2,
-                            self.view.bounds.size.height/2);
-    iv.backgroundColor = [UIColor lightGrayColor];
-    iv.image = [self generateImageWithSize:rect.size];
-    iv.layer.borderWidth = 1;
-    self.imageView = iv;
-    [self.view addSubview:iv];
-    
-    
-    UIBarButtonItem *flip = [[UIBarButtonItem alloc] initWithTitle:@"Flip" style:UIBarButtonItemStyleBordered target:self action:@selector(didPressedFlipItem:)];
-    self.navigationItem.rightBarButtonItems = @[flip];
-    
-}
-
-- (void)didPressedFlipItem:(id)sender
-{
-    self.flip = !self.flip;
-    [self updateImage];
-}
-
-- (void)updateImage
-{
-    self.imageView.image = [self generateImageWithSize:self.imageView.bounds.size];
-}
-
-- (UIImage *)generateImageWithSize:(CGSize)size
-{
-    UIGraphicsBeginImageContextWithOptions(size, NO, 0);
-    
-    [self drawWithContext:UIGraphicsGetCurrentContext() size:size];
-    
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return image;
-}
 
 - (void)drawWithContext:(CGContextRef)ctx size:(CGSize)size
 {

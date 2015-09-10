@@ -1,8 +1,8 @@
 //
-//  CTLineDrawTestViewController.h
+//  CTRunDrawTestViewController.h
 //  CoreTextDemo
 //
-//  Created by Chen Yonghui on 9/8/15.
+//  Created by Chen Yonghui on 9/9/15.
 //  Copyright (c) 2015 Shanghai TinyNetwork Inc. All rights reserved.
 //
 
@@ -10,6 +10,6 @@
 
 #import "TNImageTestViewController.h"
 
-@interface CTLineDrawTestViewController : TNImageTestViewController
+@interface CTRunDrawTestViewController : TNImageTestViewController
 
 @end
