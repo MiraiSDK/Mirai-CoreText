@@ -12,12 +12,37 @@
 #import "PangoCoreGraphics-render.h"
 #import <pango/pangocairo.h>
 #import "NSAttributedString+Pango.h"
+#import "CTPangoRun.h"
 
-@implementation CTPangoLine
+@implementation CTPangoLine {
+    PangoLayout *_layout;
+}
+
 - (void)dealloc
 {
     [_attributedString release];
+    if (_layout) {
+        g_object_unref(_layout);
+    }
     [super dealloc];
+}
+
+- (void)generatePangoObjects
+{
+    @synchronized(self) {
+        if (_layout == NULL) {
+            NSAttributedString *lineAS = [self.attributedString attributedSubstringFromRange:NSMakeRange(self.range.location, self.range.length)];
+
+            PangoFontMap *fm = pango_cairo_font_map_get_default();
+            PangoContext *pangoCtx = pango_font_map_create_context(fm);
+            PangoLayout *layout = pango_layout_new(pangoCtx);
+            pango_layout_set_attributedString(layout, lineAS);
+            pango_layout_set_single_paragraph_mode(layout, true);
+
+            _layout = layout;
+            g_object_unref(pangoCtx);
+        }
+    }
 }
 
 - (void)drawOnContext: (CGContextRef)ctx
@@ -161,6 +186,43 @@
     g_object_unref(pangoCtx);
     
     return width;
+}
+
+- (NSArray*)glyphRuns
+{
+    [self generatePangoObjects];
+    
+    NSMutableArray *runs = [NSMutableArray array];
+    
+    PangoLayoutIter *iter = pango_layout_get_iter(_layout);
+    CFIndex location = 0;
+    do {
+        PangoLayoutRun *pangoRun = pango_layout_iter_get_run_readonly(iter);
+
+        if (pangoRun == NULL) { //every pango line end with a NULL run
+            continue;
+        }
+        
+        PangoRectangle logical_rect;
+        pango_layout_iter_get_run_extents(iter, NULL, &logical_rect);
+
+        PangoGlyphString *glyphStr = pangoRun->glyphs;
+        
+        pango_layout_iter_get_index(iter);
+        CTPangoRun *run = [[CTPangoRun alloc] initWithRun:pangoRun];
+        run.line = self;
+        run.logical_rect = logical_rect;
+        run.layout = _layout;
+        run.stringRange = CFRangeMake(location, glyphStr->num_glyphs);
+        location += glyphStr->num_glyphs;
+        
+        [runs addObject:run];
+
+        
+    } while (pango_layout_iter_next_run(iter));
+    pango_layout_iter_free(iter);
+    
+    return runs;
 }
 
 @end

@@ -408,12 +408,26 @@ void pango_coregraphics_show_layout_line(CGContextRef ctx, PangoLayoutLine *line
 
 void pango_coregraphics_show_glyph_item(CGContextRef ctx, const char *text, PangoGlyphItem *glyph_item)
 {
+    PangoCoreGraphicsRenderer *crenderer = acquire_renderer();
+    PangoRenderer *renderer = (PangoRenderer *) crenderer;
+    crenderer->ctx = ctx;
+
+    CGPoint textPosition = CGContextGetTextPosition(ctx);
+    pango_renderer_draw_glyph_item(renderer, text, glyph_item, textPosition.x, textPosition.y);
     
+    release_renderer(crenderer);
 }
 
 void pango_coregraphics_show_glyph_string(CGContextRef ctx, PangoFont *font, PangoGlyphString *glyphs)
 {
+    PangoCoreGraphicsRenderer *crenderer = acquire_renderer();
+    PangoRenderer *renderer = (PangoRenderer *) crenderer;
+    crenderer->ctx = ctx;
     
+    CGPoint textPosition = CGContextGetTextPosition(ctx);
+    pango_renderer_draw_glyphs(renderer, font, glyphs, textPosition.x, textPosition.y);
+    release_renderer(crenderer);
+
 }
 
 void pango_coregraphics_show_error_underline(CGContextRef ctx, CGRect rect)
