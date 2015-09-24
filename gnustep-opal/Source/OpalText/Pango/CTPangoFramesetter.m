@@ -59,7 +59,6 @@ static void glib_log_handler_NSLog(const gchar *log_domain, GLogLevelFlags log_l
                               path: (CGPathRef)path
                         attributes: (NSDictionary*)attributes
 {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
     CGRect frameRect;
     if (!CGPathIsRect(path, &frameRect))
     {

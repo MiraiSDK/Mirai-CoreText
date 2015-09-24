@@ -75,7 +75,6 @@
 
 - (void)drawOnContext: (CGContextRef)ctx
 {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
 
     CGContextSaveGState(ctx);
     
