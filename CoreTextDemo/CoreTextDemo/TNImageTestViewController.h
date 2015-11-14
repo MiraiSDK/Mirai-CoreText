@@ -17,5 +17,5 @@
 @property (nonatomic, strong) UIImageView *imageView;
 
 @property (nonatomic, assign) BOOL flip;
-
+- (CGRect)imageRect;
 @end

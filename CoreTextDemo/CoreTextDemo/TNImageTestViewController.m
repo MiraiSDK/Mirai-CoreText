@@ -14,9 +14,7 @@
 {
     [super viewDidLoad];
     
-    CGFloat side = MIN(self.view.bounds.size.width, self.view.bounds.size.height);
-    CGRect rect = CGRectMake(0, 0, side, side);
-    rect = CGRectInset(rect, 20, 20);
+    CGRect rect = [self imageRect];
     UIImageView *iv = [[UIImageView alloc] initWithFrame:rect];
     iv.center = CGPointMake(self.view.bounds.size.width/2,
                             self.view.bounds.size.height/2);
@@ -30,6 +28,14 @@
     UIBarButtonItem *flip = [[UIBarButtonItem alloc] initWithTitle:@"Flip" style:UIBarButtonItemStyleBordered target:self action:@selector(didPressedFlipItem:)];
     self.navigationItem.rightBarButtonItems = @[flip];
     
+}
+
+- (CGRect)imageRect
+{
+    CGFloat side = MIN(self.view.bounds.size.width, self.view.bounds.size.height);
+    CGRect rect = CGRectMake(0, 0, side, side);
+    rect = CGRectInset(rect, 20, 20);
+    return rect;
 }
 
 - (void)updateImage

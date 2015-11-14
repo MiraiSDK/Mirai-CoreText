@@ -96,11 +96,25 @@ static void glib_log_handler_NSLog(const gchar *log_domain, GLogLevelFlags log_l
     return frame;
 }
 
+- (NSCharacterSet *)linebreakCharacterSet
+{
+    static NSMutableCharacterSet *set = nil;
+    if (set == nil) {
+        set = [[NSCharacterSet newlineCharacterSet] mutableCopy];
+        [set addCharactersInString:@"\u2028\u2029"];
+    }
+    return set;
+}
+
 - (CGSize)suggestFrameSizeWithRange: (CFRange)stringRange
                          attributes: (CFDictionaryRef)attributes
                         constraints: (CGSize)constraints
                            fitRange: (CFRange*)fitRange
 {
+    if ([_string length] == 0) {
+        return CGSizeZero;
+    }
+    
     // FIXME: correct string attributes
     PangoFontMap *fontmap = pango_cairo_font_map_new();
     PangoContext *pangoctx = pango_font_map_create_context(fontmap);
@@ -114,11 +128,21 @@ static void glib_log_handler_NSLog(const gchar *log_domain, GLogLevelFlags log_l
         NSRange makeRange = NSMakeRange(stringRange.location, stringRange.length);
         as = [_string attributedSubstringFromRange:makeRange];
     }
+
+    
+    NSCharacterSet *lineBreak = [self linebreakCharacterSet];
+    unichar lastCharacter = [as.string characterAtIndex:as.string.length-1];
+    if ([lineBreak characterIsMember:lastCharacter]) {
+        as = [as attributedSubstringFromRange:NSMakeRange(0, as.length-1)];
+    }
     pango_layout_set_attributedString_with_options(layout, as, nil);
     
     int width,height;
     pango_layout_get_pixel_size(layout, &width, &height);
     CGSize suggestSize = CGSizeMake(width, height);
+    g_object_unref(fontmap);
+    g_object_unref(pangoctx);
+    g_object_unref(layout);
     return suggestSize;
 }
 @end

@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "TNTestViewController.h"
+#import <CoreText/CoreText.h>
 
 @interface ViewController () <UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) NSArray *tests;

@@ -39,6 +39,9 @@
 		439C87111862E41C0089F3DA /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 439C870F1862E41C0089F3DA /* MainMenu.xib */; };
 		439C87131862E41C0089F3DA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 439C87121862E41C0089F3DA /* Images.xcassets */; };
 		439C87301862E49B0089F3DA /* CoreTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 439C872F1862E49B0089F3DA /* CoreTextView.m */; };
+		43A2CF421BC5095900F7BFF4 /* CTFramesetterSuggestTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A2CF411BC5095900F7BFF4 /* CTFramesetterSuggestTestViewController.m */; settings = {ASSET_TAGS = (); }; };
+		43A2CF431BC5095900F7BFF4 /* CTFramesetterSuggestTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A2CF411BC5095900F7BFF4 /* CTFramesetterSuggestTestViewController.m */; settings = {ASSET_TAGS = (); }; };
+		43A2CF441BC5095900F7BFF4 /* CTFramesetterSuggestTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A2CF411BC5095900F7BFF4 /* CTFramesetterSuggestTestViewController.m */; settings = {ASSET_TAGS = (); }; };
 		43B163C71862CD93006B6CE1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43B163C61862CD93006B6CE1 /* Foundation.framework */; };
 		43B163C91862CD93006B6CE1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43B163C81862CD93006B6CE1 /* CoreGraphics.framework */; };
 		43B163D11862CD93006B6CE1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43B163CF1862CD93006B6CE1 /* InfoPlist.strings */; };
@@ -105,6 +108,8 @@
 		439C87121862E41C0089F3DA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		439C872E1862E49B0089F3DA /* CoreTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreTextView.h; sourceTree = "<group>"; };
 		439C872F1862E49B0089F3DA /* CoreTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreTextView.m; sourceTree = "<group>"; };
+		43A2CF401BC5095900F7BFF4 /* CTFramesetterSuggestTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTFramesetterSuggestTestViewController.h; sourceTree = "<group>"; };
+		43A2CF411BC5095900F7BFF4 /* CTFramesetterSuggestTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTFramesetterSuggestTestViewController.m; sourceTree = "<group>"; };
 		43B163C31862CD93006B6CE1 /* CoreTextDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreTextDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43B163C61862CD93006B6CE1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		43B163C81862CD93006B6CE1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -177,6 +182,7 @@
 				4327C5431A875C0B001429B9 /* TNCTTestViewController.m */,
 				4327C5441A875C0B001429B9 /* TNCTView.h */,
 				4327C5451A875C0B001429B9 /* TNCTView.m */,
+				43A2CF3F1BC5092D00F7BFF4 /* CTFramesetter */,
 				43D7CB051BA0170600F68E09 /* CTRun */,
 				43D7CAF81B9F156500F68E09 /* CTLine */,
 			);
@@ -258,6 +264,15 @@
 				439C87091862E41B0089F3DA /* Credits.rtf */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		43A2CF3F1BC5092D00F7BFF4 /* CTFramesetter */ = {
+			isa = PBXGroup;
+			children = (
+				43A2CF401BC5095900F7BFF4 /* CTFramesetterSuggestTestViewController.h */,
+				43A2CF411BC5095900F7BFF4 /* CTFramesetterSuggestTestViewController.m */,
+			);
+			name = CTFramesetter;
 			sourceTree = "<group>";
 		};
 		43B163BA1862CD93006B6CE1 = {
@@ -504,6 +519,7 @@
 				4390B8B61A860F1D0082B0F1 /* ViewController.m in Sources */,
 				4327C54F1A875C20001429B9 /* TNTestCase.m in Sources */,
 				4390B8C81A86196C0082B0F1 /* AppDelegate.m in Sources */,
+				43A2CF441BC5095900F7BFF4 /* CTFramesetterSuggestTestViewController.m in Sources */,
 				43D7CAFD1B9F159500F68E09 /* CTLineDrawTestViewController.m in Sources */,
 				4327C5511A875C20001429B9 /* TNTestViewController.m in Sources */,
 				4327C5471A875C0B001429B9 /* TNCTTestViewController.m in Sources */,
@@ -517,6 +533,7 @@
 			files = (
 				432C7A3B195AD287003AFC04 /* DrawRectView.m in Sources */,
 				439C870E1862E41B0089F3DA /* AppDelegate.m in Sources */,
+				43A2CF431BC5095900F7BFF4 /* CTFramesetterSuggestTestViewController.m in Sources */,
 				439C87071862E41B0089F3DA /* main.m in Sources */,
 				43D7CAF61B9F150A00F68E09 /* TNCTLineTestViewController.m in Sources */,
 				439C87301862E49B0089F3DA /* CoreTextView.m in Sources */,
@@ -542,6 +559,7 @@
 				43B164541862CFAB006B6CE1 /* CoreTextView.m in Sources */,
 				43B163D31862CD93006B6CE1 /* main.m in Sources */,
 				4327C5481A875C0B001429B9 /* TNCTView.m in Sources */,
+				43A2CF421BC5095900F7BFF4 /* CTFramesetterSuggestTestViewController.m in Sources */,
 				4327C54E1A875C20001429B9 /* TNTestCase.m in Sources */,
 				43D7CAF51B9F150A00F68E09 /* TNCTLineTestViewController.m in Sources */,
 			);
