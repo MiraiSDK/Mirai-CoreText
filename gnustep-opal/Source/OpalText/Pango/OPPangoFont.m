@@ -72,6 +72,28 @@
     return self;
 }
 
+- (CGFloat)ascender
+{
+    PangoFontMetrics *metrics = pango_font_get_metrics(_font, NULL);
+    int ascender = pango_font_metrics_get_ascent(metrics);
+    pango_font_metrics_unref(metrics);
+    
+    CGFloat pixels = PANGO_PIXELS(ascender);
+    return pixels;
+}
+
+- (CGFloat)descender
+{
+    PangoFontMetrics *metrics = pango_font_get_metrics(_font, NULL);
+    int descender = pango_font_metrics_get_descent(metrics);
+    pango_font_metrics_unref(metrics);
+    
+    CGFloat pixels = PANGO_PIXELS(descender);
+    return pixels;
+}
+
+
+
 - (void)dealloc
 {
     [_creatFrom release];
