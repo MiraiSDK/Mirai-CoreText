@@ -21,7 +21,12 @@
     PangoFontDescription *_desc;
     OPFontDescriptor *_creatFrom;
     PangoContext *_context;
+    
+    NSString *_fontFamilyName;
+    OPPangoFontDescriptor *_initFontDescriptior;
+    NSDictionary *_fontMetricsMap;
 }
+
 - (id)_initWithDescriptor: (OPFontDescriptor*)aDescriptor
                   options: (CTFontOptions)options
 {
@@ -34,12 +39,14 @@
         _context = pangoctx;
 
         OPPangoFontDescriptor *desc = aDescriptor;
-//        NSLog(@"[OPPangoFont] create with desc:%@",desc);
+        _initFontDescriptior = aDescriptor;
+        NSLog(@"[OPPangoFont] create with desc:%@",desc);
 //        NSLog(@"[OPPangoFont] font family name:%@",[desc objectForKey:kCTFontFamilyNameKey]);
         _font = pango_font_map_load_font(fontMap, pangoctx, desc.pangoDesc);
         _desc = pango_font_describe(_font);
         
         const char *familyName = pango_font_description_get_family(_desc);
+        _fontFamilyName = [NSString stringWithUTF8String:familyName];
 //        NSLog(@"[OPPangoFont] loaded font:%s",familyName);
 
         static BOOL oneTimeDebug = NO;
@@ -72,8 +79,20 @@
     return self;
 }
 
+
+- (NSDictionary *)_fontMetricsMap
+{
+    if (!_fontMetricsMap) {
+        NSDictionary *attributes = [_initFontDescriptior fontAttributes];
+        NSNumber *size = [attributes objectForKey:kCTFontSizeAttribute];
+        _fontMetricsMap = [NSClassFromString(@"TNFontMetricsGetter") fontMetricsWithFontFamilyName:_fontFamilyName withSize:size withBold:@NO withItalic:@NO];
+    }
+    return _fontMetricsMap;
+}
+
 - (CGFloat)ascender
 {
+    [self _fontMetricsMap];
     PangoFontMetrics *metrics = pango_font_get_metrics(_font, NULL);
     int ascender = pango_font_metrics_get_ascent(metrics);
     pango_font_metrics_unref(metrics);
