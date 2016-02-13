@@ -38,11 +38,12 @@ buildHarfbuzz()
 	if [ ! -d harfbuzz-0.9.25 ]; then
 		if [ ! -f harfbuzz-0.9.25.tar.bz2 ]; then
 			echo "Downloading harfbuzz-0.9.25.tar.bz2..."
-			curl http://www.freedesktop.org/software/harfbuzz/release/harfbuzz-0.9.25.tar.bz2 -o harfbuzz-0.9.25.tar.bz2
+			curl -L -O http://www.freedesktop.org/software/harfbuzz/release/harfbuzz-0.9.25.tar.bz2
 			checkError $? "Download harfbuzz failed"
 		fi
 		
 		tar -xvf harfbuzz-0.9.25.tar.bz2
+		checkError $? "extract harfbuzz file failed"
 		
 		pushd harfbuzz-0.9.25
 		#patch makefile.am, disable tests..

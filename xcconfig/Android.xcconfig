@@ -14,6 +14,7 @@ DSTROOT = /
 INSTALL_PATH = $(SDK_ROOT)/System/Library/Frameworks/
 HEADER_SEARCH_PATHS=$(inherited) $(SDK_ROOT)/usr/include/freetype2/  $(SOURCE_ROOT)/gnustep-opal/Source/OpalText
 LD_DEPENDENCY_INFO_FILE=
+DEBUG_INFORMATION_FORMAT = dwarf
 
 
 //-lpangocairo-1.0 -lpango-1.0 -lgobject-2.0 -lglib-2.0 -lintl
