@@ -21,7 +21,12 @@
     PangoFontDescription *_desc;
     OPFontDescriptor *_creatFrom;
     PangoContext *_context;
+    
+    NSString *_fontFamilyName;
+    OPPangoFontDescriptor *_initFontDescriptior;
+    NSDictionary *_fontMetricsMap;
 }
+
 - (id)_initWithDescriptor: (OPFontDescriptor*)aDescriptor
                   options: (CTFontOptions)options
 {
@@ -34,12 +39,13 @@
         _context = pangoctx;
 
         OPPangoFontDescriptor *desc = aDescriptor;
-//        NSLog(@"[OPPangoFont] create with desc:%@",desc);
+        _initFontDescriptior = [aDescriptor retain];
 //        NSLog(@"[OPPangoFont] font family name:%@",[desc objectForKey:kCTFontFamilyNameKey]);
         _font = pango_font_map_load_font(fontMap, pangoctx, desc.pangoDesc);
         _desc = pango_font_describe(_font);
         
         const char *familyName = pango_font_description_get_family(_desc);
+        _fontFamilyName = [[NSString stringWithUTF8String:familyName] retain];
 //        NSLog(@"[OPPangoFont] loaded font:%s",familyName);
 
         static BOOL oneTimeDebug = NO;
@@ -72,31 +78,48 @@
     return self;
 }
 
+
+- (NSDictionary *)_fontMetricsMap
+{
+    if (!_fontMetricsMap) {
+        NSDictionary *attributes = [_initFontDescriptior fontAttributes];
+        NSNumber *size = [attributes objectForKey:kCTFontSizeAttribute];
+        _fontMetricsMap = [[NSClassFromString(@"TNFontMetricsGetter") fontMetricsWithFontFamilyName:_fontFamilyName withSize:size withBold:@NO withItalic:@NO] retain];
+    }
+    return _fontMetricsMap;
+}
+
 - (CGFloat)ascender
 {
-    PangoFontMetrics *metrics = pango_font_get_metrics(_font, NULL);
-    int ascender = pango_font_metrics_get_ascent(metrics);
-    pango_font_metrics_unref(metrics);
-    
-    CGFloat pixels = PANGO_PIXELS(ascender);
-    return pixels;
+    return -[(NSNumber *)[[self _fontMetricsMap] objectForKey:@"top"] floatValue];
 }
 
 - (CGFloat)descender
 {
-    PangoFontMetrics *metrics = pango_font_get_metrics(_font, NULL);
-    int descender = pango_font_metrics_get_descent(metrics);
-    pango_font_metrics_unref(metrics);
-    
-    CGFloat pixels = PANGO_PIXELS(descender);
-    return pixels;
+    return [(NSNumber *)[[self _fontMetricsMap] objectForKey:@"descent"] floatValue];
 }
 
+- (CGFloat)leading
+{
+    return [(NSNumber *)[[self _fontMetricsMap] objectForKey:@"leading"] floatValue];
+}
 
+- (CGFloat)capHeight
+{
+    return -[(NSNumber *)[[self _fontMetricsMap] objectForKey:@"ascent"] floatValue];
+}
+
+- (CGFloat)xHeight
+{
+    return [self capHeight];
+}
 
 - (void)dealloc
 {
     [_creatFrom release];
+    [_fontFamilyName release];
+    [_fontMetricsMap release];
+    [_initFontDescriptior release];
     
     g_object_unref(_context);
     g_object_unref(_font);

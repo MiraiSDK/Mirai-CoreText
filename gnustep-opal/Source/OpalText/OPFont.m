@@ -93,7 +93,7 @@ const CGFloat *OPFontIdentityMatrix;
 
 - (CGFloat) pointSize
 {
-  return [[[self fontDescriptor] objectForKey: OPFontSizeAttribute] doubleValue];
+  return [[[self fontDescriptor] objectForKey: OPFontSizeAttribute] floatValue];
 }
 - (OPFont*) printerFont
 {
