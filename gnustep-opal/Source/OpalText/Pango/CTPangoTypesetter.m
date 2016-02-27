@@ -129,7 +129,7 @@
     }
     
     // count number of glyphs in every run in line
-    GList *l;
+    GSList *l;
     for (l = firstLine->runs; l; l=l->next) {
         PangoLayoutRun *run = l->data;
         PangoGlyphString *glyphs = run->glyphs;
@@ -139,7 +139,14 @@
     g_object_unref(layout);
     g_object_unref(pangoctx);
     
-    NSLog(@"suggest text count:%d ",glyphsCount);
+    //FIXME: workaround here
+    // why out of range?
+    if (glyphsCount >= as.length) {
+//        NSLog(@"glyphs out of range(value:%d max:%d, fix it..",glyphsCount,as.length);
+        glyphsCount = as.length - 1;
+    }
+    
+    NSAssert((start + glyphsCount) < _as.length, @"suggested glyphs count out of range");
     return glyphsCount;
 }
 
