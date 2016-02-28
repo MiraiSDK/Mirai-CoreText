@@ -45,6 +45,11 @@
     }
 }
 
+- (CFRange)stringRange
+{
+    return self.range;
+}
+
 - (void)drawOnContext: (CGContextRef)ctx
 {
     if (self.attributedString) {
