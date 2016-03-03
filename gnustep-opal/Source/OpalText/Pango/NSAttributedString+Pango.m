@@ -219,6 +219,12 @@
     NSString *str = [attributedString string];
     
     [attributedString enumerateAttributesInRange:NSMakeRange(0, attributedString.length) options:0 usingBlock:^(NSDictionary *attrs, NSRange range, BOOL *stop) {
+        // FIXME:
+        //  the enumerate use gcd to perform block in other thread
+        //  currently, libdispatch doesn't call autoreleasepool stuff
+        //  we needs encapsulation codes in autoreleasepool here, otherwise will cause memory leak
+        //  once we upgrade libdispatch version, we can remove this.
+        @autoreleasepool {
         
         NSUInteger startIdx = range.location;
         NSUInteger endIdx = NSMaxRange(range);
@@ -227,6 +233,7 @@
         unsigned long bytesEndIndex = [str UTF8IndexForIndex:endIdx];
         
         [attrs enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop) {
+            @autoreleasepool {
             PangoAttribute *patt = NULL;
             if ([key isEqualToString:(NSString *)kCTFontAttributeName]) {
                 patt = [self createPangoFontAttributeFromNSAttributedValue:obj];
@@ -274,7 +281,7 @@
                 logical_rect.x = 0;
                 logical_rect.y = PANGO_SCALE * - height;
                 PangoRectangle ink_rect = logical_rect;
-
+                
                 
                 patt = pango_attr_shape_new(&ink_rect, &logical_rect);
                 
@@ -292,7 +299,13 @@
 //                NSLog(@"[PangoAttribute]insert attribute: %@, range:%@",key,NSStringFromRange(range));
                 pango_attr_list_insert(list, patt);
             }
+
+            } //@autoreleasepool
         }];
+
+            
+        } //@autoreleasepool
+        
     }];
 }
 
