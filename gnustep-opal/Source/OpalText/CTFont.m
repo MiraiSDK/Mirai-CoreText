@@ -494,14 +494,14 @@ CFArrayRef CTFontCopySupportedLanguages(CTFontRef font)
 
 CFStringRef CTFontCopyDisplayName(CTFontRef font)
 {
-  return [[font displayName] retain];
+  return [[font displayName] copy];
 }
 
 CFStringRef CTFontCopyName(
   CTFontRef font,
   CFStringRef key)
 {
-  return [[font nameForKey: key] retain];
+  return [[font nameForKey: key] copy];
 }
 
 CFStringRef CTFontCopyLocalizedName(
@@ -510,17 +510,17 @@ CFStringRef CTFontCopyLocalizedName(
   CFStringRef *language)
 {
   return [[font localizedNameForKey: key
-                           language: language] retain];
+                           language: language] copy];
 }
 
 CFStringRef CTFontCopyPostScriptName(CTFontRef font)
 {
-  return [[font fontName] retain];
+  return [[font fontName] copy];
 }
 
 CFStringRef CTFontCopyFamilyName(CTFontRef font)
 {
-  return [[font familyName] retain];
+  return [[font familyName] copy];
 }
 
 CFStringRef CTFontCopyFullName(CTFontRef font)

@@ -158,17 +158,18 @@
 {
     const char *family = "Droid Sans Fallback";
     int size = 12;
+    CFStringRef f = NULL;
     
     if ([obj isKindOfClass:NSClassFromString(@"NSFont")]) {
         
     } else if ([obj isKindOfClass:NSClassFromString(@"UIFont")]) {
         CTFontRef font = [obj _CTFont];
         size = CTFontGetSize(font);
-        CFStringRef f = CTFontCopyFamilyName(obj);
+        f = CTFontCopyFamilyName(obj);
         family = [f UTF8String];
     } else if ([obj isKindOfClass:NSClassFromString(@"OPFont")]){
         size = CTFontGetSize(obj);
-        CFStringRef f = CTFontCopyFamilyName(obj);
+        f = CTFontCopyFamilyName(obj);
         family = [f UTF8String];
     } else {
         NSLog(@"[PangoAttribute]unknow font value:%@",obj);
@@ -190,6 +191,10 @@
     pango_font_description_set_absolute_size(desc, size*PANGO_SCALE);
     pango_font_description_set_style(desc, PANGO_STYLE_NORMAL);
     PangoAttribute *attr =pango_attr_font_desc_new(desc);
+    
+    if (f) {
+        CFRelease(f);
+    }
     return attr;
 }
 

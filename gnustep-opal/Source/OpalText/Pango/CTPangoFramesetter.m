@@ -75,12 +75,11 @@ static void glib_log_handler_NSLog(const gchar *log_domain, GLogLevelFlags log_l
         r.length = _string.length;
     }
     
-    
     CTFrame *frame = [[CTPangoFrame alloc] initWithPath: path
                                                  stringRange: r
                                                   attributes: attributes];
     
-    PangoFontMap *fontmap = pango_cairo_font_map_new();
+    PangoFontMap *fontmap = pango_cairo_font_map_get_default();
     PangoContext *pangoctx = pango_font_map_create_context(fontmap);
     PangoLayout *layout = pango_layout_new(pangoctx);
     
@@ -89,10 +88,9 @@ static void glib_log_handler_NSLog(const gchar *log_domain, GLogLevelFlags log_l
     pango_layout_set_width(layout, PANGO_SCALE * frameRect.size.width);
     pango_layout_set_height(layout, PANGO_SCALE * frameRect.size.height);
     
-    
     [frame setPangoLayout:layout];
 
-    
+    g_object_unref(pangoctx);
     return frame;
 }
 

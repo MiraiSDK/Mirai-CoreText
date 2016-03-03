@@ -351,6 +351,8 @@ release_renderer (PangoCoreGraphicsRenderer *renderer)
 //        renderer->has_show_text_glyphs = FALSE;
 //        renderer->x_offset = 0.;
 //        renderer->y_offset = 0.;
+        renderer->ctx = NULL;
+        renderer->rect = CGRectZero;
         
         G_UNLOCK (cached_renderer);
     }
@@ -374,7 +376,7 @@ _pango_coregraphics_do_layout (CGContextRef     ctx,
     PangoRenderer *renderer = (PangoRenderer *) crenderer;
     crenderer->ctx = ctx;
     crenderer->rect = rect;
-    const char * text = pango_layout_get_text(layout);
+//    const char * text = pango_layout_get_text(layout);
 //    NSLog(@"layout text: %s",text);
 
     pango_renderer_draw_layout(renderer, layout, 0, 0);
