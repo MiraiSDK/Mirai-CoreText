@@ -139,14 +139,22 @@
     g_object_unref(layout);
     g_object_unref(pangoctx);
     
+    if (glyphsCount == 0) {
+        // HACK
+        // glyphsCount sometime will be zero when start with a special character.
+        // It must jump over this special character.
+        glyphsCount = 1;
+    }
+    
     //FIXME: workaround here
     // why out of range?
     if (glyphsCount >= as.length) {
-//        NSLog(@"glyphs out of range(value:%d max:%d, fix it..",glyphsCount,as.length);
+        //        NSLog(@"glyphs out of range(value:%d max:%d, fix it..",glyphsCount,as.length);
         glyphsCount = as.length - 1;
     }
     
     NSAssert((start + glyphsCount) < _as.length, @"suggested glyphs count out of range");
+    
     return glyphsCount;
 }
 
