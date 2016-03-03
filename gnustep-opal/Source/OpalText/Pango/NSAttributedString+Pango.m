@@ -104,6 +104,11 @@
         pango_layout_set_alignment(layout, pangoAlignment);
     }
     
+    // FIXME: code below cause odd bug in text rendering
+    //
+    // maybe the call of pango_layout_set_height (layout, 0);?
+    //
+#if 0
     CTLineBreakMode linebreak;
     CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierLineBreakMode, sizeof(CTLineBreakMode), &linebreak);
     
@@ -138,6 +143,7 @@
         default:
             break;
     }
+#endif
 
     PangoAttrList *attrList = pango_attr_list_new();;
     [self fillAttributeList:attrList withAttributedString:self];
