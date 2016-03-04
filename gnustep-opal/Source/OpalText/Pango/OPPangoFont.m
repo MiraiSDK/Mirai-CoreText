@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Shanghai TinyNetwork Inc. All rights reserved.
 //
 
+#include <fontconfig/fontconfig.h>
+
 #import "OPPangoFont.h"
 #import <pango/pango.h>
 #import <pango/pangocairo.h>
@@ -28,6 +30,25 @@
 }
 
 + (void)initialize
+{
+    [self _loadIOSDefaultFontsForPango];
+    [self _printPangoAvailableTypefacesFamilies];
+}
+
++ (void)_loadIOSDefaultFontsForPango
+{
+    NSURL *url = [[[NSFileManager defaultManager] URLsForDirectory:NSLibraryDirectory
+                                                         inDomains:NSUserDomainMask] lastObject];
+    url = [NSURL URLWithString:@"Fonts" relativeToURL:url];
+    NSString *fontsDirectory = [url path];
+    const char *fontsDirectoryFromString = [fontsDirectory UTF8String];
+    char *fontsDirectoryPath = malloc(sizeof(char)*(strlen(fontsDirectoryFromString) + 1));
+    strcpy(fontsDirectoryPath, fontsDirectoryFromString);
+    
+    FcConfigAppFontAddDir(NULL, (const FcChar8*)fontsDirectoryPath);
+}
+
++ (void)_printPangoAvailableTypefacesFamilies
 {
     int i;
     PangoFontFamily ** families;
@@ -59,16 +80,16 @@
         PangoFontMap *fontMap = pango_cairo_font_map_get_default();
         PangoContext *pangoctx = pango_font_map_create_context(fontMap);
         _context = pangoctx;
-
+        
         OPPangoFontDescriptor *desc = aDescriptor;
         _initFontDescriptior = [aDescriptor retain];
-//        NSLog(@"[OPPangoFont] font family name:%@",[desc objectForKey:kCTFontFamilyNameKey]);
+        NSLog(@"[OPPangoFont] font family name:%@",[desc objectForKey:kCTFontFamilyNameKey]);
         _font = pango_font_map_load_font(fontMap, pangoctx, desc.pangoDesc);
         _desc = pango_font_describe(_font);
         
         const char *familyName = pango_font_description_get_family(_desc);
         _fontFamilyName = [[NSString stringWithUTF8String:familyName] retain];
-//        NSLog(@"[OPPangoFont] loaded font:%s",familyName);
+        NSLog(@"[OPPangoFont] loaded font:%s",familyName);
 
         static BOOL oneTimeDebug = NO;
         if (!oneTimeDebug) {
