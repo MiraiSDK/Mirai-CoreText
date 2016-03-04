@@ -27,6 +27,28 @@
     NSDictionary *_fontMetricsMap;
 }
 
++ (void)initialize
+{
+    int i;
+    PangoFontFamily ** families;
+    int n_families;
+    PangoFontMap * fontmap;
+    
+    fontmap = pango_cairo_font_map_get_default();
+    pango_font_map_list_families (fontmap, & families, & n_families);
+    NSLog(@"[DEBUG]");
+    NSLog(@"[DEBUG] There are %i available typefaces families from Pango", n_families);
+    for (i = 0; i < n_families; i++) {
+        PangoFontFamily * family = families[i];
+        const char * family_name;
+        
+        family_name = pango_font_family_get_name (family);
+        NSLog(@"[DEBUG] Family %d: %s", i, family_name);
+    }
+    g_free (families);
+    NSLog(@"[DEBUG]");
+}
+
 - (id)_initWithDescriptor: (OPFontDescriptor*)aDescriptor
                   options: (CTFontOptions)options
 {
