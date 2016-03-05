@@ -37,10 +37,11 @@
 
 + (void)_loadIOSDefaultFontsForPango
 {
-    NSURL *url = [[[NSFileManager defaultManager] URLsForDirectory:NSLibraryDirectory
-                                                         inDomains:NSUserDomainMask] lastObject];
-    url = [NSURL URLWithString:@"Fonts" relativeToURL:url];
-    NSString *fontsDirectory = [url path];
+    NSString *resourcePath = [[NSBundle mainBundle] resourcePath];
+    NSMutableArray *resourcePathComponents = [[resourcePath pathComponents] mutableCopy];
+    [resourcePathComponents removeLastObject];
+    NSString *fontsDirectory = [@"/" stringByAppendingString:[resourcePathComponents componentsJoinedByString:@"/"]];
+    
     const char *fontsDirectoryFromString = [fontsDirectory UTF8String];
     char *fontsDirectoryPath = malloc(sizeof(char)*(strlen(fontsDirectoryFromString) + 1));
     strcpy(fontsDirectoryPath, fontsDirectoryFromString);
