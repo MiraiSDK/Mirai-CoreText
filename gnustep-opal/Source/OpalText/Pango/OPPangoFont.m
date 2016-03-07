@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Shanghai TinyNetwork Inc. All rights reserved.
 //
 
+#include <fontconfig/fontconfig.h>
+
 #import "OPPangoFont.h"
 #import <pango/pango.h>
 #import <pango/pangocairo.h>
@@ -27,6 +29,48 @@
     NSDictionary *_fontMetricsMap;
 }
 
++ (void)initialize
+{
+    [self _loadIOSDefaultFontsForPango];
+    [self _printPangoAvailableTypefacesFamilies];
+}
+
++ (void)_loadIOSDefaultFontsForPango
+{
+    NSString *resourcePath = [[NSBundle mainBundle] resourcePath];
+    NSMutableArray *resourcePathComponents = [[resourcePath pathComponents] mutableCopy];
+    [resourcePathComponents removeLastObject];
+    NSString *fontsDirectory = [@"/" stringByAppendingString:[resourcePathComponents componentsJoinedByString:@"/"]];
+    
+    const char *fontsDirectoryFromString = [fontsDirectory UTF8String];
+    char *fontsDirectoryPath = malloc(sizeof(char)*(strlen(fontsDirectoryFromString) + 1));
+    strcpy(fontsDirectoryPath, fontsDirectoryFromString);
+    
+    FcConfigAppFontAddDir(NULL, (const FcChar8*)fontsDirectoryPath);
+}
+
++ (void)_printPangoAvailableTypefacesFamilies
+{
+    int i;
+    PangoFontFamily ** families;
+    int n_families;
+    PangoFontMap * fontmap;
+    
+    fontmap = pango_cairo_font_map_get_default();
+    pango_font_map_list_families (fontmap, & families, & n_families);
+    NSLog(@"[DEBUG]");
+    NSLog(@"[DEBUG] There are %i available typefaces families from Pango", n_families);
+    for (i = 0; i < n_families; i++) {
+        PangoFontFamily * family = families[i];
+        const char * family_name;
+        
+        family_name = pango_font_family_get_name (family);
+        NSLog(@"[DEBUG] Family %d: %s", i, family_name);
+    }
+    g_free (families);
+    NSLog(@"[DEBUG]");
+}
+
 - (id)_initWithDescriptor: (OPFontDescriptor*)aDescriptor
                   options: (CTFontOptions)options
 {
@@ -37,16 +81,16 @@
         PangoFontMap *fontMap = pango_cairo_font_map_get_default();
         PangoContext *pangoctx = pango_font_map_create_context(fontMap);
         _context = pangoctx;
-
+        
         OPPangoFontDescriptor *desc = aDescriptor;
         _initFontDescriptior = [aDescriptor retain];
-//        NSLog(@"[OPPangoFont] font family name:%@",[desc objectForKey:kCTFontFamilyNameKey]);
+        NSLog(@"[OPPangoFont] font family name:%@",[desc objectForKey:kCTFontFamilyNameKey]);
         _font = pango_font_map_load_font(fontMap, pangoctx, desc.pangoDesc);
         _desc = pango_font_describe(_font);
         
         const char *familyName = pango_font_description_get_family(_desc);
         _fontFamilyName = [[NSString stringWithUTF8String:familyName] retain];
-//        NSLog(@"[OPPangoFont] loaded font:%s",familyName);
+        NSLog(@"[OPPangoFont] loaded font:%s",familyName);
 
         static BOOL oneTimeDebug = NO;
         if (!oneTimeDebug) {
