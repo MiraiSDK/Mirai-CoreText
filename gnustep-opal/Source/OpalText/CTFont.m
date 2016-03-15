@@ -173,7 +173,6 @@ CTFontRef CTFontCreateWithNameAndOptions(
 {
   NSDictionary *attrs = [NSDictionary dictionaryWithObjectsAndKeys:
     name, kCTFontNameAttribute,
-    name, kCTFontFamilyNameAttribute,
     nil];
 
   OPFontDescriptor *descriptor = [OPFontDescriptor fontDescriptorWithFontAttributes: attrs];
