@@ -14,7 +14,6 @@
 #import "PangoCoreGraphics-render.h"
 #import "CTFont.h"
 #import "CTStringAttributes.h"
-#import "CTFoundationExtended.h"
 #import "NSAttributedString+Pango.h"
 
 @implementation CTPangoTypesetter

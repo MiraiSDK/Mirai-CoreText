@@ -36,8 +36,6 @@
 		43840618187F2527000D092C /* CTRunDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 43840617187F2527000D092C /* CTRunDelegate.m */; };
 		43840619187F265E000D092C /* CTRunDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 43840617187F2527000D092C /* CTRunDelegate.m */; };
 		4384061A187F2671000D092C /* CTRunDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 43840613187F2500000D092C /* CTRunDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		438462D01883E4BC006DA1AA /* CTFoundationExtended.h in Headers */ = {isa = PBXBuildFile; fileRef = 438462CE1883E4BC006DA1AA /* CTFoundationExtended.h */; };
-		438462D11883E4BC006DA1AA /* CTFoundationExtended.m in Sources */ = {isa = PBXBuildFile; fileRef = 438462CF1883E4BC006DA1AA /* CTFoundationExtended.m */; };
 		439C86F31862E1FC0089F3DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 439C86F21862E1FC0089F3DA /* Foundation.framework */; };
 		43B164401862CF60006B6CE1 /* CTFramesetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111AE185DF1CA00E771B4 /* CTFramesetter.m */; };
 		43B164411862CF64006B6CE1 /* CTFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E111A8185DF1CA00E771B4 /* CTFont.m */; };
@@ -192,8 +190,6 @@
 		43758F3E1B9A622000B8117B /* CTPangoLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTPangoLine.m; sourceTree = "<group>"; };
 		43840613187F2500000D092C /* CTRunDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTRunDelegate.h; sourceTree = "<group>"; };
 		43840617187F2527000D092C /* CTRunDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTRunDelegate.m; sourceTree = "<group>"; };
-		438462CE1883E4BC006DA1AA /* CTFoundationExtended.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTFoundationExtended.h; sourceTree = "<group>"; };
-		438462CF1883E4BC006DA1AA /* CTFoundationExtended.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTFoundationExtended.m; sourceTree = "<group>"; };
 		439C86F01862E1840089F3DA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		439C86F21862E1FC0089F3DA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		43B164091862CE38006B6CE1 /* libCoreText-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libCoreText-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -377,8 +373,6 @@
 				43E111B5185DF1CA00E771B4 /* CTStringAttributes.m */,
 				43E111B6185DF1CA00E771B4 /* CTTextTab.m */,
 				43E111B7185DF1CA00E771B4 /* CTTypesetter.m */,
-				438462CE1883E4BC006DA1AA /* CTFoundationExtended.h */,
-				438462CF1883E4BC006DA1AA /* CTFoundationExtended.m */,
 				43758F3C1B9A5F4600B8117B /* CTTypesetter-private.h */,
 				43E111B8185DF1CA00E771B4 /* Fontconfig */,
 				43E111BC185DF1CA00E771B4 /* FreeType */,
@@ -546,7 +540,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				438462D01883E4BC006DA1AA /* CTFoundationExtended.h in Headers */,
 				43E1126E185DF23100E771B4 /* CoreText.h in Headers */,
 				43E1126F185DF23100E771B4 /* CTFont.h in Headers */,
 				43B6B6461913985E005D09ED /* NSAttributedString+Pango.h in Headers */,
@@ -797,7 +790,6 @@
 				43B6B6471913985E005D09ED /* NSAttributedString+Pango.m in Sources */,
 				43E11266185DF23100E771B4 /* CTTypesetter.m in Sources */,
 				43E11267185DF23100E771B4 /* CTGlyphInfo.m in Sources */,
-				438462D11883E4BC006DA1AA /* CTFoundationExtended.m in Sources */,
 				43098C86197B63E5005A97A1 /* OPPangoFont.m in Sources */,
 				43E11268185DF23100E771B4 /* CTFramesetter.m in Sources */,
 				43E11269185DF23100E771B4 /* CTFrame.m in Sources */,

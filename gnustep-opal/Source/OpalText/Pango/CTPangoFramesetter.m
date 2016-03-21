@@ -15,7 +15,6 @@
 #import "PangoCoreGraphics-render.h"
 #import <pango/pangocairo.h>
 
-#import "CTFoundationExtended.h"
 #import "CTFont.h"
 #import "NSAttributedString+Pango.h"
 

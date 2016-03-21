@@ -13,7 +13,6 @@
 
 #import "CTStringAttributes.h"
 #import "CTFont.h"
-#import "CTFoundationExtended.h"
 #import "CTRunDelegate-private.h"
 
 
